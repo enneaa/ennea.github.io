@@ -1,0 +1,512 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+## 前言
+![](http://i1.tietuku.cn/5807e3e937c9ebba.png)
+火狐折腾好一会儿了，总算是弄得合意，就想着整理一下分享出来，说不定有人需要。
+围绕浏览体验作了一些优化。
+懒得看介绍的，可直接下载体验。
+## 更新 2016/01/11
+ 下载地址：<http://yunpan.cn/ccyRQxeVKchL4#cd81>
+
+百度作恶过甚，抵制百度，换用其他同类产品，不再提供百度云下载。
+界面风格/操作习惯延续之前版本，建议更新。
+<ul>
+	<li>悄悄地更新。</li>
+	<li>我也不知道更新了啥，各种细节完善。</li>
+	<li>Ennea Firefox V1 更新至此结束。撒花。。。</li>
+	<li>Ennea Firefox V2 应该会有的吧；）</li>
+</ul>
+当然如果你钱多的话可以在这 <a href="http://www.runningcheese.com/donate" target="_blank">捐助本站</a>
+Windows 10 解决任务栏出现两个火狐图标的问题，参考这 http://tieba.baidu.com/p/3923325915
+## 概览
+<strong>扩展：</strong>
+
+<a href="http://i1.tietuku.cn/a86e10d28caeb215.png"><img src="http://i1.tietuku.cn/a86e10d28caeb215.png" alt="扩展" width="360" height="580" /></a>
+<strong>油猴脚本：</strong>
+
+<a href="http://i1.tietuku.cn/7417b13d56450207.png"><img src="http://i1.tietuku.cn/7417b13d56450207.png" alt="油猴脚本" width="359" height="472" /></a>
+<strong>UC脚本：</strong>
+
+<a href="http://i1.tietuku.cn/139c4c706936ac2e.png"><img src="http://i1.tietuku.cn/139c4c706936ac2e.png" alt="25475-df3fe3c7e5efa20f" width="358" height="639" /></a>
+<strong>样式：</strong>
+
+<a href="http://i1.tietuku.cn/8bbb2acb31c68132.png"><img src="http://i1.tietuku.cn/8bbb2acb31c68132.png" alt="25475-94f7a8579d8b3c9d" width="358" height="607" /></a>
+[/toggle_item]
+[toggle_item title="界面" active="true"]
+界面极简化，去除各种阴影/线条，隐藏不必要的元素，补全图标，美化细节。
+<strong>1.标签栏</strong>
+
+<a href="http://i1.tietuku.cn/5807e3e937c9ebba.png"><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="25475-bace6e2d64e84048" width="810" height="455" /></a>
+
+<strong>2.侧边栏</strong>
+去除边框，并添加书签/历史/附加组件/pocket及一些常用网站。
+Pocket 侧栏：
+
+<a href="http://i1.tietuku.cn/250c4cbe864a33de.png"><img src="http://i1.tietuku.cn/250c4cbe864a33de.png" alt="25475-37b68f64a9f5f876" width="496" height="686" /></a>
+附加组件 侧栏：
+
+<a href="http://i1.tietuku.cn/85b907dc0e270ed4.png"><img src="http://i1.tietuku.cn/85b907dc0e270ed4.png" alt="25475-d98229b9a03ca5a9" width="515" height="669" /></a>
+侧栏圆点：
+
+<a href="http://i1.tietuku.cn/2de5dd680e49c4c3.png"><img src="http://i1.tietuku.cn/2de5dd680e49c4c3.png" alt="25475-8b22db37e0d6d766" width="244" height="150" /></a>
+如上图所示，侧边栏在ctrl+B或 ctrl+H启动后会缩为一个小圆点，把鼠标放在圆点会侧栏自动展开。
+不需要侧栏自动收缩的，可将stylish中“0-侧栏样式”关闭。
+<strong>3.右键菜单</strong>
+美化右键样式，补全菜单图标。
+添加谷歌图片搜索，多引擎搜索，用邮件发送连接等右键菜单项
+图片右键菜单：
+
+<a href="http://i1.tietuku.cn/02f114dd656d5970.png"><img src="http://i1.tietuku.cn/02f114dd656d5970.png" alt="uc脚本" width="357" height="497" /></a>
+页面右键菜单：
+
+<a href="http://i1.tietuku.cn/f784e699d6377e8f.png"><img src="http://i1.tietuku.cn/f784e699d6377e8f.png" alt="25475-ef94719e271c90bc" width="352" height="293" /></a>
+<strong>4.地址栏</strong>
+美化下拉列表，合并搜索栏
+
+<a href="http://i1.tietuku.cn/94bd97dad1072bde.png"><img src="http://i1.tietuku.cn/94bd97dad1072bde.png" alt="25475-e48a5c47c416e842" width="757" height="521" /></a>
+<strong>5.载入进度条</strong>
+添加漂亮的载入进度条
+
+<a href="http://i1.tietuku.cn/ceb9f10a903d360a.png"><img src="http://i1.tietuku.cn/ceb9f10a903d360a.png" alt="25475-3ac7221380c62cdd" width="412" height="174" /></a>
+<strong>6.新标签页</strong>
+<a href="https://userstyles.org/styles/112775/about-newtab-for-31">about-newtab-for-31+</a>
+1.隐藏了搜索框/右上角的齿轮和“这是什么页面”字样
+2.修改为直角
+3.背景图片可通过#newtab-scrollbox:not([page-disabled]) {background:url("file:///C:/*/*/**.jpg");修改，将*改成本地图片的地址,或者直接输入网络图片地址 如：url("http://s.cn.bing.net/az/hprichbg/rb/UchisarCastle_ZH- CN10268966547_1920x1080.jpg");
+4.提供部分网站缩略图，缩略图用的是搜狗的在线图标，常见网站在样式里替换网址就行了。
+参考 http://bbs.kafan.cn/thread-1819339-1-1.html。
+5.该样式是在1366*768分辨率下调整成的，可能需要自行调整方块的大小：
+`#newtab-grid &gt; .newtab-cell{
+height: 155px;
+width: 250px;
+}`
+及拨号框的大小：
+`#newtab-grid{
+max-width: 1200px !important;
+max-height: 600px !important;
+}`
+还有，调整好上两项可得不同行数/列数的拨号。
+效果见图
+
+<a href="http://i1.tietuku.cn/5807e3e937c9ebba.png"><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="25475-bace6e2d64e84048" width="710" height="399" /></a>
+
+##功能项
+添加的这些功能都挺好用的，有的可能需要适应一下
+<strong>1.搜索</strong>
+搜索栏合并到地址栏，可在地址栏完成搜索
+“搜索引擎关键字+搜索词” 可直接调用相关搜索引擎搜索
+右键菜单添加多引擎搜索，在选定文字上右键即可用多个搜索引擎搜索
+图片右键添加谷歌图片搜索
+选中文字上拖则用默认搜索搜索选中文字
+选中文字下拖则用默认搜索站内搜索选中文字
+2.Simplify Awesome Bar
+只要不是输入框，敲击键盘将直接带到地址栏。
+任何选定的文本，将一同与输入字母进入地址栏。 例如：如果玩具是选定的文本、s是输入的字母，那 s 玩具 将出现在地址栏里。ps:可配合关键字调用相应引擎搜索。
+<strong>3.音乐随心听</strong>
+点击地址栏右侧的音乐随心听按钮弹出音乐播放面板，右键为播放控制及切换音乐站点
+<a href="http://i1.tietuku.cn/dd32fc44aad13a9d.png"><img src="http://i1.tietuku.cn/dd32fc44aad13a9d.png" alt="25475-11b4b72498874947" width="360" height="520" /></a>
+<strong>4.自动翻页</strong>
+在支持的页面自动翻页，如bing，google搜索结果页面，卡饭论坛等等。
+可手动关闭。
+<strong>5.视频小窗口播放</strong>
+点击视频右上角的弹出窗口播放即可
+<a href="http://i1.tietuku.cn/b114fba59fa045cd.png"><img src="http://i1.tietuku.cn/b114fba59fa045cd.png" alt="25475-6944478da3ba8554" width="671" height="398" /></a>
+
+<a href="http://i1.tietuku.cn/8badcd0c53ae36cc.png"><img src="http://i1.tietuku.cn/8badcd0c53ae36cc.png" alt="25475-e50fbd06ebf6959d" width="673" height="460" /></a>
+
+<strong>7.自动下载Bing图片并设置为桌面壁纸</strong>
+默认禁用，可自行启用“BingDesktopThemeEveryDay.uc.js”uc脚本。
+<strong>8.手势</strong>
+关闭当前标签"DR"；恢复关闭的标签页"DL"
+激活左边的标签页"UL"激活右边的标签页"UR"；
+刷新当前页面"UD"；
+后退"L" 前进"R"；
+<strong>9.拖拽</strong>
+链接上拖前台打开，下拖后台打开；
+文字上拖前台搜索，下拖前台站内搜索；
+图片上拖新标签页打开图片，下拖打开链接；
+<strong>10.标签页</strong>
+新标签打开:书签、历史、搜索栏
+地址栏新标签打开
+中键点击bookmark菜单不关闭
+右键关闭标签页，ctrl+右键打开菜单
+滚轮切换标签/鼠标停留标签自动聚焦（默认不启用）
+<span style="color: #ff6600; font-size: 14pt;"><strong>下载/标签页/手势/拖拽/书签栏等设置在uc管理器菜单中。</strong></span>
+uc管理器菜单：
+
+<a href="http://i1.tietuku.cn/24915719a82a6580.png"><img src="http://i1.tietuku.cn/24915719a82a6580.png" alt="25475-4ab4febf0d6cde9a" width="196" height="215" /></a>
+
+<strong>0.其他</strong>
+扩展：
+网盘离线下载 火狐吧出品，百度云,115右键离线下载http,ftp,ed2k，磁链，方便快捷
+ACVAA 中国反视频广告联盟 去除中国主流视频网站（包括其外链）好几十秒无节操视频广告
+Pan 去广告的同时，轻松管理代理
+Clearly 去除页面无关元素方便阅读
+Pocket Save pages to read later.
+脚本：
+AutoPopup.uc.js 鼠标置于图标上自动弹出
+downloadPlus.uc.js 从硬盘中删除+下载重命名并可转码+双击复制链接+另存为+保存并打开+完成下载提示音+自动关闭下载产生的空白标签
+GoogleTranslator.uc.js 左键点击按钮直接翻译，如果有选中文字就翻译文字，否则翻译网页。右键弹出设置菜单
+Locationbar.uc.js 地址栏成为可点击的链接
+Redirector.uc.js Redirect your requests.重定向脚本
+SnapLinksMod.uc.xul 批量选中链接
+
+##致谢
+感谢<a href="http://sourceforge.net/projects/pcxfirefox/">pcxfirefox</a>的作者 xunxun。
+标签栏样式，导航栏样式主要修改自<a href="http://roserio.com/mochi/">Mochi</a>，特别感谢作者zhulinxizi。
+感谢ywzhaiqi、feiruo、黑仪大螃蟹等等脚本、样式、扩展开发者。
+感谢各位大大的定制版，让小白也能凑出合用的火狐，感谢<a href="http://www.firefoxfan.com/">火狐范</a>，<a href="http://sunbox.cc/">阳光盒子</a>，<a href="http://www.runningcheese.com/">奔跑中的奶酪</a>等。
+感谢卡饭论坛，火狐吧。
+##后记
+<span style="font-size: 18pt; color: #cf613a;">ENNEA FireFox </span>就是 <span style="font-size: 18pt; color: #cf613a;">嗯呢火狐</span>，哈哈。
+火狐这个磨人的狐狸精真是让人离不开啊。
+
+
+##使用FAQ
+
+<strong>1.新标签页网站修改</strong>
+
+<span class="lzl_content_main">把样式“5-newtab”中第10/11行删了，新标签页就能显示固定/删除按钮直接操作了。</span>
+
+<span class="lzl_content_main">把网站从书签或历史记录拖到新标签页直接固定网站</span>。
+
+<strong>2.新标签页固定网站没有缩略图</strong>
+
+常用网站，在样式“5-newtab-缩略图”中添加
+<blockquote>[href*="tv.sohu.com"] .newtab-thumbnail {
+background: rgba(0, 0, 0, .05) url("http://data.ie.sogou.com/favor/icon2.php?url=http://tv.sohu.com/") center center no-repeat !important;
+background-size: 100% 100%!important;
+}</blockquote>
+把"tv.sohu.com"替换为你要添加的网站
+
+如果按上述操作缩略图显示空白，就要自己做图了，把做好的图放在".Profiles\extensions\userChromeJS@mozdev.org\content\thumbnails"中，并改好名。
+
+在样式“5-newtab-缩略图”中添加
+<blockquote>[href*="www.quora.com"] .newtab-thumbnail {
+background: rgba(0, 0, 0, .05) url("chrome://userchromejs/content/thumbnails/quora.png") center center no-repeat !important;
+background-size: 100% 100%!important;
+}</blockquote>
+把"www.quora.com"替换为你要添加的网站，“quora.png”替换为图片名。
+
+&nbsp;
+
+待补充
+
+使用中有什么问题可以在下面评论，会尽量帮助解决
+
+本文作者: <a href="http://www.weibo.com/snbo0" target="_blank">是話說</a>
+
+![是話說](http://i1.tietuku.cn/3cdafb37872ab256.jpg)
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<h2 id="">前言</h2>
+
+<p><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="" title="">
+火狐折腾好一会儿了，总算是弄得合意，就想着整理一下分享出来，说不定有人需要。
+围绕浏览体验作了一些优化。
+懒得看介绍的，可直接下载体验。</p>
+
+<h2 id="20160111">更新 2016/01/11</h2>
+
+<p>下载地址：<a href="http://yunpan.cn/ccyRQxeVKchL4#cd81">http://yunpan.cn/ccyRQxeVKchL4#cd81</a></p>
+
+<p>百度作恶过甚，抵制百度，换用其他同类产品，不再提供百度云下载。
+界面风格/操作习惯延续之前版本，建议更新。</p>
+
+<ul>
+    <li>悄悄地更新。</li>
+    <li>我也不知道更新了啥，各种细节完善。</li>
+    <li>Ennea Firefox V1 更新至此结束。撒花。。。</li>
+    <li>Ennea Firefox V2 应该会有的吧；）</li>
+</ul>
+
+<p>当然如果你钱多的话可以在这 <a href="http://www.runningcheese.com/donate" target="_blank">捐助本站</a>
+Windows 10 解决任务栏出现两个火狐图标的问题，参考这 http://tieba.baidu.com/p/3923325915</p>
+
+<h2 id="">概览</h2>
+
+<p><strong>扩展：</strong></p>
+
+<p><a href="http://i1.tietuku.cn/a86e10d28caeb215.png"><img src="http://i1.tietuku.cn/a86e10d28caeb215.png" alt="扩展" height="580" width="360"></a>
+<strong>油猴脚本：</strong></p>
+
+<p><a href="http://i1.tietuku.cn/7417b13d56450207.png"><img src="http://i1.tietuku.cn/7417b13d56450207.png" alt="油猴脚本" height="472" width="359"></a>
+<strong>UC脚本：</strong></p>
+
+<p><a href="http://i1.tietuku.cn/139c4c706936ac2e.png"><img src="http://i1.tietuku.cn/139c4c706936ac2e.png" alt="25475-df3fe3c7e5efa20f" height="639" width="358"></a>
+<strong>样式：</strong></p>
+
+<p><a href="http://i1.tietuku.cn/8bbb2acb31c68132.png"><img src="http://i1.tietuku.cn/8bbb2acb31c68132.png" alt="25475-94f7a8579d8b3c9d" height="607" width="358"></a>
+[/toggle<em>item]
+[toggle</em>item title="界面" active="true"]
+界面极简化，去除各种阴影/线条，隐藏不必要的元素，补全图标，美化细节。
+<strong>1.标签栏</strong></p>
+
+<p><a href="http://i1.tietuku.cn/5807e3e937c9ebba.png"><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="25475-bace6e2d64e84048" height="455" width="810"></a></p>
+
+<p><strong>2.侧边栏</strong>
+去除边框，并添加书签/历史/附加组件/pocket及一些常用网站。
+Pocket 侧栏：</p>
+
+<p><a href="http://i1.tietuku.cn/250c4cbe864a33de.png"><img src="http://i1.tietuku.cn/250c4cbe864a33de.png" alt="25475-37b68f64a9f5f876" height="686" width="496"></a>
+附加组件 侧栏：</p>
+
+<p><a href="http://i1.tietuku.cn/85b907dc0e270ed4.png"><img src="http://i1.tietuku.cn/85b907dc0e270ed4.png" alt="25475-d98229b9a03ca5a9" height="669" width="515"></a>
+侧栏圆点：</p>
+
+<p><a href="http://i1.tietuku.cn/2de5dd680e49c4c3.png"><img src="http://i1.tietuku.cn/2de5dd680e49c4c3.png" alt="25475-8b22db37e0d6d766" height="150" width="244"></a>
+如上图所示，侧边栏在ctrl+B或 ctrl+H启动后会缩为一个小圆点，把鼠标放在圆点会侧栏自动展开。
+不需要侧栏自动收缩的，可将stylish中“0-侧栏样式”关闭。
+<strong>3.右键菜单</strong>
+美化右键样式，补全菜单图标。
+添加谷歌图片搜索，多引擎搜索，用邮件发送连接等右键菜单项
+图片右键菜单：</p>
+
+<p><a href="http://i1.tietuku.cn/02f114dd656d5970.png"><img src="http://i1.tietuku.cn/02f114dd656d5970.png" alt="uc脚本" height="497" width="357"></a>
+页面右键菜单：</p>
+
+<p><a href="http://i1.tietuku.cn/f784e699d6377e8f.png"><img src="http://i1.tietuku.cn/f784e699d6377e8f.png" alt="25475-ef94719e271c90bc" height="293" width="352"></a>
+<strong>4.地址栏</strong>
+美化下拉列表，合并搜索栏</p>
+
+<p><a href="http://i1.tietuku.cn/94bd97dad1072bde.png"><img src="http://i1.tietuku.cn/94bd97dad1072bde.png" alt="25475-e48a5c47c416e842" height="521" width="757"></a>
+<strong>5.载入进度条</strong>
+添加漂亮的载入进度条</p>
+
+<p><a href="http://i1.tietuku.cn/ceb9f10a903d360a.png"><img src="http://i1.tietuku.cn/ceb9f10a903d360a.png" alt="25475-3ac7221380c62cdd" height="174" width="412"></a>
+<strong>6.新标签页</strong>
+<a href="https://userstyles.org/styles/112775/about-newtab-for-31">about-newtab-for-31+</a>
+1.隐藏了搜索框/右上角的齿轮和“这是什么页面”字样
+2.修改为直角
+3.背景图片可通过#newtab-scrollbox:not([page-disabled]) {background:url("file:///C:/<em>/</em>/<em>*.jpg");修改，将</em>改成本地图片的地址,或者直接输入网络图片地址 如：url("http://s.cn.bing.net/az/hprichbg/rb/UchisarCastle<em>ZH- CN10268966547</em>1920x1080.jpg");
+4.提供部分网站缩略图，缩略图用的是搜狗的在线图标，常见网站在样式里替换网址就行了。
+参考 http://bbs.kafan.cn/thread-1819339-1-1.html。
+5.该样式是在1366*768分辨率下调整成的，可能需要自行调整方块的大小：
+<code>#newtab-grid &amp;gt; .newtab-cell{
+height: 155px;
+width: 250px;
+}</code>
+及拨号框的大小：
+<code>#newtab-grid{
+max-width: 1200px !important;
+max-height: 600px !important;
+}</code>
+还有，调整好上两项可得不同行数/列数的拨号。
+效果见图</p>
+
+<p><a href="http://i1.tietuku.cn/5807e3e937c9ebba.png"><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="25475-bace6e2d64e84048" height="399" width="710"></a></p>
+
+<h2 id="">功能项</h2>
+
+<p>添加的这些功能都挺好用的，有的可能需要适应一下
+<strong>1.搜索</strong>
+搜索栏合并到地址栏，可在地址栏完成搜索
+“搜索引擎关键字+搜索词” 可直接调用相关搜索引擎搜索
+右键菜单添加多引擎搜索，在选定文字上右键即可用多个搜索引擎搜索
+图片右键添加谷歌图片搜索
+选中文字上拖则用默认搜索搜索选中文字
+选中文字下拖则用默认搜索站内搜索选中文字
+2.Simplify Awesome Bar
+只要不是输入框，敲击键盘将直接带到地址栏。
+任何选定的文本，将一同与输入字母进入地址栏。 例如：如果玩具是选定的文本、s是输入的字母，那 s 玩具 将出现在地址栏里。ps:可配合关键字调用相应引擎搜索。
+<strong>3.音乐随心听</strong>
+点击地址栏右侧的音乐随心听按钮弹出音乐播放面板，右键为播放控制及切换音乐站点
+<a href="http://i1.tietuku.cn/dd32fc44aad13a9d.png"><img src="http://i1.tietuku.cn/dd32fc44aad13a9d.png" alt="25475-11b4b72498874947" height="520" width="360"></a>
+<strong>4.自动翻页</strong>
+在支持的页面自动翻页，如bing，google搜索结果页面，卡饭论坛等等。
+可手动关闭。
+<strong>5.视频小窗口播放</strong>
+点击视频右上角的弹出窗口播放即可
+<a href="http://i1.tietuku.cn/b114fba59fa045cd.png"><img src="http://i1.tietuku.cn/b114fba59fa045cd.png" alt="25475-6944478da3ba8554" height="398" width="671"></a></p>
+
+<p><a href="http://i1.tietuku.cn/8badcd0c53ae36cc.png"><img src="http://i1.tietuku.cn/8badcd0c53ae36cc.png" alt="25475-e50fbd06ebf6959d" height="460" width="673"></a></p>
+
+<p><strong>7.自动下载Bing图片并设置为桌面壁纸</strong>
+默认禁用，可自行启用“BingDesktopThemeEveryDay.uc.js”uc脚本。
+<strong>8.手势</strong>
+关闭当前标签"DR"；恢复关闭的标签页"DL"
+激活左边的标签页"UL"激活右边的标签页"UR"；
+刷新当前页面"UD"；
+后退"L" 前进"R"；
+<strong>9.拖拽</strong>
+链接上拖前台打开，下拖后台打开；
+文字上拖前台搜索，下拖前台站内搜索；
+图片上拖新标签页打开图片，下拖打开链接；
+<strong>10.标签页</strong>
+新标签打开:书签、历史、搜索栏
+地址栏新标签打开
+中键点击bookmark菜单不关闭
+右键关闭标签页，ctrl+右键打开菜单
+滚轮切换标签/鼠标停留标签自动聚焦（默认不启用）
+<span style="color: #ff6600; font-size: 14pt;"><strong>下载/标签页/手势/拖拽/书签栏等设置在uc管理器菜单中。</strong></span>
+uc管理器菜单：</p>
+
+<p><a href="http://i1.tietuku.cn/24915719a82a6580.png"><img src="http://i1.tietuku.cn/24915719a82a6580.png" alt="25475-4ab4febf0d6cde9a" height="215" width="196"></a></p>
+
+<p><strong>0.其他</strong>
+扩展：
+网盘离线下载 火狐吧出品，百度云,115右键离线下载http,ftp,ed2k，磁链，方便快捷
+ACVAA 中国反视频广告联盟 去除中国主流视频网站（包括其外链）好几十秒无节操视频广告
+Pan 去广告的同时，轻松管理代理
+Clearly 去除页面无关元素方便阅读
+Pocket Save pages to read later.
+脚本：
+AutoPopup.uc.js 鼠标置于图标上自动弹出
+downloadPlus.uc.js 从硬盘中删除+下载重命名并可转码+双击复制链接+另存为+保存并打开+完成下载提示音+自动关闭下载产生的空白标签
+GoogleTranslator.uc.js 左键点击按钮直接翻译，如果有选中文字就翻译文字，否则翻译网页。右键弹出设置菜单
+Locationbar.uc.js 地址栏成为可点击的链接
+Redirector.uc.js Redirect your requests.重定向脚本
+SnapLinksMod.uc.xul 批量选中链接</p>
+
+<h2 id="">致谢</h2>
+
+<p>感谢<a href="http://sourceforge.net/projects/pcxfirefox/">pcxfirefox</a>的作者 xunxun。
+标签栏样式，导航栏样式主要修改自<a href="http://roserio.com/mochi/">Mochi</a>，特别感谢作者zhulinxizi。
+感谢ywzhaiqi、feiruo、黑仪大螃蟹等等脚本、样式、扩展开发者。
+感谢各位大大的定制版，让小白也能凑出合用的火狐，感谢<a href="http://www.firefoxfan.com/">火狐范</a>，<a href="http://sunbox.cc/">阳光盒子</a>，<a href="http://www.runningcheese.com/">奔跑中的奶酪</a>等。
+感谢卡饭论坛，火狐吧。</p>
+
+<h2 id="">后记</h2>
+
+<p><span style="font-size: 18pt; color: #cf613a;">ENNEA FireFox </span>就是 <span style="font-size: 18pt; color: #cf613a;">嗯呢火狐</span>，哈哈。
+火狐这个磨人的狐狸精真是让人离不开啊。</p>
+
+<h2 id="faq">使用FAQ</h2>
+
+<p><strong>1.新标签页网站修改</strong></p>
+
+<p><span class="lzl_content_main">把样式“5-newtab”中第10/11行删了，新标签页就能显示固定/删除按钮直接操作了。</span></p>
+
+<p><span class="lzl_content_main">把网站从书签或历史记录拖到新标签页直接固定网站</span>。</p>
+
+<p><strong>2.新标签页固定网站没有缩略图</strong></p>
+
+<p>常用网站，在样式“5-newtab-缩略图”中添加</p>
+
+<blockquote>[href*="tv.sohu.com"] .newtab-thumbnail {
+background: rgba(0, 0, 0, .05) url("http://data.ie.sogou.com/favor/icon2.php?url=http://tv.sohu.com/") center center no-repeat !important;
+background-size: 100% 100%!important;
+}</blockquote>
+
+<p>把"tv.sohu.com"替换为你要添加的网站</p>
+
+<p>如果按上述操作缩略图显示空白，就要自己做图了，把做好的图放在".Profiles\extensions\userChromeJS@mozdev.org\content\thumbnails"中，并改好名。</p>
+
+<p>在样式“5-newtab-缩略图”中添加</p>
+
+<blockquote>[href*="www.quora.com"] .newtab-thumbnail {
+background: rgba(0, 0, 0, .05) url("chrome://userchromejs/content/thumbnails/quora.png") center center no-repeat !important;
+background-size: 100% 100%!important;
+}</blockquote>
+
+<p>把"www.quora.com"替换为你要添加的网站，“quora.png”替换为图片名。</p>
+
+<p>&nbsp;</p>
+
+<p>待补充</p>
+
+<p>使用中有什么问题可以在下面评论，会尽量帮助解决</p>
+
+<p>本文作者: <a href="http://www.weibo.com/snbo0" target="_blank">是話說</a></p>
+
+<p><img src="http://i1.tietuku.cn/3cdafb37872ab256.jpg" alt="是話說" title=""></p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "ennea-firefox-v1.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>
