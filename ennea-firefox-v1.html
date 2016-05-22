@@ -47,59 +47,79 @@ Windows 10 解决任务栏出现两个火狐图标的问题，参考这 http://t
 <strong>扩展：</strong>
 
 <a href="http://i1.tietuku.cn/a86e10d28caeb215.png"><img src="http://i1.tietuku.cn/a86e10d28caeb215.png" alt="扩展" width="360" height="580" /></a>
+
 <strong>油猴脚本：</strong>
 
 <a href="http://i1.tietuku.cn/7417b13d56450207.png"><img src="http://i1.tietuku.cn/7417b13d56450207.png" alt="油猴脚本" width="359" height="472" /></a>
+
 <strong>UC脚本：</strong>
 
 <a href="http://i1.tietuku.cn/139c4c706936ac2e.png"><img src="http://i1.tietuku.cn/139c4c706936ac2e.png" alt="25475-df3fe3c7e5efa20f" width="358" height="639" /></a>
+
 <strong>样式：</strong>
 
 <a href="http://i1.tietuku.cn/8bbb2acb31c68132.png"><img src="http://i1.tietuku.cn/8bbb2acb31c68132.png" alt="25475-94f7a8579d8b3c9d" width="358" height="607" /></a>
-[/toggle_item]
-[toggle_item title="界面" active="true"]
+##界面
 界面极简化，去除各种阴影/线条，隐藏不必要的元素，补全图标，美化细节。
+
 <strong>1.标签栏</strong>
 
 <a href="http://i1.tietuku.cn/5807e3e937c9ebba.png"><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="25475-bace6e2d64e84048" width="810" height="455" /></a>
 
 <strong>2.侧边栏</strong>
+
 去除边框，并添加书签/历史/附加组件/pocket及一些常用网站。
+
 Pocket 侧栏：
 
 <a href="http://i1.tietuku.cn/250c4cbe864a33de.png"><img src="http://i1.tietuku.cn/250c4cbe864a33de.png" alt="25475-37b68f64a9f5f876" width="496" height="686" /></a>
+
 附加组件 侧栏：
 
 <a href="http://i1.tietuku.cn/85b907dc0e270ed4.png"><img src="http://i1.tietuku.cn/85b907dc0e270ed4.png" alt="25475-d98229b9a03ca5a9" width="515" height="669" /></a>
+
 侧栏圆点：
 
 <a href="http://i1.tietuku.cn/2de5dd680e49c4c3.png"><img src="http://i1.tietuku.cn/2de5dd680e49c4c3.png" alt="25475-8b22db37e0d6d766" width="244" height="150" /></a>
 如上图所示，侧边栏在ctrl+B或 ctrl+H启动后会缩为一个小圆点，把鼠标放在圆点会侧栏自动展开。
 不需要侧栏自动收缩的，可将stylish中“0-侧栏样式”关闭。
+
 <strong>3.右键菜单</strong>
 美化右键样式，补全菜单图标。
 添加谷歌图片搜索，多引擎搜索，用邮件发送连接等右键菜单项
 图片右键菜单：
 
 <a href="http://i1.tietuku.cn/02f114dd656d5970.png"><img src="http://i1.tietuku.cn/02f114dd656d5970.png" alt="uc脚本" width="357" height="497" /></a>
+
 页面右键菜单：
 
 <a href="http://i1.tietuku.cn/f784e699d6377e8f.png"><img src="http://i1.tietuku.cn/f784e699d6377e8f.png" alt="25475-ef94719e271c90bc" width="352" height="293" /></a>
+
 <strong>4.地址栏</strong>
+
 美化下拉列表，合并搜索栏
 
 <a href="http://i1.tietuku.cn/94bd97dad1072bde.png"><img src="http://i1.tietuku.cn/94bd97dad1072bde.png" alt="25475-e48a5c47c416e842" width="757" height="521" /></a>
+
 <strong>5.载入进度条</strong>
+
 添加漂亮的载入进度条
 
 <a href="http://i1.tietuku.cn/ceb9f10a903d360a.png"><img src="http://i1.tietuku.cn/ceb9f10a903d360a.png" alt="25475-3ac7221380c62cdd" width="412" height="174" /></a>
+
 <strong>6.新标签页</strong>
+
 <a href="https://userstyles.org/styles/112775/about-newtab-for-31">about-newtab-for-31+</a>
+
 1.隐藏了搜索框/右上角的齿轮和“这是什么页面”字样
+
 2.修改为直角
+
 3.背景图片可通过#newtab-scrollbox:not([page-disabled]) {background:url("file:///C:/*/*/**.jpg");修改，将*改成本地图片的地址,或者直接输入网络图片地址 如：url("http://s.cn.bing.net/az/hprichbg/rb/UchisarCastle_ZH- CN10268966547_1920x1080.jpg");
+
 4.提供部分网站缩略图，缩略图用的是搜狗的在线图标，常见网站在样式里替换网址就行了。
 参考 http://bbs.kafan.cn/thread-1819339-1-1.html。
+
 5.该样式是在1366*768分辨率下调整成的，可能需要自行调整方块的大小：
 `#newtab-grid &gt; .newtab-cell{
 height: 155px;
@@ -111,77 +131,131 @@ max-width: 1200px !important;
 max-height: 600px !important;
 }`
 还有，调整好上两项可得不同行数/列数的拨号。
+
 效果见图
 
 <a href="http://i1.tietuku.cn/5807e3e937c9ebba.png"><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="25475-bace6e2d64e84048" width="710" height="399" /></a>
 
 ##功能项
 添加的这些功能都挺好用的，有的可能需要适应一下
+
 <strong>1.搜索</strong>
+
 搜索栏合并到地址栏，可在地址栏完成搜索
+
 “搜索引擎关键字+搜索词” 可直接调用相关搜索引擎搜索
+
 右键菜单添加多引擎搜索，在选定文字上右键即可用多个搜索引擎搜索
+
 图片右键添加谷歌图片搜索
+
 选中文字上拖则用默认搜索搜索选中文字
+
 选中文字下拖则用默认搜索站内搜索选中文字
+
 2.Simplify Awesome Bar
+
 只要不是输入框，敲击键盘将直接带到地址栏。
+
 任何选定的文本，将一同与输入字母进入地址栏。 例如：如果玩具是选定的文本、s是输入的字母，那 s 玩具 将出现在地址栏里。ps:可配合关键字调用相应引擎搜索。
+
 <strong>3.音乐随心听</strong>
+
 点击地址栏右侧的音乐随心听按钮弹出音乐播放面板，右键为播放控制及切换音乐站点
 <a href="http://i1.tietuku.cn/dd32fc44aad13a9d.png"><img src="http://i1.tietuku.cn/dd32fc44aad13a9d.png" alt="25475-11b4b72498874947" width="360" height="520" /></a>
+
 <strong>4.自动翻页</strong>
+
 在支持的页面自动翻页，如bing，google搜索结果页面，卡饭论坛等等。
 可手动关闭。
+
 <strong>5.视频小窗口播放</strong>
+
 点击视频右上角的弹出窗口播放即可
 <a href="http://i1.tietuku.cn/b114fba59fa045cd.png"><img src="http://i1.tietuku.cn/b114fba59fa045cd.png" alt="25475-6944478da3ba8554" width="671" height="398" /></a>
 
 <a href="http://i1.tietuku.cn/8badcd0c53ae36cc.png"><img src="http://i1.tietuku.cn/8badcd0c53ae36cc.png" alt="25475-e50fbd06ebf6959d" width="673" height="460" /></a>
 
 <strong>7.自动下载Bing图片并设置为桌面壁纸</strong>
+
 默认禁用，可自行启用“BingDesktopThemeEveryDay.uc.js”uc脚本。
+
 <strong>8.手势</strong>
+
 关闭当前标签"DR"；恢复关闭的标签页"DL"
+
 激活左边的标签页"UL"激活右边的标签页"UR"；
+
 刷新当前页面"UD"；
+
 后退"L" 前进"R"；
+
 <strong>9.拖拽</strong>
+
 链接上拖前台打开，下拖后台打开；
+
 文字上拖前台搜索，下拖前台站内搜索；
+
 图片上拖新标签页打开图片，下拖打开链接；
+
 <strong>10.标签页</strong>
+
 新标签打开:书签、历史、搜索栏
+
 地址栏新标签打开
+
 中键点击bookmark菜单不关闭
+
 右键关闭标签页，ctrl+右键打开菜单
+
 滚轮切换标签/鼠标停留标签自动聚焦（默认不启用）
+
 <span style="color: #ff6600; font-size: 14pt;"><strong>下载/标签页/手势/拖拽/书签栏等设置在uc管理器菜单中。</strong></span>
+
 uc管理器菜单：
 
 <a href="http://i1.tietuku.cn/24915719a82a6580.png"><img src="http://i1.tietuku.cn/24915719a82a6580.png" alt="25475-4ab4febf0d6cde9a" width="196" height="215" /></a>
 
 <strong>0.其他</strong>
+
 扩展：
+
 网盘离线下载 火狐吧出品，百度云,115右键离线下载http,ftp,ed2k，磁链，方便快捷
+
 ACVAA 中国反视频广告联盟 去除中国主流视频网站（包括其外链）好几十秒无节操视频广告
+
 Pan 去广告的同时，轻松管理代理
+
 Clearly 去除页面无关元素方便阅读
+
 Pocket Save pages to read later.
+
 脚本：
+
 AutoPopup.uc.js 鼠标置于图标上自动弹出
+
 downloadPlus.uc.js 从硬盘中删除+下载重命名并可转码+双击复制链接+另存为+保存并打开+完成下载提示音+自动关闭下载产生的空白标签
+
 GoogleTranslator.uc.js 左键点击按钮直接翻译，如果有选中文字就翻译文字，否则翻译网页。右键弹出设置菜单
+
 Locationbar.uc.js 地址栏成为可点击的链接
+
 Redirector.uc.js Redirect your requests.重定向脚本
+
 SnapLinksMod.uc.xul 批量选中链接
 
 ##致谢
+
 感谢<a href="http://sourceforge.net/projects/pcxfirefox/">pcxfirefox</a>的作者 xunxun。
+
 标签栏样式，导航栏样式主要修改自<a href="http://roserio.com/mochi/">Mochi</a>，特别感谢作者zhulinxizi。
+
 感谢ywzhaiqi、feiruo、黑仪大螃蟹等等脚本、样式、扩展开发者。
+
 感谢各位大大的定制版，让小白也能凑出合用的火狐，感谢<a href="http://www.firefoxfan.com/">火狐范</a>，<a href="http://sunbox.cc/">阳光盒子</a>，<a href="http://www.runningcheese.com/">奔跑中的奶酪</a>等。
+
 感谢卡饭论坛，火狐吧。
+
 ##后记
 <span style="font-size: 18pt; color: #cf613a;">ENNEA FireFox </span>就是 <span style="font-size: 18pt; color: #cf613a;">嗯呢火狐</span>，哈哈。
 火狐这个磨人的狐狸精真是让人离不开啊。
@@ -256,61 +330,83 @@ Windows 10 解决任务栏出现两个火狐图标的问题，参考这 http://t
 
 <p><strong>扩展：</strong></p>
 
-<p><a href="http://i1.tietuku.cn/a86e10d28caeb215.png"><img src="http://i1.tietuku.cn/a86e10d28caeb215.png" alt="扩展" height="580" width="360"></a>
-<strong>油猴脚本：</strong></p>
+<p><a href="http://i1.tietuku.cn/a86e10d28caeb215.png"><img src="http://i1.tietuku.cn/a86e10d28caeb215.png" alt="扩展" height="580" width="360"></a></p>
 
-<p><a href="http://i1.tietuku.cn/7417b13d56450207.png"><img src="http://i1.tietuku.cn/7417b13d56450207.png" alt="油猴脚本" height="472" width="359"></a>
-<strong>UC脚本：</strong></p>
+<p><strong>油猴脚本：</strong></p>
 
-<p><a href="http://i1.tietuku.cn/139c4c706936ac2e.png"><img src="http://i1.tietuku.cn/139c4c706936ac2e.png" alt="25475-df3fe3c7e5efa20f" height="639" width="358"></a>
-<strong>样式：</strong></p>
+<p><a href="http://i1.tietuku.cn/7417b13d56450207.png"><img src="http://i1.tietuku.cn/7417b13d56450207.png" alt="油猴脚本" height="472" width="359"></a></p>
 
-<p><a href="http://i1.tietuku.cn/8bbb2acb31c68132.png"><img src="http://i1.tietuku.cn/8bbb2acb31c68132.png" alt="25475-94f7a8579d8b3c9d" height="607" width="358"></a>
-[/toggle<em>item]
-[toggle</em>item title="界面" active="true"]
-界面极简化，去除各种阴影/线条，隐藏不必要的元素，补全图标，美化细节。
-<strong>1.标签栏</strong></p>
+<p><strong>UC脚本：</strong></p>
+
+<p><a href="http://i1.tietuku.cn/139c4c706936ac2e.png"><img src="http://i1.tietuku.cn/139c4c706936ac2e.png" alt="25475-df3fe3c7e5efa20f" height="639" width="358"></a></p>
+
+<p><strong>样式：</strong></p>
+
+<p><a href="http://i1.tietuku.cn/8bbb2acb31c68132.png"><img src="http://i1.tietuku.cn/8bbb2acb31c68132.png" alt="25475-94f7a8579d8b3c9d" height="607" width="358"></a></p>
+
+<h2 id="">界面</h2>
+
+<p>界面极简化，去除各种阴影/线条，隐藏不必要的元素，补全图标，美化细节。</p>
+
+<p><strong>1.标签栏</strong></p>
 
 <p><a href="http://i1.tietuku.cn/5807e3e937c9ebba.png"><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="25475-bace6e2d64e84048" height="455" width="810"></a></p>
 
-<p><strong>2.侧边栏</strong>
-去除边框，并添加书签/历史/附加组件/pocket及一些常用网站。
-Pocket 侧栏：</p>
+<p><strong>2.侧边栏</strong></p>
 
-<p><a href="http://i1.tietuku.cn/250c4cbe864a33de.png"><img src="http://i1.tietuku.cn/250c4cbe864a33de.png" alt="25475-37b68f64a9f5f876" height="686" width="496"></a>
-附加组件 侧栏：</p>
+<p>去除边框，并添加书签/历史/附加组件/pocket及一些常用网站。</p>
 
-<p><a href="http://i1.tietuku.cn/85b907dc0e270ed4.png"><img src="http://i1.tietuku.cn/85b907dc0e270ed4.png" alt="25475-d98229b9a03ca5a9" height="669" width="515"></a>
-侧栏圆点：</p>
+<p>Pocket 侧栏：</p>
+
+<p><a href="http://i1.tietuku.cn/250c4cbe864a33de.png"><img src="http://i1.tietuku.cn/250c4cbe864a33de.png" alt="25475-37b68f64a9f5f876" height="686" width="496"></a></p>
+
+<p>附加组件 侧栏：</p>
+
+<p><a href="http://i1.tietuku.cn/85b907dc0e270ed4.png"><img src="http://i1.tietuku.cn/85b907dc0e270ed4.png" alt="25475-d98229b9a03ca5a9" height="669" width="515"></a></p>
+
+<p>侧栏圆点：</p>
 
 <p><a href="http://i1.tietuku.cn/2de5dd680e49c4c3.png"><img src="http://i1.tietuku.cn/2de5dd680e49c4c3.png" alt="25475-8b22db37e0d6d766" height="150" width="244"></a>
 如上图所示，侧边栏在ctrl+B或 ctrl+H启动后会缩为一个小圆点，把鼠标放在圆点会侧栏自动展开。
-不需要侧栏自动收缩的，可将stylish中“0-侧栏样式”关闭。
-<strong>3.右键菜单</strong>
+不需要侧栏自动收缩的，可将stylish中“0-侧栏样式”关闭。</p>
+
+<p><strong>3.右键菜单</strong>
 美化右键样式，补全菜单图标。
 添加谷歌图片搜索，多引擎搜索，用邮件发送连接等右键菜单项
 图片右键菜单：</p>
 
-<p><a href="http://i1.tietuku.cn/02f114dd656d5970.png"><img src="http://i1.tietuku.cn/02f114dd656d5970.png" alt="uc脚本" height="497" width="357"></a>
-页面右键菜单：</p>
+<p><a href="http://i1.tietuku.cn/02f114dd656d5970.png"><img src="http://i1.tietuku.cn/02f114dd656d5970.png" alt="uc脚本" height="497" width="357"></a></p>
 
-<p><a href="http://i1.tietuku.cn/f784e699d6377e8f.png"><img src="http://i1.tietuku.cn/f784e699d6377e8f.png" alt="25475-ef94719e271c90bc" height="293" width="352"></a>
-<strong>4.地址栏</strong>
-美化下拉列表，合并搜索栏</p>
+<p>页面右键菜单：</p>
 
-<p><a href="http://i1.tietuku.cn/94bd97dad1072bde.png"><img src="http://i1.tietuku.cn/94bd97dad1072bde.png" alt="25475-e48a5c47c416e842" height="521" width="757"></a>
-<strong>5.载入进度条</strong>
-添加漂亮的载入进度条</p>
+<p><a href="http://i1.tietuku.cn/f784e699d6377e8f.png"><img src="http://i1.tietuku.cn/f784e699d6377e8f.png" alt="25475-ef94719e271c90bc" height="293" width="352"></a></p>
 
-<p><a href="http://i1.tietuku.cn/ceb9f10a903d360a.png"><img src="http://i1.tietuku.cn/ceb9f10a903d360a.png" alt="25475-3ac7221380c62cdd" height="174" width="412"></a>
-<strong>6.新标签页</strong>
-<a href="https://userstyles.org/styles/112775/about-newtab-for-31">about-newtab-for-31+</a>
-1.隐藏了搜索框/右上角的齿轮和“这是什么页面”字样
-2.修改为直角
-3.背景图片可通过#newtab-scrollbox:not([page-disabled]) {background:url("file:///C:/<em>/</em>/<em>*.jpg");修改，将</em>改成本地图片的地址,或者直接输入网络图片地址 如：url("http://s.cn.bing.net/az/hprichbg/rb/UchisarCastle<em>ZH- CN10268966547</em>1920x1080.jpg");
-4.提供部分网站缩略图，缩略图用的是搜狗的在线图标，常见网站在样式里替换网址就行了。
-参考 http://bbs.kafan.cn/thread-1819339-1-1.html。
-5.该样式是在1366*768分辨率下调整成的，可能需要自行调整方块的大小：
+<p><strong>4.地址栏</strong></p>
+
+<p>美化下拉列表，合并搜索栏</p>
+
+<p><a href="http://i1.tietuku.cn/94bd97dad1072bde.png"><img src="http://i1.tietuku.cn/94bd97dad1072bde.png" alt="25475-e48a5c47c416e842" height="521" width="757"></a></p>
+
+<p><strong>5.载入进度条</strong></p>
+
+<p>添加漂亮的载入进度条</p>
+
+<p><a href="http://i1.tietuku.cn/ceb9f10a903d360a.png"><img src="http://i1.tietuku.cn/ceb9f10a903d360a.png" alt="25475-3ac7221380c62cdd" height="174" width="412"></a></p>
+
+<p><strong>6.新标签页</strong></p>
+
+<p><a href="https://userstyles.org/styles/112775/about-newtab-for-31">about-newtab-for-31+</a></p>
+
+<p>1.隐藏了搜索框/右上角的齿轮和“这是什么页面”字样</p>
+
+<p>2.修改为直角</p>
+
+<p>3.背景图片可通过#newtab-scrollbox:not([page-disabled]) {background:url("file:///C:/<em>/</em>/<em>*.jpg");修改，将</em>改成本地图片的地址,或者直接输入网络图片地址 如：url("http://s.cn.bing.net/az/hprichbg/rb/UchisarCastle<em>ZH- CN10268966547</em>1920x1080.jpg");</p>
+
+<p>4.提供部分网站缩略图，缩略图用的是搜狗的在线图标，常见网站在样式里替换网址就行了。
+参考 http://bbs.kafan.cn/thread-1819339-1-1.html。</p>
+
+<p>5.该样式是在1366*768分辨率下调整成的，可能需要自行调整方块的大小：
 <code>#newtab-grid &amp;gt; .newtab-cell{
 height: 155px;
 width: 250px;
@@ -320,80 +416,132 @@ width: 250px;
 max-width: 1200px !important;
 max-height: 600px !important;
 }</code>
-还有，调整好上两项可得不同行数/列数的拨号。
-效果见图</p>
+还有，调整好上两项可得不同行数/列数的拨号。</p>
+
+<p>效果见图</p>
 
 <p><a href="http://i1.tietuku.cn/5807e3e937c9ebba.png"><img src="http://i1.tietuku.cn/5807e3e937c9ebba.png" alt="25475-bace6e2d64e84048" height="399" width="710"></a></p>
 
 <h2 id="">功能项</h2>
 
-<p>添加的这些功能都挺好用的，有的可能需要适应一下
-<strong>1.搜索</strong>
-搜索栏合并到地址栏，可在地址栏完成搜索
-“搜索引擎关键字+搜索词” 可直接调用相关搜索引擎搜索
-右键菜单添加多引擎搜索，在选定文字上右键即可用多个搜索引擎搜索
-图片右键添加谷歌图片搜索
-选中文字上拖则用默认搜索搜索选中文字
-选中文字下拖则用默认搜索站内搜索选中文字
-2.Simplify Awesome Bar
-只要不是输入框，敲击键盘将直接带到地址栏。
-任何选定的文本，将一同与输入字母进入地址栏。 例如：如果玩具是选定的文本、s是输入的字母，那 s 玩具 将出现在地址栏里。ps:可配合关键字调用相应引擎搜索。
-<strong>3.音乐随心听</strong>
-点击地址栏右侧的音乐随心听按钮弹出音乐播放面板，右键为播放控制及切换音乐站点
-<a href="http://i1.tietuku.cn/dd32fc44aad13a9d.png"><img src="http://i1.tietuku.cn/dd32fc44aad13a9d.png" alt="25475-11b4b72498874947" height="520" width="360"></a>
-<strong>4.自动翻页</strong>
-在支持的页面自动翻页，如bing，google搜索结果页面，卡饭论坛等等。
-可手动关闭。
-<strong>5.视频小窗口播放</strong>
-点击视频右上角的弹出窗口播放即可
+<p>添加的这些功能都挺好用的，有的可能需要适应一下</p>
+
+<p><strong>1.搜索</strong></p>
+
+<p>搜索栏合并到地址栏，可在地址栏完成搜索</p>
+
+<p>“搜索引擎关键字+搜索词” 可直接调用相关搜索引擎搜索</p>
+
+<p>右键菜单添加多引擎搜索，在选定文字上右键即可用多个搜索引擎搜索</p>
+
+<p>图片右键添加谷歌图片搜索</p>
+
+<p>选中文字上拖则用默认搜索搜索选中文字</p>
+
+<p>选中文字下拖则用默认搜索站内搜索选中文字</p>
+
+<p>2.Simplify Awesome Bar</p>
+
+<p>只要不是输入框，敲击键盘将直接带到地址栏。</p>
+
+<p>任何选定的文本，将一同与输入字母进入地址栏。 例如：如果玩具是选定的文本、s是输入的字母，那 s 玩具 将出现在地址栏里。ps:可配合关键字调用相应引擎搜索。</p>
+
+<p><strong>3.音乐随心听</strong></p>
+
+<p>点击地址栏右侧的音乐随心听按钮弹出音乐播放面板，右键为播放控制及切换音乐站点
+<a href="http://i1.tietuku.cn/dd32fc44aad13a9d.png"><img src="http://i1.tietuku.cn/dd32fc44aad13a9d.png" alt="25475-11b4b72498874947" height="520" width="360"></a></p>
+
+<p><strong>4.自动翻页</strong></p>
+
+<p>在支持的页面自动翻页，如bing，google搜索结果页面，卡饭论坛等等。
+可手动关闭。</p>
+
+<p><strong>5.视频小窗口播放</strong></p>
+
+<p>点击视频右上角的弹出窗口播放即可
 <a href="http://i1.tietuku.cn/b114fba59fa045cd.png"><img src="http://i1.tietuku.cn/b114fba59fa045cd.png" alt="25475-6944478da3ba8554" height="398" width="671"></a></p>
 
 <p><a href="http://i1.tietuku.cn/8badcd0c53ae36cc.png"><img src="http://i1.tietuku.cn/8badcd0c53ae36cc.png" alt="25475-e50fbd06ebf6959d" height="460" width="673"></a></p>
 
-<p><strong>7.自动下载Bing图片并设置为桌面壁纸</strong>
-默认禁用，可自行启用“BingDesktopThemeEveryDay.uc.js”uc脚本。
-<strong>8.手势</strong>
-关闭当前标签"DR"；恢复关闭的标签页"DL"
-激活左边的标签页"UL"激活右边的标签页"UR"；
-刷新当前页面"UD"；
-后退"L" 前进"R"；
-<strong>9.拖拽</strong>
-链接上拖前台打开，下拖后台打开；
-文字上拖前台搜索，下拖前台站内搜索；
-图片上拖新标签页打开图片，下拖打开链接；
-<strong>10.标签页</strong>
-新标签打开:书签、历史、搜索栏
-地址栏新标签打开
-中键点击bookmark菜单不关闭
-右键关闭标签页，ctrl+右键打开菜单
-滚轮切换标签/鼠标停留标签自动聚焦（默认不启用）
-<span style="color: #ff6600; font-size: 14pt;"><strong>下载/标签页/手势/拖拽/书签栏等设置在uc管理器菜单中。</strong></span>
-uc管理器菜单：</p>
+<p><strong>7.自动下载Bing图片并设置为桌面壁纸</strong></p>
+
+<p>默认禁用，可自行启用“BingDesktopThemeEveryDay.uc.js”uc脚本。</p>
+
+<p><strong>8.手势</strong></p>
+
+<p>关闭当前标签"DR"；恢复关闭的标签页"DL"</p>
+
+<p>激活左边的标签页"UL"激活右边的标签页"UR"；</p>
+
+<p>刷新当前页面"UD"；</p>
+
+<p>后退"L" 前进"R"；</p>
+
+<p><strong>9.拖拽</strong></p>
+
+<p>链接上拖前台打开，下拖后台打开；</p>
+
+<p>文字上拖前台搜索，下拖前台站内搜索；</p>
+
+<p>图片上拖新标签页打开图片，下拖打开链接；</p>
+
+<p><strong>10.标签页</strong></p>
+
+<p>新标签打开:书签、历史、搜索栏</p>
+
+<p>地址栏新标签打开</p>
+
+<p>中键点击bookmark菜单不关闭</p>
+
+<p>右键关闭标签页，ctrl+右键打开菜单</p>
+
+<p>滚轮切换标签/鼠标停留标签自动聚焦（默认不启用）</p>
+
+<p><span style="color: #ff6600; font-size: 14pt;"><strong>下载/标签页/手势/拖拽/书签栏等设置在uc管理器菜单中。</strong></span></p>
+
+<p>uc管理器菜单：</p>
 
 <p><a href="http://i1.tietuku.cn/24915719a82a6580.png"><img src="http://i1.tietuku.cn/24915719a82a6580.png" alt="25475-4ab4febf0d6cde9a" height="215" width="196"></a></p>
 
-<p><strong>0.其他</strong>
-扩展：
-网盘离线下载 火狐吧出品，百度云,115右键离线下载http,ftp,ed2k，磁链，方便快捷
-ACVAA 中国反视频广告联盟 去除中国主流视频网站（包括其外链）好几十秒无节操视频广告
-Pan 去广告的同时，轻松管理代理
-Clearly 去除页面无关元素方便阅读
-Pocket Save pages to read later.
-脚本：
-AutoPopup.uc.js 鼠标置于图标上自动弹出
-downloadPlus.uc.js 从硬盘中删除+下载重命名并可转码+双击复制链接+另存为+保存并打开+完成下载提示音+自动关闭下载产生的空白标签
-GoogleTranslator.uc.js 左键点击按钮直接翻译，如果有选中文字就翻译文字，否则翻译网页。右键弹出设置菜单
-Locationbar.uc.js 地址栏成为可点击的链接
-Redirector.uc.js Redirect your requests.重定向脚本
-SnapLinksMod.uc.xul 批量选中链接</p>
+<p><strong>0.其他</strong></p>
+
+<p>扩展：</p>
+
+<p>网盘离线下载 火狐吧出品，百度云,115右键离线下载http,ftp,ed2k，磁链，方便快捷</p>
+
+<p>ACVAA 中国反视频广告联盟 去除中国主流视频网站（包括其外链）好几十秒无节操视频广告</p>
+
+<p>Pan 去广告的同时，轻松管理代理</p>
+
+<p>Clearly 去除页面无关元素方便阅读</p>
+
+<p>Pocket Save pages to read later.</p>
+
+<p>脚本：</p>
+
+<p>AutoPopup.uc.js 鼠标置于图标上自动弹出</p>
+
+<p>downloadPlus.uc.js 从硬盘中删除+下载重命名并可转码+双击复制链接+另存为+保存并打开+完成下载提示音+自动关闭下载产生的空白标签</p>
+
+<p>GoogleTranslator.uc.js 左键点击按钮直接翻译，如果有选中文字就翻译文字，否则翻译网页。右键弹出设置菜单</p>
+
+<p>Locationbar.uc.js 地址栏成为可点击的链接</p>
+
+<p>Redirector.uc.js Redirect your requests.重定向脚本</p>
+
+<p>SnapLinksMod.uc.xul 批量选中链接</p>
 
 <h2 id="">致谢</h2>
 
-<p>感谢<a href="http://sourceforge.net/projects/pcxfirefox/">pcxfirefox</a>的作者 xunxun。
-标签栏样式，导航栏样式主要修改自<a href="http://roserio.com/mochi/">Mochi</a>，特别感谢作者zhulinxizi。
-感谢ywzhaiqi、feiruo、黑仪大螃蟹等等脚本、样式、扩展开发者。
-感谢各位大大的定制版，让小白也能凑出合用的火狐，感谢<a href="http://www.firefoxfan.com/">火狐范</a>，<a href="http://sunbox.cc/">阳光盒子</a>，<a href="http://www.runningcheese.com/">奔跑中的奶酪</a>等。
-感谢卡饭论坛，火狐吧。</p>
+<p>感谢<a href="http://sourceforge.net/projects/pcxfirefox/">pcxfirefox</a>的作者 xunxun。</p>
+
+<p>标签栏样式，导航栏样式主要修改自<a href="http://roserio.com/mochi/">Mochi</a>，特别感谢作者zhulinxizi。</p>
+
+<p>感谢ywzhaiqi、feiruo、黑仪大螃蟹等等脚本、样式、扩展开发者。</p>
+
+<p>感谢各位大大的定制版，让小白也能凑出合用的火狐，感谢<a href="http://www.firefoxfan.com/">火狐范</a>，<a href="http://sunbox.cc/">阳光盒子</a>，<a href="http://www.runningcheese.com/">奔跑中的奶酪</a>等。</p>
+
+<p>感谢卡饭论坛，火狐吧。</p>
 
 <h2 id="">后记</h2>
 
