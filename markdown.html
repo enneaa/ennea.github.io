@@ -1,855 +1,60 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="Keywords" content="blog"/>
-    <meta name="Description" content="blog"/>
-    <title>Simple</title>
-    <link rel="shortcut icon" href="/static/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
-</head>
-<body>
-<div class="main">
-    <div class="header">
-    	<ul id="pages">
-            <li><a href="/">home</a></li>
-            <li><a href="/#/tags">tags</a></li>
-            <li><a href="/#/archive">archive</a></li>
-    	</ul>
-    </div>
-	<div class="wrap-header">
-	<h1>
-    <a href="/" id="title"></a>
-	</h1>
-	</div>
-<div id="md" style="display: none;">
-<!-- markdown -->
-<< [访问 Wow!Ubuntu](http://wowubuntu.com)
-
-**NOTE:** This is Simplelified  Chinese Edition Document of Markdown Syntax. If you are seeking for English Edition Document. Please refer to [Markdown: Syntax][eng-doc].
-
-[eng-doc]:http://daringfireball.net/projects/markdown/syntax
-
-**声明：** 这份文档派生(fork)于[繁体中文版](http://markdown.tw/)，在此基础上进行了繁体转简体工作，并进行了适当的润色。此文档用 Markdown 语法编写，你可以到这里[查看它的源文件][src1]。「繁体中文版的原始文件可以[查看这里][src] 。」--By @[riku][t]
-
-**注：** 本项目托管于 [GitCafe][]上，请通过"派生"和"合并请求"来帮忙改进本项目。
-
-  [src1]: http://gitcafe.com/riku/Markdown-Syntax-CN/blob/master/syntax.md
-  [src]: https://github.com/othree/markdown-syntax-zhtw/blob/master/syntax.md
-  [t]: http://twitter.com/riku
-  [g]: http://gitcafe.com/riku/Markdown-Syntax-CN
-  [Github]: https://github.com/riku/Markdown-Syntax-CN
-  [GitCafe]: http://gitcafe.com/riku/Markdown-Syntax-CN/
-
-Markdown 语法说明 (简体中文版) / ([点击查看快速入门](./basic.html))
-================
-
-*   [概述](#overview)
-    *   [宗旨](#philosophy)
-    *   [兼容 HTML](#html)
-    *   [特殊字符自动转换](#autoescape)
-*   [区块元素](#block)
-    *   [段落和换行](#p)
-    *   [标题](#header)
-    *   [区块引用](#blockquote)
-    *   [列表](#list)
-    *   [代码区块](#precode)
-    *   [分隔线](#hr)
-*   [区段元素](#span)
-    *   [链接](#link)
-    *   [强调](#em)
-    *   [代码](#code)
-    *   [图片](#img)
-*   [其它](#misc)
-    *   [反斜杠](#backslash)
-    *   [自动链接](#autolink)
-*   [感谢](#acknowledgement)
-*	[Markdown 免费编辑器](#editor)
-
-* * *
-
-<h2 id="overview">概述</h2>
-
-<h3 id="philosophy">宗旨</h3>
-
-Markdown 的目标是实现「易读易写」。
-
-可读性，无论如何，都是最重要的。一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成。Markdown 语法受到一些既有 text-to-HTML 格式的影响，包括 [Setext] [1]、[atx] [2]、[Textile] [3]、[reStructuredText] [4]、[Grutatext] [5] 和 [EtText] [6]，而最大灵感来源其实是纯文本电子邮件的格式。
-
-  [1]: http://docutils.sourceforge.net/mirror/setext.html
-  [2]: http://www.aaronsw.com/2002/atx/
-  [3]: http://textism.com/tools/textile/
-  [4]: http://docutils.sourceforge.net/rst.html
-  [5]: http://www.triptico.com/software/grutatxt.html
-  [6]: http://ettext.taint.org/doc/
-
-总之， Markdown 的语法全由一些符号所组成，这些符号经过精挑细选，其作用一目了然。比如：在文字两旁加上星号，看起来就像\*强调\*。Markdown 的列表看起来，嗯，就是列表。Markdown 的区块引用看起来就真的像是引用一段文字，就像你曾在电子邮件中见过的那样。
-
-<h3 id="html">兼容 HTML</h3>
-
-Markdown 语法的目标是：成为一种适用于网络的*书写*语言。
-
-Markdown 并不是想取代 HTML的地位，甚至接近它。它的语法种类很少，只对应 HTML 标记的一小部分。Markdown 的构想*不是*要使得 HTML 文档更容易书写。在我看来， HTML 已经很容易写了。Markdown 的理念是，能让文档更容易读、写和随意改。HTML 是一种*发布*的格式，Markdown 是一种*书写*的格式。就这样，Markdown 的格式语法只涵盖纯文本可以涵盖的范围。
-
-不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown；只要直接加标签就可以了。
-
-要制约的只有一些 HTML 区块元素――比如 `<div>`、`<table>`、`<pre>`、`<p>` 等标签，必须在前后加上空行与其它内容区隔开，还要求它们的开始标签与结尾标签不能用制表符或空格来缩进。Markdown 的生成器有足够智能，不会在 HTML 区块标签外加上不必要的 `<p>` 标签。
-
-例子如下，在 Markdown 文件里加上一段 HTML 表格：
-
-    这是一个普通段落。
-
-    <table>
-        <tr>
-            <td>Foo</td>
-        </tr>
-    </table>
-
-    这是另一个普通段落。
-
-请注意，在 HTML 区块标签间的 Markdown 格式语法将不会被处理。比如，你在 HTML 区块内使用 Markdown 样式的`*强调*`会没有效果。
-
-HTML 的区段（行内）标签如 `<span>`、`<cite>`、`<del>` 可以在 Markdown 的段落、列表或是标题里随意使用。依照个人习惯，甚至可以不用 Markdown 格式，而直接采用 HTML 标签来格式化。举例说明：如果比较喜欢 HTML 的 `<a>` 或 `<img>` 标签，可以直接使用这些标签，而不用 Markdown 提供的链接或是图像标签语法。
-
-和处在 HTML 区块标签间不同，Markdown 语法在 HTML 区段标签间是有效的。
-
-<h3 id="autoescape">特殊字符自动转换</h3>
-
-在 HTML 文件中，有两个字符需要特殊处理： `<` 和 `&` 。 `<` 符号用于起始标签，`&` 符号则用于标记 HTML 实体，如果你只是想要显示这些字符的原型，你必须要使用实体的形式，像是 `&lt;` 和 `&amp;`。
-
-`&` 字符尤其让网络文档编写者受折磨，如果你要打「`AT&T`」 ，你必须要写成「`AT&amp;T`」。而网址中的 `&` 字符也要转换。比如你要链接到：
-
-    http://images.google.com/images?num=30&q=larry+bird
-
-你必须要把网址转换写为：
-
-    http://images.google.com/images?num=30&amp;q=larry+bird
-
-才能放到链接标签的 `href` 属性里。不用说也知道这很容易忽略，这也可能是 HTML 标准检验所检查到的错误中，数量最多的。
-
-Markdown 让你可以自然地书写字符，需要转换的由它来处理好了。如果你使用的 `&` 字符是 HTML 字符实体的一部分，它会保留原状，否则它会被转换成 `&amp`;。
-
-所以你如果要在文档中插入一个版权符号 `©`，你可以这样写：
-
-    &copy;
-
-Markdown 会保留它不动。而若你写：
-
-    AT&T
-
-Markdown 就会将它转为：
-
-    AT&amp;T
-
-类似的状况也会发生在 `<` 符号上，因为 Markdown 允许 [兼容 HTML](#html) ，如果你是把 `<` 符号作为 HTML 标签的定界符使用，那 Markdown 也不会对它做任何转换，但是如果你写：
-
-    4 < 5
-
-Markdown 将会把它转换为：
-
-    4 &lt; 5
-
-不过需要注意的是，code 范围内，不论是行内还是区块， `<` 和 `&` 两个符号都*一定*会被转换成 HTML 实体，这项特性让你可以很容易地用 Markdown 写 HTML code （和 HTML 相对而言， HTML 语法中，你要把所有的 `<` 和 `&` 都转换为 HTML 实体，才能在 HTML 文件里面写出 HTML code。）
-
-* * *
-
-<h2 id="block">区块元素</h2>
-
-
-<h3 id="p">段落和换行</h3>
-
-一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。
-
-「由一个或多个连续的文本行组成」这句话其实暗示了 Markdown 允许段落内的强迫换行（插入换行符），这个特性和其他大部分的 text-to-HTML 格式不一样（包括 Movable Type 的「Convert Line Breaks」选项），其它的格式会把每个换行符都转成 `<br />` 标签。
-
-如果你*确实*想要依赖 Markdown 来插入 `<br />` 标签的话，在插入处先按入两个以上的空格然后回车。
-
-的确，需要多费点事（多加空格）来产生 `<br />` ，但是简单地「每个换行都转换为 `<br />`」的方法在 Markdown 中并不适合， Markdown 中 email 式的 [区块引用][bq] 和多段落的 [列表][l] 在使用换行来排版的时候，不但更好用，还更方便阅读。
-
-  [bq]: #blockquote
-  [l]:  #list
-
-<h3 id="header">标题</h3>
-
-Markdown 支持两种标题的语法，类 [Setext] [1] 和类 [atx] [2] 形式。
-
-类 Setext 形式是用底线的形式，利用 `=` （最高阶标题）和 `-` （第二阶标题），例如：
-
-    This is an H1
-    =============
-
-    This is an H2
-    -------------
-
-任何数量的 `=` 和 `-` 都可以有效果。
-
-类 Atx 形式则是在行首插入 1 到 6 个 `#` ，对应到标题 1 到 6 阶，例如：
-
-    # 这是 H1
-
-    ## 这是 H2
-
-    ###### 这是 H6
-
-你可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 `#`，而行尾的 `#` 数量也不用和开头一样（行首的井字符数量决定标题的阶数）：
-
-    # 这是 H1 #
-
-    ## 这是 H2 ##
-
-    ### 这是 H3 ######
-
-
-<h3 id="blockquote">区块引用 Blockquotes</h3>
-
-Markdown 标记区块引用是使用类似 email 中用 `>` 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 `>` ：
-
-    > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-    > consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-    > Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-    > 
-    > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-    > id sem consectetuer libero luctus adipiscing.
-
-Markdown 也允许你偷懒只在整个段落的第一行最前面加上 `>` ：
-
-    > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-    consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-    Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
-    > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-    id sem consectetuer libero luctus adipiscing.
-
-区块引用可以嵌套（例如：引用内的引用），只要根据层次加上不同数量的 `>` ：
-
-    > This is the first level of quoting.
-    >
-    > > This is nested blockquote.
-    >
-    > Back to the first level.
-
-引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：
-
-	> ## 这是一个标题。
-	> 
-	> 1.   这是第一行列表项。
-	> 2.   这是第二行列表项。
-	> 
-	> 给出一些例子代码：
-	> 
-	>     return shell_exec("echo $input | $markdown_script");
-
-任何像样的文本编辑器都能轻松地建立 email 型的引用。例如在 BBEdit 中，你可以选取文字后然后从选单中选择*增加引用阶层*。
-
-<h3 id="list">列表</h3>
-
-Markdown 支持有序列表和无序列表。
-
-无序列表使用星号、加号或是减号作为列表标记：
-
-    *   Red
-    *   Green
-    *   Blue
-
-效果就是
-
-* red
-* green
-* blue
-
-等同于：
-
-    +   Red
-    +   Green
-    +   Blue
-
-也等同于：
-
-    -   Red
-    -   Green
-    -   Blue
-
-有序列表则使用数字接着一个英文句点：
-
-    1.  Bird
-    2.  McHale
-    3.  Parish
-
-很重要的一点是，你在列表标记上使用的数字并不会影响输出的 HTML 结果，上面的列表所产生的 HTML 标记为：
-
-    <ol>
-    <li>Bird</li>
-    <li>McHale</li>
-    <li>Parish</li>
-    </ol>
-
-如果你的列表标记写成：
-
-    1.  Bird
-    1.  McHale
-    1.  Parish
-
-或甚至是：
-
-    3. Bird
-    1. McHale
-    8. Parish
-
-你都会得到完全相同的 HTML 输出。重点在于，你可以让 Markdown 文件的列表数字和输出的结果相同，或是你懒一点，你可以完全不用在意数字的正确性。
-
-如果你使用懒惰的写法，建议第一个项目最好还是从 1. 开始，因为 Markdown 未来可能会支持有序列表的 start 属性。
-
-列表项目标记通常是放在最左边，但是其实也可以缩进，最多 3 个空格，项目标记后面则一定要接着至少一个空格或制表符。
-
-要让列表看起来更漂亮，你可以把内容用固定的缩进整理好：
-
-    *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-        Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
-        viverra nec, fringilla in, laoreet vitae, risus.
-    *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
-        Suspendisse id sem consectetuer libero luctus adipiscing.
-
-但是如果你懒，那也行：
-
-    *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-    Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
-    viverra nec, fringilla in, laoreet vitae, risus.
-    *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
-    Suspendisse id sem consectetuer libero luctus adipiscing.
-
-如果列表项目间用空行分开，在输出 HTML 时 Markdown 就会将项目内容用 `<p>` 
-标签包起来，举例来说：
-
-    *   Bird
-    *   Magic
-
-会被转换为：
-
-    <ul>
-    <li>Bird</li>
-    <li>Magic</li>
-    </ul>
-
-但是这个：
-
-    *   Bird
-
-    *   Magic
-
-会被转换为：
-
-    <ul>
-    <li><p>Bird</p></li>
-    <li><p>Magic</p></li>
-    </ul>
-
-列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符：
-
-    1.  This is a list item with two paragraphs. Lorem ipsum dolor
-        sit amet, consectetuer adipiscing elit. Aliquam hendrerit
-        mi posuere lectus.
-
-        Vestibulum enim wisi, viverra nec, fringilla in, laoreet
-        vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
-        sit amet velit.
-
-    2.  Suspendisse id sem consectetuer libero luctus adipiscing.
-
-如果你每行都有缩进，看起来会看好很多，当然，再次地，如果你很懒惰，Markdown 也允许：
-
-    *   This is a list item with two paragraphs.
-
-        This is the second paragraph in the list item. You're
-    only required to indent the first line. Lorem ipsum dolor
-    sit amet, consectetuer adipiscing elit.
-
-    *   Another item in the same list.
-
-如果要在列表项目内放进引用，那 `>` 就需要缩进：
-
-    *   A list item with a blockquote:
-
-        > This is a blockquote
-        > inside a list item.
-
-如果要放代码区块的话，该区块就需要缩进*两次*，也就是 8 个空格或是 2 个制表符：
-
-    *   一列表项包含一个列表区块：
-
-            <代码写在这>
-
-
-当然，项目列表很可能会不小心产生，像是下面这样的写法：
-
-    1986. What a great season.
-
-换句话说，也就是在行首出现*数字-句点-空白*，要避免这样的状况，你可以在句点前面加上反斜杠。
-
-    1986\. What a great season.
-
-<h3 id="precode">代码区块</h3>
-
-和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这些区块我们并不希望它以一般段落文件的方式去排版，而是照原来的样子显示，Markdown 会用 `<pre>` 和 `<code>` 标签来把代码区块包起来。
-
-要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：
-
-    这是一个普通段落：
-
-        这是一个代码区块。
-
-Markdown 会转换成：
-
-    <p>这是一个普通段落：</p>
-
-    <pre><code>这是一个代码区块。
-    </code></pre>
-
-这个每行一阶的缩进（4 个空格或是 1 个制表符），都会被移除，例如：
-
-    Here is an example of AppleScript:
-
-        tell application "Foo"
-            beep
-        end tell
-
-会被转换为：
-
-    <p>Here is an example of AppleScript:</p>
-
-    <pre><code>tell application "Foo"
-        beep
-    end tell
-    </code></pre>
-
-一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。
-
-在代码区块里面， `&` 、 `<` 和 `>` 会自动转成 HTML 实体，这样的方式让你非常容易使用 Markdown 插入范例用的 HTML 原始码，只需要复制贴上，再加上缩进就可以了，剩下的 Markdown 都会帮你处理，例如：
-
-        <div class="footer">
-            &copy; 2004 Foo Corporation
-        </div>
-
-会被转换为：
-
-    <pre><code>&lt;div class="footer"&gt;
-        &amp;copy; 2004 Foo Corporation
-    &lt;/div&gt;
-    </code></pre>
-
-代码区块中，一般的 Markdown 语法不会被转换，像是星号便只是星号，这表示你可以很容易地以 Markdown 语法撰写 Markdown 语法相关的文件。
-
-<h3 id="hr">分隔线</h3>
-
-你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：
-
-    * * *
-
-    ***
-
-    *****
-
-    - - -
-
-    ---------------------------------------
-
-
-* * *
-
-<h2 id="span">区段元素</h2>
-
-<h3 id="link">链接</h3>
-
-Markdown 支持两种形式的链接语法： *行内式*和*参考式*两种形式。
-
-不管是哪一种，链接文字都是用 [方括号] 来标记。
-
-要建立一个*行内式*的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：
-
-    This is [an example](http://example.com/ "Title") inline link.
-
-    [This link](http://example.net/) has no title attribute.
-
-会产生：
-
-    <p>This is <a href="http://example.com/" title="Title">
-    an example</a> inline link.</p>
-
-    <p><a href="http://example.net/">This link</a> has no
-    title attribute.</p>
-
-如果你是要链接到同样主机的资源，你可以使用相对路径：
-
-    See my [About](/about/) page for details.   
-
-*参考式*的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：
-
-    This is [an example][id] reference-style link.
-
-你也可以选择性地在两个方括号中间加上一个空格：
-
-    This is [an example] [id] reference-style link.
-
-接着，在文件的任意处，你可以把这个标记的链接内容定义出来：
-
-    [id]: http://example.com/  "Optional Title Here"
-
-链接内容定义的形式为：
-
-*   方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字
-*   接着一个冒号
-*   接着一个以上的空格或制表符
-*   接着链接的网址
-*   选择性地接着 title 内容，可以用单引号、双引号或是括弧包着
-
-下面这三种链接的定义都是相同：
-
-	[foo]: http://example.com/  "Optional Title Here"
-	[foo]: http://example.com/  'Optional Title Here'
-	[foo]: http://example.com/  (Optional Title Here)
-
-**请注意：**有一个已知的问题是 Markdown.pl 1.0.1 会忽略单引号包起来的链接 title。
-
-链接网址也可以用尖括号包起来：
-
-    [id]: <http://example.com/>  "Optional Title Here"
-
-你也可以把 title 属性放到下一行，也可以加一些缩进，若网址太长的话，这样会比较好看：
-
-    [id]: http://example.com/longish/path/to/resource/here
-        "Optional Title Here"
-
-网址定义只有在产生链接的时候用到，并不会直接出现在文件之中。
-
-链接辨别标签可以有字母、数字、空白和标点符号，但是并*不*区分大小写，因此下面两个链接是一样的：
-
-	[link text][a]
-	[link text][A]
-
-*隐式链接标记*功能让你可以省略指定链接标记，这种情形下，链接标记会视为等同于链接文字，要用隐式链接标记只要在链接文字后面加上一个空的方括号，如果你要让 "Google" 链接到 google.com，你可以简化成：
-
-	[Google][]
-
-然后定义链接内容：
-
-	[Google]: http://google.com/
-
-由于链接文字可能包含空白，所以这种简化型的标记内也许包含多个单词：
-
-	Visit [Daring Fireball][] for more information.
-
-然后接着定义链接：
-
-	[Daring Fireball]: http://daringfireball.net/
-
-链接的定义可以放在文件中的任何一个地方，我比较偏好直接放在链接出现段落的后面，你也可以把它放在文件最后面，就像是注解一样。
-
-下面是一个参考式链接的范例：
-
-    I get 10 times more traffic from [Google] [1] than from
-    [Yahoo] [2] or [MSN] [3].
-
-      [1]: http://google.com/        "Google"
-      [2]: http://search.yahoo.com/  "Yahoo Search"
-      [3]: http://search.msn.com/    "MSN Search"
-
-如果改成用链接名称的方式写：
-
-    I get 10 times more traffic from [Google][] than from
-    [Yahoo][] or [MSN][].
-
-      [google]: http://google.com/        "Google"
-      [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
-      [msn]:    http://search.msn.com/    "MSN Search"
-
-上面两种写法都会产生下面的 HTML。
-
-    <p>I get 10 times more traffic from <a href="http://google.com/"
-    title="Google">Google</a> than from
-    <a href="http://search.yahoo.com/" title="Yahoo Search">Yahoo</a>
-    or <a href="http://search.msn.com/" title="MSN Search">MSN</a>.</p>
-
-下面是用行内式写的同样一段内容的 Markdown 文件，提供作为比较之用：
-
-    I get 10 times more traffic from [Google](http://google.com/ "Google")
-    than from [Yahoo](http://search.yahoo.com/ "Yahoo Search") or
-    [MSN](http://search.msn.com/ "MSN Search").
-
-参考式的链接其实重点不在于它比较好写，而是它比较好读，比较一下上面的范例，使用参考式的文章本身只有 81 个字符，但是用行内形式的却会增加到 176 个字元，如果是用纯 HTML 格式来写，会有 234 个字元，在 HTML 格式中，标签比文本还要多。
-
-使用 Markdown 的参考式链接，可以让文件更像是浏览器最后产生的结果，让你可以把一些标记相关的元数据移到段落文字之外，你就可以增加链接而不让文章的阅读感觉被打断。
-
-<h3 id="em">强调</h3>
-
-Markdown 使用星号（`*`）和底线（`_`）作为标记强调字词的符号，被 `*` 或 `_` 包围的字词会被转成用 `<em>` 标签包围，用两个 `*` 或 `_` 包起来的话，则会被转成 `<strong>`，例如：
-
-    *single asterisks*
-
-    _single underscores_
-
-    **double asterisks**
-
-    __double underscores__
-
-会转成：
-
-    <em>single asterisks</em>
-
-    <em>single underscores</em>
-
-    <strong>double asterisks</strong>
-
-    <strong>double underscores</strong>
-
-你可以随便用你喜欢的样式，唯一的限制是，你用什么符号开启标签，就要用什么符号结束。
-
-强调也可以直接插在文字中间：
-
-    un*frigging*believable
-
-但是**如果你的 `*` 和 `_` 两边都有空白的话，它们就只会被当成普通的符号**。
-
-如果要在文字前后直接插入普通的星号或底线，你可以用反斜线：
-
-    \*this text is surrounded by literal asterisks\*
-
-<h3 id="code">代码</h3>
-
-如果要标记一小段行内代码，你可以用反引号把它包起来（`` ` ``），例如：
-
-    Use the `printf()` function.
-
-会产生：
-
-    <p>Use the <code>printf()</code> function.</p>
-
-如果要在代码区段内插入反引号，你可以用多个反引号来开启和结束代码区段：
-
-    ``There is a literal backtick (`) here.``
-
-这段语法会产生：
-
-    <p><code>There is a literal backtick (`) here.</code></p>
-
-代码区段的起始和结束端都可以放入一个空白，起始端后面一个，结束端前面一个，这样你就可以在区段的一开始就插入反引号：
-
-	A single backtick in a code span: `` ` ``
-	
-	A backtick-delimited string in a code span: `` `foo` ``
-
-会产生：
-
-	<p>A single backtick in a code span: <code>`</code></p>
-	
-	<p>A backtick-delimited string in a code span: <code>`foo`</code></p>
-
-在代码区段内，`&` 和尖括号**都**会被自动地转成 HTML 实体，这使得插入 HTML 原始码变得很容易，Markdown 会把下面这段：
-
-    Please don't use any `<blink>` tags.
-
-转为：
-
-    <p>Please don't use any <code>&lt;blink&gt;</code> tags.</p>
-
-你也可以这样写：
-
-    `&#8212;` is the decimal-encoded equivalent of `&mdash;`.
-
-以产生：
-
-    <p><code>&amp;#8212;</code> is the decimal-encoded
-    equivalent of <code>&amp;mdash;</code>.</p>
-
-
-
-<h3 id="img">图片</h3>
-
-很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。
-
-Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： *行内式*和*参考式*。
-
-行内式的图片语法看起来像是：
-
-    ![Alt text](/path/to/img.jpg)
-
-    ![Alt text](/path/to/img.jpg "Optional title")
-
-详细叙述如下：
-
-*   一个惊叹号 `!`
-*   接着一个方括号，里面放上图片的替代文字
-*   接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上
-    选择性的 'title' 文字。
-
-参考式的图片语法则长得像这样：
-
-    ![Alt text][id]
-
-「id」是图片参考的名称，图片参考的定义方式则和链接参考一样：
-
-    [id]: url/to/image  "Optional title attribute"
-
-到目前为止， Markdown 还没有办法指定图片的宽高，如果你需要的话，你可以使用普通的 `<img>` 标签。
-
-* * *
-
-<h2 id="misc">其它</h2>
-
-<h3 id="autolink">自动链接</h3>
-
-Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用尖括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：
-
-    <http://example.com/>
-
-Markdown 会转为：
-
-    <a href="http://example.com/">http://example.com/</a>
-
-邮址的自动链接也很类似，只是 Markdown 会先做一个编码转换的过程，把文字字符转成 16 进位码的 HTML 实体，这样的格式可以糊弄一些不好的邮址收集机器人，例如：
-
-    <address@example.com>
-
-Markdown 会转成：
-
-    <a href="&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#x61;&#x64;&#x64;&#x72;&#x65;
-    &#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
-    &#109;">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
-    &#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>
-
-在浏览器里面，这段字串（其实是 `<a href="mailto:address@example.com">address@example.com</a>`）会变成一个可以点击的「address@example.com」链接。
-
-（这种作法虽然可以糊弄不少的机器人，但并不能全部挡下来，不过总比什么都不做好些。不管怎样，公开你的信箱终究会引来广告信件的。）
-
-<h3 id="backslash">反斜杠</h3>
-
-Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 `<em>` 标签），你可以在星号的前面加上反斜杠：
-
-    \*literal asterisks\*
-
-Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：
-
-    \   反斜线
-    `   反引号
-    *   星号
-    _   底线
-    {}  花括号
-    []  方括号
-    ()  括弧
-    #   井字号
-    +   加号
-    -   减号
-    .   英文句点
-    !   惊叹号
-
-<h2 id="acknowledgement">感谢</h2>
-
-感谢 [leafy7382][] 协助翻译，[hlb][]、[Randylien][] 帮忙润稿，[ethantw][] 的[汉字标准格式・CSS Reset][]， [WM][] 回报文字错误。
-
-[leafy7382]:https://twitter.com/#!/leafy7382
-[hlb]:http://iamhlb.com/
-[Randylien]:http://twitter.com/randylien
-[ethantw]:https://twitter.com/#!/ethantw
-[汉字标准格式・CSS Reset]:http://ethantw.net/projects/han/
-[WM]:http://kidwm.net/
-
-感谢 [fenprace][]，[addv][]。
-
-[fenprace]:https://github.com/fenprace
-[addv]:https://github.com/addv
-
-----------
-<h2 id="editor">Markdown 免费编辑器</h2>
-
-Windows 平台
-
-* [MarkdownPad](http://markdownpad.com/)
-* [MarkPad](http://code52.org/DownmarkerWPF/)
-
-Linux 平台
-
-* [ReText](http://sourceforge.net/p/retext/home/ReText/)
-
-Mac 平台
-
-* [Mou](http://mouapp.com/)
-
-在线编辑器
-
-* [Markable.in](http://markable.in/)
-* [Dillinger.io](http://dillinger.io/)
-
-浏览器插件
-
-* [MaDe](https://chrome.google.com/webstore/detail/oknndfeeopgpibecfjljjfanledpbkog) (Chrome)
-
-高级应用
-
-* [Sublime Text 2](http://www.sublimetext.com/2) + [MarkdownEditing](http://ttscoff.github.com/MarkdownEditing/) / [教程](http://lucifr.com/2012/07/12/markdownediting-for-sublime-text-2/)
-
-\*** 如有更好的 Markdown 免费编辑器推荐，请到[这里反馈](https://gitcafe.com/riku/Markdown-Syntax-CN/tickets/1)，谢谢！
-<!-- markdown end -->
-</div>
-<div class="entry" id="main">
-<!-- content -->
-<p>&lt;&lt; <a href="http://wowubuntu.com">访问 Wow!Ubuntu</a></p>
-
-<p><strong>NOTE:</strong> This is Simplelified  Chinese Edition Document of Markdown Syntax. If you are seeking for English Edition Document. Please refer to <a href="http://daringfireball.net/projects/markdown/syntax">Markdown: Syntax</a>.</p>
-
-<p><strong>声明：</strong> 这份文档派生(fork)于<a href="http://markdown.tw/">繁体中文版</a>，在此基础上进行了繁体转简体工作，并进行了适当的润色。此文档用 Markdown 语法编写，你可以到这里<a href="http://gitcafe.com/riku/Markdown-Syntax-CN/blob/master/syntax.md">查看它的源文件</a>。「繁体中文版的原始文件可以<a href="https://github.com/othree/markdown-syntax-zhtw/blob/master/syntax.md">查看这里</a> 。」--By @<a href="http://twitter.com/riku">riku</a></p>
-
-<p><strong>注：</strong> 本项目托管于 <a href="http://gitcafe.com/riku/Markdown-Syntax-CN/">GitCafe</a>上，请通过"派生"和"合并请求"来帮忙改进本项目。</p>
-
-<h1 id="markdownbasichtml">Markdown 语法说明 (简体中文版) / (<a href="./basic.html">点击查看快速入门</a>)</h1>
-
-<ul>
-<li><a href="#overview">概述</a>
-<ul><li><a href="#philosophy">宗旨</a></li>
-<li><a href="#html">兼容 HTML</a></li>
-<li><a href="#autoescape">特殊字符自动转换</a></li></ul></li>
-<li><a href="#block">区块元素</a>
-<ul><li><a href="#p">段落和换行</a></li>
-<li><a href="#header">标题</a></li>
-<li><a href="#blockquote">区块引用</a></li>
-<li><a href="#list">列表</a></li>
-<li><a href="#precode">代码区块</a></li>
-<li><a href="#hr">分隔线</a></li></ul></li>
-<li><a href="#span">区段元素</a>
-<ul><li><a href="#link">链接</a></li>
-<li><a href="#em">强调</a></li>
-<li><a href="#code">代码</a></li>
-<li><a href="#img">图片</a></li></ul></li>
-<li><a href="#misc">其它</a>
-<ul><li><a href="#backslash">反斜杠</a></li>
-<li><a href="#autolink">自动链接</a></li></ul></li>
-<li><a href="#acknowledgement">感谢</a></li>
-<li><a href="#editor">Markdown 免费编辑器</a></li>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=gbk"><title>Notepad</title></head><body style="font-size:1rem;line-height:1.4;max-width:45rem;margin:0 auto;padding:2rem;" contenteditable=""><div style="" class="markdown-here-wrapper" data-md-url=""><p style="margin: 0px 0px 1.2em ! important;">&lt;&lt; <a href="http://wowubuntu.com/">访问 Wow!Ubuntu</a></p>
+<p style="margin: 0px 0px 1.2em ! important;"><strong>NOTE:</strong> 
+This is Simplelified  Chinese Edition Document of Markdown Syntax. If 
+you are seeking for English Edition Document. Please refer to <a href="http://daringfireball.net/projects/markdown/syntax">Markdown: Syntax</a>.</p>
+<p style="margin: 0px 0px 1.2em ! important;"><strong>声明：</strong> 这份文档派生(fork)于<a href="http://markdown.tw/">繁体中文版</a>，在此基础上进行了繁体转简体工作，并进行了适当的润色。此文档用 Markdown 语法编写，你可以到这里<a href="http://gitcafe.com/riku/Markdown-Syntax-CN/blob/master/syntax.md">查看它的源文件</a>。「繁体中文版的原始文件可以<a href="https://github.com/othree/markdown-syntax-zhtw/blob/master/syntax.md">查看这里</a> 。」—By @<a href="http://twitter.com/riku">riku</a></p>
+<p style="margin: 0px 0px 1.2em ! important;"><strong>注：</strong> 本项目托管于 <a href="http://gitcafe.com/riku/Markdown-Syntax-CN/">GitCafe</a>上，请通过”派生”和”合并请求”来帮忙改进本项目。</p>
+<h1 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.6em; border-bottom: 1px solid rgb(221, 221, 221);" id="markdown-basic-html-">Markdown 语法说明 (简体中文版) / (<a href="http://./basic.html">点击查看快速入门</a>)</h1>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;"><a href="#overview">概述</a><ul style="margin: 1.2em 0px;padding-left: 2em;margin: 0px; padding-left: 1em;">
+<li style="margin: 0.5em 0px;"><a href="#philosophy">宗旨</a></li>
+<li style="margin: 0.5em 0px;"><a href="#html">兼容 HTML</a></li>
+<li style="margin: 0.5em 0px;"><a href="#autoescape">特殊字符自动转换</a></li>
 </ul>
-
+</li>
+<li style="margin: 0.5em 0px;"><a href="#block">区块元素</a><ul style="margin: 1.2em 0px;padding-left: 2em;margin: 0px; padding-left: 1em;">
+<li style="margin: 0.5em 0px;"><a href="#p">段落和换行</a></li>
+<li style="margin: 0.5em 0px;"><a href="#header">标题</a></li>
+<li style="margin: 0.5em 0px;"><a href="#blockquote">区块引用</a></li>
+<li style="margin: 0.5em 0px;"><a href="#list">列表</a></li>
+<li style="margin: 0.5em 0px;"><a href="#precode">代码区块</a></li>
+<li style="margin: 0.5em 0px;"><a href="#hr">分隔线</a></li>
+</ul>
+</li>
+<li style="margin: 0.5em 0px;"><a href="#span">区段元素</a><ul style="margin: 1.2em 0px;padding-left: 2em;margin: 0px; padding-left: 1em;">
+<li style="margin: 0.5em 0px;"><a href="#link">链接</a></li>
+<li style="margin: 0.5em 0px;"><a href="#em">强调</a></li>
+<li style="margin: 0.5em 0px;"><a href="#code">代码</a></li>
+<li style="margin: 0.5em 0px;"><a href="#img">图片</a></li>
+</ul>
+</li>
+<li style="margin: 0.5em 0px;"><a href="#misc">其它</a><ul style="margin: 1.2em 0px;padding-left: 2em;margin: 0px; padding-left: 1em;">
+<li style="margin: 0.5em 0px;"><a href="#backslash">反斜杠</a></li>
+<li style="margin: 0.5em 0px;"><a href="#autolink">自动链接</a></li>
+</ul>
+</li>
+<li style="margin: 0.5em 0px;"><a href="#acknowledgement">感谢</a></li>
+<li style="margin: 0.5em 0px;"><a href="#editor">Markdown 免费编辑器</a></li>
+</ul>
 <hr>
+<h2 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.4em; border-bottom: 1px solid rgb(238, 238, 238);" id="overview">概述</h2>
 
-<h2 id="overview">概述</h2>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="philosophy">宗旨</h3>
 
-<h3 id="philosophy">宗旨</h3>
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 的目标是实现「易读易写」。</p>
+<p style="margin: 0px 0px 1.2em ! important;">可读性，无论如何，都是最重要的。一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成。Markdown 语法受到一些既有 text-to-HTML 格式的影响，包括 <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a>、<a href="http://www.aaronsw.com/2002/atx/">atx</a>、<a href="http://textism.com/tools/textile/">Textile</a>、<a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>、<a href="http://www.triptico.com/software/grutatxt.html">Grutatext</a> 和 <a href="http://ettext.taint.org/doc/">EtText</a>，而最大灵感来源其实是纯文本电子邮件的格式。</p>
+<p style="margin: 0px 0px 1.2em ! important;">总之， Markdown 
+的语法全由一些符号所组成，这些符号经过精挑细选，其作用一目了然。比如：在文字两旁加上星号，看起来就像*强调*。Markdown 
+的列表看起来，嗯，就是列表。Markdown 的区块引用看起来就真的像是引用一段文字，就像你曾在电子邮件中见过的那样。</p>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="html">兼容 HTML</h3>
 
-<p>Markdown 的目标是实现「易读易写」。</p>
-
-<p>可读性，无论如何，都是最重要的。一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成。Markdown 语法受到一些既有 text-to-HTML 格式的影响，包括 <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a>、<a href="http://www.aaronsw.com/2002/atx/">atx</a>、<a href="http://textism.com/tools/textile/">Textile</a>、<a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>、<a href="http://www.triptico.com/software/grutatxt.html">Grutatext</a> 和 <a href="http://ettext.taint.org/doc/">EtText</a>，而最大灵感来源其实是纯文本电子邮件的格式。</p>
-
-<p>总之， Markdown 的语法全由一些符号所组成，这些符号经过精挑细选，其作用一目了然。比如：在文字两旁加上星号，看起来就像*强调*。Markdown 的列表看起来，嗯，就是列表。Markdown 的区块引用看起来就真的像是引用一段文字，就像你曾在电子邮件中见过的那样。</p>
-
-<h3 id="html">兼容 HTML</h3>
-
-<p>Markdown 语法的目标是：成为一种适用于网络的<em>书写</em>语言。</p>
-
-<p>Markdown 并不是想取代 HTML的地位，甚至接近它。它的语法种类很少，只对应 HTML 标记的一小部分。Markdown 的构想<em>不是</em>要使得 HTML 文档更容易书写。在我看来， HTML 已经很容易写了。Markdown 的理念是，能让文档更容易读、写和随意改。HTML 是一种<em>发布</em>的格式，Markdown 是一种<em>书写</em>的格式。就这样，Markdown 的格式语法只涵盖纯文本可以涵盖的范围。</p>
-
-<p>不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown；只要直接加标签就可以了。</p>
-
-<p>要制约的只有一些 HTML 区块元素――比如 <code>&lt;div&gt;</code>、<code>&lt;table&gt;</code>、<code>&lt;pre&gt;</code>、<code>&lt;p&gt;</code> 等标签，必须在前后加上空行与其它内容区隔开，还要求它们的开始标签与结尾标签不能用制表符或空格来缩进。Markdown 的生成器有足够智能，不会在 HTML 区块标签外加上不必要的 <code>&lt;p&gt;</code> 标签。</p>
-
-<p>例子如下，在 Markdown 文件里加上一段 HTML 表格：</p>
-
-<pre><code>这是一个普通段落。
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 语法的目标是：成为一种适用于网络的<em>书写</em>语言。</p>
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 并不是想取代 HTML的地位，甚至接近它。它的语法种类很少，只对应 HTML 标记的一小部分。Markdown 的构想<em>不是</em>要使得 HTML 文档更容易书写。在我看来， HTML 已经很容易写了。Markdown 的理念是，能让文档更容易读、写和随意改。HTML 是一种<em>发布</em>的格式，Markdown 是一种<em>书写</em>的格式。就这样，Markdown 的格式语法只涵盖纯文本可以涵盖的范围。</p>
+<p style="margin: 0px 0px 1.2em ! important;">不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown；只要直接加标签就可以了。</p>
+<p style="margin: 0px 0px 1.2em ! important;">要制约的只有一些 HTML 区块元素――比如 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;div&gt;</code>、<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;table&gt;</code>、<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;pre&gt;</code>、<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;p&gt;</code> 等标签，必须在前后加上空行与其它内容区隔开，还要求它们的开始标签与结尾标签不能用制表符或空格来缩进。Markdown 的生成器有足够智能，不会在 HTML 区块标签外加上不必要的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;p&gt;</code> 标签。</p>
+<p style="margin: 0px 0px 1.2em ! important;">例子如下，在 Markdown 文件里加上一段 HTML 表格：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">这是一个普通段落。
 
 &lt;table&gt;
     &lt;tr&gt;
@@ -858,140 +63,86 @@ Mac 平台
 &lt;/table&gt;
 
 这是另一个普通段落。
-</code></pre>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">请注意，在 HTML 区块标签间的 Markdown 格式语法将不会被处理。比如，你在 HTML 区块内使用 Markdown 样式的<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">*强调*</code>会没有效果。</p>
+<p style="margin: 0px 0px 1.2em ! important;">HTML 的区段（行内）标签如 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;span&gt;</code>、<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;cite&gt;</code>、<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;del&gt;</code> 可以在 Markdown 的段落、列表或是标题里随意使用。依照个人习惯，甚至可以不用 Markdown 格式，而直接采用 HTML 标签来格式化。举例说明：如果比较喜欢 HTML 的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;a&gt;</code> 或 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;img&gt;</code> 标签，可以直接使用这些标签，而不用 Markdown 提供的链接或是图像标签语法。</p>
+<p style="margin: 0px 0px 1.2em ! important;">和处在 HTML 区块标签间不同，Markdown 语法在 HTML 区段标签间是有效的。</p>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="autoescape">特殊字符自动转换</h3>
 
-<p>请注意，在 HTML 区块标签间的 Markdown 格式语法将不会被处理。比如，你在 HTML 区块内使用 Markdown 样式的<code>*强调*</code>会没有效果。</p>
-
-<p>HTML 的区段（行内）标签如 <code>&lt;span&gt;</code>、<code>&lt;cite&gt;</code>、<code>&lt;del&gt;</code> 可以在 Markdown 的段落、列表或是标题里随意使用。依照个人习惯，甚至可以不用 Markdown 格式，而直接采用 HTML 标签来格式化。举例说明：如果比较喜欢 HTML 的 <code>&lt;a&gt;</code> 或 <code>&lt;img&gt;</code> 标签，可以直接使用这些标签，而不用 Markdown 提供的链接或是图像标签语法。</p>
-
-<p>和处在 HTML 区块标签间不同，Markdown 语法在 HTML 区段标签间是有效的。</p>
-
-<h3 id="autoescape">特殊字符自动转换</h3>
-
-<p>在 HTML 文件中，有两个字符需要特殊处理： <code>&lt;</code> 和 <code>&amp;</code> 。 <code>&lt;</code> 符号用于起始标签，<code>&amp;</code> 符号则用于标记 HTML 实体，如果你只是想要显示这些字符的原型，你必须要使用实体的形式，像是 <code>&amp;lt;</code> 和 <code>&amp;amp;</code>。</p>
-
-<p><code>&amp;</code> 字符尤其让网络文档编写者受折磨，如果你要打「<code>AT&amp;T</code>」 ，你必须要写成「<code>AT&amp;amp;T</code>」。而网址中的 <code>&amp;</code> 字符也要转换。比如你要链接到：</p>
-
-<pre><code>http://images.google.com/images?num=30&amp;q=larry+bird
-</code></pre>
-
-<p>你必须要把网址转换写为：</p>
-
-<pre><code>http://images.google.com/images?num=30&amp;amp;q=larry+bird
-</code></pre>
-
-<p>才能放到链接标签的 <code>href</code> 属性里。不用说也知道这很容易忽略，这也可能是 HTML 标准检验所检查到的错误中，数量最多的。</p>
-
-<p>Markdown 让你可以自然地书写字符，需要转换的由它来处理好了。如果你使用的 <code>&amp;</code> 字符是 HTML 字符实体的一部分，它会保留原状，否则它会被转换成 <code>&amp;amp</code>;。</p>
-
-<p>所以你如果要在文档中插入一个版权符号 <code>©</code>，你可以这样写：</p>
-
-<pre><code>&amp;copy;
-</code></pre>
-
-<p>Markdown 会保留它不动。而若你写：</p>
-
-<pre><code>AT&amp;T
-</code></pre>
-
-<p>Markdown 就会将它转为：</p>
-
-<pre><code>AT&amp;amp;T
-</code></pre>
-
-<p>类似的状况也会发生在 <code>&lt;</code> 符号上，因为 Markdown 允许 <a href="#html">兼容 HTML</a> ，如果你是把 <code>&lt;</code> 符号作为 HTML 标签的定界符使用，那 Markdown 也不会对它做任何转换，但是如果你写：</p>
-
-<pre><code>4 &lt; 5
-</code></pre>
-
-<p>Markdown 将会把它转换为：</p>
-
-<pre><code>4 &amp;lt; 5
-</code></pre>
-
-<p>不过需要注意的是，code 范围内，不论是行内还是区块， <code>&lt;</code> 和 <code>&amp;</code> 两个符号都<em>一定</em>会被转换成 HTML 实体，这项特性让你可以很容易地用 Markdown 写 HTML code （和 HTML 相对而言， HTML 语法中，你要把所有的 <code>&lt;</code> 和 <code>&amp;</code> 都转换为 HTML 实体，才能在 HTML 文件里面写出 HTML code。）</p>
-
+<p style="margin: 0px 0px 1.2em ! important;">在 HTML 文件中，有两个字符需要特殊处理： <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;</code> 和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 。 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;</code> 符号用于起始标签，<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 符号则用于标记 HTML 实体，如果你只是想要显示这些字符的原型，你必须要使用实体的形式，像是 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;lt;</code> 和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;amp;</code>。</p>
+<p style="margin: 0px 0px 1.2em ! important;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 字符尤其让网络文档编写者受折磨，如果你要打「<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">AT&amp;T</code>」 ，你必须要写成「<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">AT&amp;amp;T</code>」。而网址中的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 字符也要转换。比如你要链接到：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">http://images.google.com/images?num=30&amp;q=larry+bird
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">你必须要把网址转换写为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">http://images.google.com/images?num=30&amp;amp;q=larry+bird
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">才能放到链接标签的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">href</code> 属性里。不用说也知道这很容易忽略，这也可能是 HTML 标准检验所检查到的错误中，数量最多的。</p>
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 让你可以自然地书写字符，需要转换的由它来处理好了。如果你使用的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 字符是 HTML 字符实体的一部分，它会保留原状，否则它会被转换成 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;amp</code>;。</p>
+<p style="margin: 0px 0px 1.2em ! important;">所以你如果要在文档中插入一个版权符号 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&#169;</code>，你可以这样写：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&amp;copy;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">Markdown 会保留它不动。而若你写：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">AT&amp;T
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">Markdown 就会将它转为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">AT&amp;amp;T
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">类似的状况也会发生在 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;</code> 符号上，因为 Markdown 允许 <a href="#html">兼容 HTML</a> ，如果你是把 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;</code> 符号作为 HTML 标签的定界符使用，那 Markdown 也不会对它做任何转换，但是如果你写：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">4 &lt; 5
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">Markdown 将会把它转换为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">4 &amp;lt; 5
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">不过需要注意的是，code 范围内，不论是行内还是区块， <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;</code> 和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 两个符号都<em>一定</em>会被转换成 HTML 实体，这项特性让你可以很容易地用 Markdown 写 HTML code （和 HTML 相对而言， HTML 语法中，你要把所有的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;</code> 和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 都转换为 HTML 实体，才能在 HTML 文件里面写出 HTML code。）</p>
 <hr>
+<h2 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.4em; border-bottom: 1px solid rgb(238, 238, 238);" id="block">区块元素</h2>
 
-<h2 id="block">区块元素</h2>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="p">段落和换行</h3>
 
-<h3 id="p">段落和换行</h3>
+<p style="margin: 0px 0px 1.2em ! important;">一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。</p>
+<p style="margin: 0px 0px 1.2em ! important;">「由一个或多个连续的文本行组成」这句话其实暗示了 
+Markdown 允许段落内的强迫换行（插入换行符），这个特性和其他大部分的 text-to-HTML 格式不一样（包括 Movable 
+Type 的「Convert Line Breaks」选项），其它的格式会把每个换行符都转成 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;br /&gt;</code> 标签。</p>
+<p style="margin: 0px 0px 1.2em ! important;">如果你<em>确实</em>想要依赖 Markdown 来插入 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;br /&gt;</code> 标签的话，在插入处先按入两个以上的空格然后回车。</p>
+<p style="margin: 0px 0px 1.2em ! important;">的确，需要多费点事（多加空格）来产生 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;br /&gt;</code> ，但是简单地「每个换行都转换为 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;br /&gt;</code>」的方法在 Markdown 中并不适合， Markdown 中 email 式的 <a href="#blockquote">区块引用</a> 和多段落的 <a href="#list">列表</a> 在使用换行来排版的时候，不但更好用，还更方便阅读。</p>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="header">标题</h3>
 
-<p>一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。</p>
-
-<p>「由一个或多个连续的文本行组成」这句话其实暗示了 Markdown 允许段落内的强迫换行（插入换行符），这个特性和其他大部分的 text-to-HTML 格式不一样（包括 Movable Type 的「Convert Line Breaks」选项），其它的格式会把每个换行符都转成 <code>&lt;br /&gt;</code> 标签。</p>
-
-<p>如果你<em>确实</em>想要依赖 Markdown 来插入 <code>&lt;br /&gt;</code> 标签的话，在插入处先按入两个以上的空格然后回车。</p>
-
-<p>的确，需要多费点事（多加空格）来产生 <code>&lt;br /&gt;</code> ，但是简单地「每个换行都转换为 <code>&lt;br /&gt;</code>」的方法在 Markdown 中并不适合， Markdown 中 email 式的 <a href="#blockquote">区块引用</a> 和多段落的 <a href="#list">列表</a> 在使用换行来排版的时候，不但更好用，还更方便阅读。</p>
-
-<h3 id="header">标题</h3>
-
-<p>Markdown 支持两种标题的语法，类 <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a> 和类 <a href="http://www.aaronsw.com/2002/atx/">atx</a> 形式。</p>
-
-<p>类 Setext 形式是用底线的形式，利用 <code>=</code> （最高阶标题）和 <code>-</code> （第二阶标题），例如：</p>
-
-<pre><code>This is an H1
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 支持两种标题的语法，类 <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a> 和类 <a href="http://www.aaronsw.com/2002/atx/">atx</a> 形式。</p>
+<p style="margin: 0px 0px 1.2em ! important;">类 Setext 形式是用底线的形式，利用 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">=</code> （最高阶标题）和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">-</code> （第二阶标题），例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">This is an H1
 =============
 
 This is an H2
 -------------
-</code></pre>
-
-<p>任何数量的 <code>=</code> 和 <code>-</code> 都可以有效果。</p>
-
-<p>类 Atx 形式则是在行首插入 1 到 6 个 <code>#</code> ，对应到标题 1 到 6 阶，例如：</p>
-
-<pre><code># 这是 H1
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">任何数量的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">=</code> 和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">-</code> 都可以有效果。</p>
+<p style="margin: 0px 0px 1.2em ! important;">类 Atx 形式则是在行首插入 1 到 6 个 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">#</code> ，对应到标题 1 到 6 阶，例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;"># 这是 H1
 
 ## 这是 H2
 
 ###### 这是 H6
-</code></pre>
-
-<p>你可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 <code>#</code>，而行尾的 <code>#</code> 数量也不用和开头一样（行首的井字符数量决定标题的阶数）：</p>
-
-<pre><code># 这是 H1 #
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">你可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">#</code>，而行尾的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">#</code> 数量也不用和开头一样（行首的井字符数量决定标题的阶数）：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;"># 这是 H1 #
 
 ## 这是 H2 ##
 
 ### 这是 H3 ######
-</code></pre>
+</code></pre><h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="blockquote">区块引用 Blockquotes</h3>
 
-<h3 id="blockquote">区块引用 Blockquotes</h3>
-
-<p>Markdown 标记区块引用是使用类似 email 中用 <code>&gt;</code> 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 <code>&gt;</code> ：</p>
-
-<pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 标记区块引用是使用类似 email 中用 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&gt;</code> 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&gt;</code> ：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 &gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
 &gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 &gt; 
 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 &gt; id sem consectetuer libero luctus adipiscing.
-</code></pre>
-
-<p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 <code>&gt;</code> ：</p>
-
-<pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">Markdown 也允许你偷懒只在整个段落的第一行最前面加上 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&gt;</code> ：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
 Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 id sem consectetuer libero luctus adipiscing.
-</code></pre>
-
-<p>区块引用可以嵌套（例如：引用内的引用），只要根据层次加上不同数量的 <code>&gt;</code> ：</p>
-
-<pre><code>&gt; This is the first level of quoting.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">区块引用可以嵌套（例如：引用内的引用），只要根据层次加上不同数量的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&gt;</code> ：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&gt; This is the first level of quoting.
 &gt;
 &gt; &gt; This is nested blockquote.
 &gt;
 &gt; Back to the first level.
-</code></pre>
-
-<p>引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</p>
-
-<pre><code>&gt; ## 这是一个标题。
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&gt; ## 这是一个标题。
 &gt; 
 &gt; 1.   这是第一行列表项。
 &gt; 2.   这是第二行列表项。
@@ -999,130 +150,80 @@ id sem consectetuer libero luctus adipiscing.
 &gt; 给出一些例子代码：
 &gt; 
 &gt;     return shell_exec("echo $input | $markdown_script");
-</code></pre>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">任何像样的文本编辑器都能轻松地建立 email 型的引用。例如在 BBEdit 中，你可以选取文字后然后从选单中选择<em>增加引用阶层</em>。</p>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="list">列表</h3>
 
-<p>任何像样的文本编辑器都能轻松地建立 email 型的引用。例如在 BBEdit 中，你可以选取文字后然后从选单中选择<em>增加引用阶层</em>。</p>
-
-<h3 id="list">列表</h3>
-
-<p>Markdown 支持有序列表和无序列表。</p>
-
-<p>无序列表使用星号、加号或是减号作为列表标记：</p>
-
-<pre><code>*   Red
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 支持有序列表和无序列表。</p>
+<p style="margin: 0px 0px 1.2em ! important;">无序列表使用星号、加号或是减号作为列表标记：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*   Red
 *   Green
 *   Blue
-</code></pre>
-
-<p>效果就是</p>
-
-<ul>
-<li>red</li>
-<li>green</li>
-<li>blue</li>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">效果就是</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;">red</li>
+<li style="margin: 0.5em 0px;">green</li>
+<li style="margin: 0.5em 0px;">blue</li>
 </ul>
-
-<p>等同于：</p>
-
-<pre><code>+   Red
+<p style="margin: 0px 0px 1.2em ! important;">等同于：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">+   Red
 +   Green
 +   Blue
-</code></pre>
-
-<p>也等同于：</p>
-
-<pre><code>-   Red
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">也等同于：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">-   Red
 -   Green
 -   Blue
-</code></pre>
-
-<p>有序列表则使用数字接着一个英文句点：</p>
-
-<pre><code>1.  Bird
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">有序列表则使用数字接着一个英文句点：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">1.  Bird
 2.  McHale
 3.  Parish
-</code></pre>
-
-<p>很重要的一点是，你在列表标记上使用的数字并不会影响输出的 HTML 结果，上面的列表所产生的 HTML 标记为：</p>
-
-<pre><code>&lt;ol&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">很重要的一点是，你在列表标记上使用的数字并不会影响输出的 HTML 结果，上面的列表所产生的 HTML 标记为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;ol&gt;
 &lt;li&gt;Bird&lt;/li&gt;
 &lt;li&gt;McHale&lt;/li&gt;
 &lt;li&gt;Parish&lt;/li&gt;
 &lt;/ol&gt;
-</code></pre>
-
-<p>如果你的列表标记写成：</p>
-
-<pre><code>1.  Bird
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">如果你的列表标记写成：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">1.  Bird
 1.  McHale
 1.  Parish
-</code></pre>
-
-<p>或甚至是：</p>
-
-<pre><code>3. Bird
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">或甚至是：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">3. Bird
 1. McHale
 8. Parish
-</code></pre>
-
-<p>你都会得到完全相同的 HTML 输出。重点在于，你可以让 Markdown 文件的列表数字和输出的结果相同，或是你懒一点，你可以完全不用在意数字的正确性。</p>
-
-<p>如果你使用懒惰的写法，建议第一个项目最好还是从 1. 开始，因为 Markdown 未来可能会支持有序列表的 start 属性。</p>
-
-<p>列表项目标记通常是放在最左边，但是其实也可以缩进，最多 3 个空格，项目标记后面则一定要接着至少一个空格或制表符。</p>
-
-<p>要让列表看起来更漂亮，你可以把内容用固定的缩进整理好：</p>
-
-<pre><code>*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">你都会得到完全相同的 HTML 输出。重点在于，你可以让 Markdown 文件的列表数字和输出的结果相同，或是你懒一点，你可以完全不用在意数字的正确性。</p>
+<p style="margin: 0px 0px 1.2em ! important;">如果你使用懒惰的写法，建议第一个项目最好还是从 1. 开始，因为 Markdown 未来可能会支持有序列表的 start 属性。</p>
+<p style="margin: 0px 0px 1.2em ! important;">列表项目标记通常是放在最左边，但是其实也可以缩进，最多 3 个空格，项目标记后面则一定要接着至少一个空格或制表符。</p>
+<p style="margin: 0px 0px 1.2em ! important;">要让列表看起来更漂亮，你可以把内容用固定的缩进整理好：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
     Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
     viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
     Suspendisse id sem consectetuer libero luctus adipiscing.
-</code></pre>
-
-<p>但是如果你懒，那也行：</p>
-
-<pre><code>*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">但是如果你懒，那也行：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
 viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 Suspendisse id sem consectetuer libero luctus adipiscing.
-</code></pre>
-
-<p>如果列表项目间用空行分开，在输出 HTML 时 Markdown 就会将项目内容用 <code>&lt;p&gt;</code> 
-标签包起来，举例来说：</p>
-
-<pre><code>*   Bird
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">如果列表项目间用空行分开，在输出 HTML 时 Markdown 就会将项目内容用 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;p&gt;</code><br>标签包起来，举例来说：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*   Bird
 *   Magic
-</code></pre>
-
-<p>会被转换为：</p>
-
-<pre><code>&lt;ul&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">会被转换为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;ul&gt;
 &lt;li&gt;Bird&lt;/li&gt;
 &lt;li&gt;Magic&lt;/li&gt;
 &lt;/ul&gt;
-</code></pre>
-
-<p>但是这个：</p>
-
-<pre><code>*   Bird
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">但是这个：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*   Bird
 
 *   Magic
-</code></pre>
-
-<p>会被转换为：</p>
-
-<pre><code>&lt;ul&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">会被转换为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Bird&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Magic&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</code></pre>
-
-<p>列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符：</p>
-
-<pre><code>1.  This is a list item with two paragraphs. Lorem ipsum dolor
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">1.  This is a list item with two paragraphs. Lorem ipsum dolor
     sit amet, consectetuer adipiscing elit. Aliquam hendrerit
     mi posuere lectus.
 
@@ -1131,106 +232,67 @@ Suspendisse id sem consectetuer libero luctus adipiscing.
     sit amet velit.
 
 2.  Suspendisse id sem consectetuer libero luctus adipiscing.
-</code></pre>
-
-<p>如果你每行都有缩进，看起来会看好很多，当然，再次地，如果你很懒惰，Markdown 也允许：</p>
-
-<pre><code>*   This is a list item with two paragraphs.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">如果你每行都有缩进，看起来会看好很多，当然，再次地，如果你很懒惰，Markdown 也允许：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*   This is a list item with two paragraphs.
 
     This is the second paragraph in the list item. You're
 only required to indent the first line. Lorem ipsum dolor
 sit amet, consectetuer adipiscing elit.
 
 *   Another item in the same list.
-</code></pre>
-
-<p>如果要在列表项目内放进引用，那 <code>&gt;</code> 就需要缩进：</p>
-
-<pre><code>*   A list item with a blockquote:
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">如果要在列表项目内放进引用，那 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&gt;</code> 就需要缩进：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*   A list item with a blockquote:
 
     &gt; This is a blockquote
     &gt; inside a list item.
-</code></pre>
-
-<p>如果要放代码区块的话，该区块就需要缩进<em>两次</em>，也就是 8 个空格或是 2 个制表符：</p>
-
-<pre><code>*   一列表项包含一个列表区块：
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">如果要放代码区块的话，该区块就需要缩进<em>两次</em>，也就是 8 个空格或是 2 个制表符：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*   一列表项包含一个列表区块：
 
         &lt;代码写在这&gt;
-</code></pre>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">当然，项目列表很可能会不小心产生，像是下面这样的写法：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">1986. What a great season.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">换句话说，也就是在行首出现<em>数字-句点-空白</em>，要避免这样的状况，你可以在句点前面加上反斜杠。</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">1986\. What a great season.
+</code></pre><h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="precode">代码区块</h3>
 
-<p>当然，项目列表很可能会不小心产生，像是下面这样的写法：</p>
-
-<pre><code>1986. What a great season.
-</code></pre>
-
-<p>换句话说，也就是在行首出现<em>数字-句点-空白</em>，要避免这样的状况，你可以在句点前面加上反斜杠。</p>
-
-<pre><code>1986\. What a great season.
-</code></pre>
-
-<h3 id="precode">代码区块</h3>
-
-<p>和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这些区块我们并不希望它以一般段落文件的方式去排版，而是照原来的样子显示，Markdown 会用 <code>&lt;pre&gt;</code> 和 <code>&lt;code&gt;</code> 标签来把代码区块包起来。</p>
-
-<p>要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：</p>
-
-<pre><code>这是一个普通段落：
+<p style="margin: 0px 0px 1.2em ! important;">和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这些区块我们并不希望它以一般段落文件的方式去排版，而是照原来的样子显示，Markdown 会用 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;pre&gt;</code> 和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;code&gt;</code> 标签来把代码区块包起来。</p>
+<p style="margin: 0px 0px 1.2em ! important;">要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">这是一个普通段落：
 
     这是一个代码区块。
-</code></pre>
-
-<p>Markdown 会转换成：</p>
-
-<pre><code>&lt;p&gt;这是一个普通段落：&lt;/p&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">Markdown 会转换成：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;这是一个普通段落：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;这是一个代码区块。
 &lt;/code&gt;&lt;/pre&gt;
-</code></pre>
-
-<p>这个每行一阶的缩进（4 个空格或是 1 个制表符），都会被移除，例如：</p>
-
-<pre><code>Here is an example of AppleScript:
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">这个每行一阶的缩进（4 个空格或是 1 个制表符），都会被移除，例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">Here is an example of AppleScript:
 
     tell application "Foo"
         beep
     end tell
-</code></pre>
-
-<p>会被转换为：</p>
-
-<pre><code>&lt;p&gt;Here is an example of AppleScript:&lt;/p&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">会被转换为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;Here is an example of AppleScript:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;tell application "Foo"
     beep
 end tell
 &lt;/code&gt;&lt;/pre&gt;
-</code></pre>
-
-<p>一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
-
-<p>在代码区块里面， <code>&amp;</code> 、 <code>&lt;</code> 和 <code>&gt;</code> 会自动转成 HTML 实体，这样的方式让你非常容易使用 Markdown 插入范例用的 HTML 原始码，只需要复制贴上，再加上缩进就可以了，剩下的 Markdown 都会帮你处理，例如：</p>
-
-<pre><code>    &lt;div class="footer"&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
+<p style="margin: 0px 0px 1.2em ! important;">在代码区块里面， <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 、 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;</code> 和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&gt;</code> 会自动转成 HTML 实体，这样的方式让你非常容易使用 Markdown 插入范例用的 HTML 原始码，只需要复制贴上，再加上缩进就可以了，剩下的 Markdown 都会帮你处理，例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">    &lt;div class="footer"&gt;
         &amp;copy; 2004 Foo Corporation
     &lt;/div&gt;
-</code></pre>
-
-<p>会被转换为：</p>
-
-<pre><code>&lt;pre&gt;&lt;code&gt;&amp;lt;div class="footer"&amp;gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">会被转换为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;pre&gt;&lt;code&gt;&amp;lt;div class="footer"&amp;gt;
     &amp;amp;copy; 2004 Foo Corporation
 &amp;lt;/div&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-</code></pre>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">代码区块中，一般的 Markdown 语法不会被转换，像是星号便只是星号，这表示你可以很容易地以 Markdown 语法撰写 Markdown 语法相关的文件。</p>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="hr">分隔线</h3>
 
-<p>代码区块中，一般的 Markdown 语法不会被转换，像是星号便只是星号，这表示你可以很容易地以 Markdown 语法撰写 Markdown 语法相关的文件。</p>
-
-<h3 id="hr">分隔线</h3>
-
-<p>你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：</p>
-
-<pre><code>* * *
+<p style="margin: 0px 0px 1.2em ! important;">你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">* * *
 
 ***
 
@@ -1239,325 +301,181 @@ end tell
 - - -
 
 ---------------------------------------
-</code></pre>
+</code></pre><hr>
+<h2 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.4em; border-bottom: 1px solid rgb(238, 238, 238);" id="span">区段元素</h2>
 
-<hr>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="link">链接</h3>
 
-<h2 id="span">区段元素</h2>
-
-<h3 id="link">链接</h3>
-
-<p>Markdown 支持两种形式的链接语法： <em>行内式</em>和<em>参考式</em>两种形式。</p>
-
-<p>不管是哪一种，链接文字都是用 [方括号] 来标记。</p>
-
-<p>要建立一个<em>行内式</em>的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：</p>
-
-<pre><code>This is [an example](http://example.com/ "Title") inline link.
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 支持两种形式的链接语法： <em>行内式</em>和<em>参考式</em>两种形式。</p>
+<p style="margin: 0px 0px 1.2em ! important;">不管是哪一种，链接文字都是用 [方括号] 来标记。</p>
+<p style="margin: 0px 0px 1.2em ! important;">要建立一个<em>行内式</em>的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">This is [an example](http://example.com/ "Title") inline link.
 
 [This link](http://example.net/) has no title attribute.
-</code></pre>
-
-<p>会产生：</p>
-
-<pre><code>&lt;p&gt;This is &lt;a href="http://example.com/" title="Title"&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">会产生：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;This is &lt;a href="http://example.com/" title="Title"&gt;
 an example&lt;/a&gt; inline link.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://example.net/"&gt;This link&lt;/a&gt; has no
 title attribute.&lt;/p&gt;
-</code></pre>
-
-<p>如果你是要链接到同样主机的资源，你可以使用相对路径：</p>
-
-<pre><code>See my [About](/about/) page for details.   
-</code></pre>
-
-<p><em>参考式</em>的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：</p>
-
-<pre><code>This is [an example][id] reference-style link.
-</code></pre>
-
-<p>你也可以选择性地在两个方括号中间加上一个空格：</p>
-
-<pre><code>This is [an example] [id] reference-style link.
-</code></pre>
-
-<p>接着，在文件的任意处，你可以把这个标记的链接内容定义出来：</p>
-
-<pre><code>[id]: http://example.com/  "Optional Title Here"
-</code></pre>
-
-<p>链接内容定义的形式为：</p>
-
-<ul>
-<li>方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字</li>
-<li>接着一个冒号</li>
-<li>接着一个以上的空格或制表符</li>
-<li>接着链接的网址</li>
-<li>选择性地接着 title 内容，可以用单引号、双引号或是括弧包着</li>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">如果你是要链接到同样主机的资源，你可以使用相对路径：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">See my [About](/about/) page for details.   
+</code></pre><p style="margin: 0px 0px 1.2em ! important;"><em>参考式</em>的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">This is [an example][id] reference-style link.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">你也可以选择性地在两个方括号中间加上一个空格：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">This is [an example] [id] reference-style link.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">接着，在文件的任意处，你可以把这个标记的链接内容定义出来：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[id]: http://example.com/  "Optional Title Here"
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">链接内容定义的形式为：</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;">方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字</li>
+<li style="margin: 0.5em 0px;">接着一个冒号</li>
+<li style="margin: 0.5em 0px;">接着一个以上的空格或制表符</li>
+<li style="margin: 0.5em 0px;">接着链接的网址</li>
+<li style="margin: 0.5em 0px;">选择性地接着 title 内容，可以用单引号、双引号或是括弧包着</li>
 </ul>
-
-<p>下面这三种链接的定义都是相同：</p>
-
-<pre><code>[foo]: http://example.com/  "Optional Title Here"
+<p style="margin: 0px 0px 1.2em ! important;">下面这三种链接的定义都是相同：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[foo]: http://example.com/  "Optional Title Here"
 [foo]: http://example.com/  'Optional Title Here'
 [foo]: http://example.com/  (Optional Title Here)
-</code></pre>
-
-<p><strong>请注意：</strong>有一个已知的问题是 Markdown.pl 1.0.1 会忽略单引号包起来的链接 title。</p>
-
-<p>链接网址也可以用尖括号包起来：</p>
-
-<pre><code>[id]: &lt;http://example.com/&gt;  "Optional Title Here"
-</code></pre>
-
-<p>你也可以把 title 属性放到下一行，也可以加一些缩进，若网址太长的话，这样会比较好看：</p>
-
-<pre><code>[id]: http://example.com/longish/path/to/resource/here
+</code></pre><p style="margin: 0px 0px 1.2em ! important;"><strong>请注意：</strong>有一个已知的问题是 Markdown.pl 1.0.1 会忽略单引号包起来的链接 title。</p>
+<p style="margin: 0px 0px 1.2em ! important;">链接网址也可以用尖括号包起来：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[id]: &lt;http://example.com/&gt;  "Optional Title Here"
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">你也可以把 title 属性放到下一行，也可以加一些缩进，若网址太长的话，这样会比较好看：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[id]: http://example.com/longish/path/to/resource/here
     "Optional Title Here"
-</code></pre>
-
-<p>网址定义只有在产生链接的时候用到，并不会直接出现在文件之中。</p>
-
-<p>链接辨别标签可以有字母、数字、空白和标点符号，但是并<em>不</em>区分大小写，因此下面两个链接是一样的：</p>
-
-<pre><code>[link text][a]
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">网址定义只有在产生链接的时候用到，并不会直接出现在文件之中。</p>
+<p style="margin: 0px 0px 1.2em ! important;">链接辨别标签可以有字母、数字、空白和标点符号，但是并<em>不</em>区分大小写，因此下面两个链接是一样的：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[link text][a]
 [link text][A]
-</code></pre>
-
-<p><em>隐式链接标记</em>功能让你可以省略指定链接标记，这种情形下，链接标记会视为等同于链接文字，要用隐式链接标记只要在链接文字后面加上一个空的方括号，如果你要让 "Google" 链接到 google.com，你可以简化成：</p>
-
-<pre><code>[Google][]
-</code></pre>
-
-<p>然后定义链接内容：</p>
-
-<pre><code>[Google]: http://google.com/
-</code></pre>
-
-<p>由于链接文字可能包含空白，所以这种简化型的标记内也许包含多个单词：</p>
-
-<pre><code>Visit [Daring Fireball][] for more information.
-</code></pre>
-
-<p>然后接着定义链接：</p>
-
-<pre><code>[Daring Fireball]: http://daringfireball.net/
-</code></pre>
-
-<p>链接的定义可以放在文件中的任何一个地方，我比较偏好直接放在链接出现段落的后面，你也可以把它放在文件最后面，就像是注解一样。</p>
-
-<p>下面是一个参考式链接的范例：</p>
-
-<pre><code>I get 10 times more traffic from [Google] [1] than from
+</code></pre><p style="margin: 0px 0px 1.2em ! important;"><em>隐式链接标记</em>功能让你可以省略指定链接标记，这种情形下，链接标记会视为等同于链接文字，要用隐式链接标记只要在链接文字后面加上一个空的方括号，如果你要让 “Google” 链接到 google.com，你可以简化成：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[Google][]
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">然后定义链接内容：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[Google]: http://google.com/
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">由于链接文字可能包含空白，所以这种简化型的标记内也许包含多个单词：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">Visit [Daring Fireball][] for more information.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">然后接着定义链接：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[Daring Fireball]: http://daringfireball.net/
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">链接的定义可以放在文件中的任何一个地方，我比较偏好直接放在链接出现段落的后面，你也可以把它放在文件最后面，就像是注解一样。</p>
+<p style="margin: 0px 0px 1.2em ! important;">下面是一个参考式链接的范例：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">I get 10 times more traffic from [Google] [1] than from
 [Yahoo] [2] or [MSN] [3].
 
   [1]: http://google.com/        "Google"
   [2]: http://search.yahoo.com/  "Yahoo Search"
   [3]: http://search.msn.com/    "MSN Search"
-</code></pre>
-
-<p>如果改成用链接名称的方式写：</p>
-
-<pre><code>I get 10 times more traffic from [Google][] than from
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">如果改成用链接名称的方式写：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">I get 10 times more traffic from [Google][] than from
 [Yahoo][] or [MSN][].
 
   [google]: http://google.com/        "Google"
   [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
   [msn]:    http://search.msn.com/    "MSN Search"
-</code></pre>
-
-<p>上面两种写法都会产生下面的 HTML。</p>
-
-<pre><code>&lt;p&gt;I get 10 times more traffic from &lt;a href="http://google.com/"
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">上面两种写法都会产生下面的 HTML。</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;I get 10 times more traffic from &lt;a href="http://google.com/"
 title="Google"&gt;Google&lt;/a&gt; than from
 &lt;a href="http://search.yahoo.com/" title="Yahoo Search"&gt;Yahoo&lt;/a&gt;
 or &lt;a href="http://search.msn.com/" title="MSN Search"&gt;MSN&lt;/a&gt;.&lt;/p&gt;
-</code></pre>
-
-<p>下面是用行内式写的同样一段内容的 Markdown 文件，提供作为比较之用：</p>
-
-<pre><code>I get 10 times more traffic from [Google](http://google.com/ "Google")
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">下面是用行内式写的同样一段内容的 Markdown 文件，提供作为比较之用：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">I get 10 times more traffic from [Google](http://google.com/ "Google")
 than from [Yahoo](http://search.yahoo.com/ "Yahoo Search") or
 [MSN](http://search.msn.com/ "MSN Search").
-</code></pre>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">参考式的链接其实重点不在于它比较好写，而是它比较好读，比较一下上面的范例，使用参考式的文章本身只有 81 个字符，但是用行内形式的却会增加到 176 个字元，如果是用纯 HTML 格式来写，会有 234 个字元，在 HTML 格式中，标签比文本还要多。</p>
+<p style="margin: 0px 0px 1.2em ! important;">使用 Markdown 的参考式链接，可以让文件更像是浏览器最后产生的结果，让你可以把一些标记相关的元数据移到段落文字之外，你就可以增加链接而不让文章的阅读感觉被打断。</p>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="em">强调</h3>
 
-<p>参考式的链接其实重点不在于它比较好写，而是它比较好读，比较一下上面的范例，使用参考式的文章本身只有 81 个字符，但是用行内形式的却会增加到 176 个字元，如果是用纯 HTML 格式来写，会有 234 个字元，在 HTML 格式中，标签比文本还要多。</p>
-
-<p>使用 Markdown 的参考式链接，可以让文件更像是浏览器最后产生的结果，让你可以把一些标记相关的元数据移到段落文字之外，你就可以增加链接而不让文章的阅读感觉被打断。</p>
-
-<h3 id="em">强调</h3>
-
-<p>Markdown 使用星号（<code>*</code>）和底线（<code>_</code>）作为标记强调字词的符号，被 <code>*</code> 或 <code>_</code> 包围的字词会被转成用 <code>&lt;em&gt;</code> 标签包围，用两个 <code>*</code> 或 <code>_</code> 包起来的话，则会被转成 <code>&lt;strong&gt;</code>，例如：</p>
-
-<pre><code>*single asterisks*
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 使用星号（<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">*</code>）和底线（<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">_</code>）作为标记强调字词的符号，被 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">*</code> 或 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">_</code> 包围的字词会被转成用 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;em&gt;</code> 标签包围，用两个 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">*</code> 或 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">_</code> 包起来的话，则会被转成 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;strong&gt;</code>，例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">*single asterisks*
 
 _single underscores_
 
 **double asterisks**
 
 __double underscores__
-</code></pre>
-
-<p>会转成：</p>
-
-<pre><code>&lt;em&gt;single asterisks&lt;/em&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">会转成：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;em&gt;single asterisks&lt;/em&gt;
 
 &lt;em&gt;single underscores&lt;/em&gt;
 
 &lt;strong&gt;double asterisks&lt;/strong&gt;
 
 &lt;strong&gt;double underscores&lt;/strong&gt;
-</code></pre>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">你可以随便用你喜欢的样式，唯一的限制是，你用什么符号开启标签，就要用什么符号结束。</p>
+<p style="margin: 0px 0px 1.2em ! important;">强调也可以直接插在文字中间：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">un*frigging*believable
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">但是<strong>如果你的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">*</code> 和 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">_</code> 两边都有空白的话，它们就只会被当成普通的符号</strong>。</p>
+<p style="margin: 0px 0px 1.2em ! important;">如果要在文字前后直接插入普通的星号或底线，你可以用反斜线：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">\*this text is surrounded by literal asterisks\*
+</code></pre><h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="code">代码</h3>
 
-<p>你可以随便用你喜欢的样式，唯一的限制是，你用什么符号开启标签，就要用什么符号结束。</p>
-
-<p>强调也可以直接插在文字中间：</p>
-
-<pre><code>un*frigging*believable
-</code></pre>
-
-<p>但是<strong>如果你的 <code>*</code> 和 <code>_</code> 两边都有空白的话，它们就只会被当成普通的符号</strong>。</p>
-
-<p>如果要在文字前后直接插入普通的星号或底线，你可以用反斜线：</p>
-
-<pre><code>\*this text is surrounded by literal asterisks\*
-</code></pre>
-
-<h3 id="code">代码</h3>
-
-<p>如果要标记一小段行内代码，你可以用反引号把它包起来（<code>`</code>），例如：</p>
-
-<pre><code>Use the `printf()` function.
-</code></pre>
-
-<p>会产生：</p>
-
-<pre><code>&lt;p&gt;Use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;
-</code></pre>
-
-<p>如果要在代码区段内插入反引号，你可以用多个反引号来开启和结束代码区段：</p>
-
-<pre><code>``There is a literal backtick (`) here.``
-</code></pre>
-
-<p>这段语法会产生：</p>
-
-<pre><code>&lt;p&gt;&lt;code&gt;There is a literal backtick (`) here.&lt;/code&gt;&lt;/p&gt;
-</code></pre>
-
-<p>代码区段的起始和结束端都可以放入一个空白，起始端后面一个，结束端前面一个，这样你就可以在区段的一开始就插入反引号：</p>
-
-<pre><code>A single backtick in a code span: `` ` ``
+<p style="margin: 0px 0px 1.2em ! important;">如果要标记一小段行内代码，你可以用反引号把它包起来（<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">` </code>），例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">Use the `printf()` function.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">会产生：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;Use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">如果要在代码区段内插入反引号，你可以用多个反引号来开启和结束代码区段：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">``There is a literal backtick (`) here.``
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">这段语法会产生：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;&lt;code&gt;There is a literal backtick (`) here.&lt;/code&gt;&lt;/p&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">代码区段的起始和结束端都可以放入一个空白，起始端后面一个，结束端前面一个，这样你就可以在区段的一开始就插入反引号：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">A single backtick in a code span: `` ` ``
 
 A backtick-delimited string in a code span: `` `foo` ``
-</code></pre>
-
-<p>会产生：</p>
-
-<pre><code>&lt;p&gt;A single backtick in a code span: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">会产生：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;A single backtick in a code span: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;A backtick-delimited string in a code span: &lt;code&gt;`foo`&lt;/code&gt;&lt;/p&gt;
-</code></pre>
-
-<p>在代码区段内，<code>&amp;</code> 和尖括号<strong>都</strong>会被自动地转成 HTML 实体，这使得插入 HTML 原始码变得很容易，Markdown 会把下面这段：</p>
-
-<pre><code>Please don't use any `&lt;blink&gt;` tags.
-</code></pre>
-
-<p>转为：</p>
-
-<pre><code>&lt;p&gt;Please don't use any &lt;code&gt;&amp;lt;blink&amp;gt;&lt;/code&gt; tags.&lt;/p&gt;
-</code></pre>
-
-<p>你也可以这样写：</p>
-
-<pre><code>`&amp;#8212;` is the decimal-encoded equivalent of `&amp;mdash;`.
-</code></pre>
-
-<p>以产生：</p>
-
-<pre><code>&lt;p&gt;&lt;code&gt;&amp;amp;#8212;&lt;/code&gt; is the decimal-encoded
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">在代码区段内，<code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&amp;</code> 和尖括号<strong>都</strong>会被自动地转成 HTML 实体，这使得插入 HTML 原始码变得很容易，Markdown 会把下面这段：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">Please don't use any `&lt;blink&gt;` tags.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">转为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;Please don't use any &lt;code&gt;&amp;lt;blink&amp;gt;&lt;/code&gt; tags.&lt;/p&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">你也可以这样写：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">`&amp;#8212;` is the decimal-encoded equivalent of `&amp;mdash;`.
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">以产生：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;p&gt;&lt;code&gt;&amp;amp;#8212;&lt;/code&gt; is the decimal-encoded
 equivalent of &lt;code&gt;&amp;amp;mdash;&lt;/code&gt;.&lt;/p&gt;
-</code></pre>
+</code></pre><h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="img">图片</h3>
 
-<h3 id="img">图片</h3>
-
-<p>很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。</p>
-
-<p>Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： <em>行内式</em>和<em>参考式</em>。</p>
-
-<p>行内式的图片语法看起来像是：</p>
-
-<pre><code>![Alt text](/path/to/img.jpg)
+<p style="margin: 0px 0px 1.2em ! important;">很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。</p>
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： <em>行内式</em>和<em>参考式</em>。</p>
+<p style="margin: 0px 0px 1.2em ! important;">行内式的图片语法看起来像是：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">![Alt text](/path/to/img.jpg)
 
 ![Alt text](/path/to/img.jpg "Optional title")
-</code></pre>
-
-<p>详细叙述如下：</p>
-
-<ul>
-<li>一个惊叹号 <code>!</code></li>
-<li>接着一个方括号，里面放上图片的替代文字</li>
-<li>接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上
-选择性的 'title' 文字。</li>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">详细叙述如下：</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;">一个惊叹号 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">!</code></li>
+<li style="margin: 0.5em 0px;">接着一个方括号，里面放上图片的替代文字</li>
+<li style="margin: 0.5em 0px;">接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上<br>选择性的 ‘title’ 文字。</li>
 </ul>
-
-<p>参考式的图片语法则长得像这样：</p>
-
-<pre><code>![Alt text][id]
-</code></pre>
-
-<p>「id」是图片参考的名称，图片参考的定义方式则和链接参考一样：</p>
-
-<pre><code>[id]: url/to/image  "Optional title attribute"
-</code></pre>
-
-<p>到目前为止， Markdown 还没有办法指定图片的宽高，如果你需要的话，你可以使用普通的 <code>&lt;img&gt;</code> 标签。</p>
-
+<p style="margin: 0px 0px 1.2em ! important;">参考式的图片语法则长得像这样：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">![Alt text][id]
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">「id」是图片参考的名称，图片参考的定义方式则和链接参考一样：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">[id]: url/to/image  "Optional title attribute"
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">到目前为止， Markdown 还没有办法指定图片的宽高，如果你需要的话，你可以使用普通的 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;img&gt;</code> 标签。</p>
 <hr>
+<h2 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.4em; border-bottom: 1px solid rgb(238, 238, 238);" id="misc">其它</h2>
 
-<h2 id="misc">其它</h2>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="autolink">自动链接</h3>
 
-<h3 id="autolink">自动链接</h3>
-
-<p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用尖括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：</p>
-
-<pre><code>&lt;http://example.com/&gt;
-</code></pre>
-
-<p>Markdown 会转为：</p>
-
-<pre><code>&lt;a href="http://example.com/"&gt;http://example.com/&lt;/a&gt;
-</code></pre>
-
-<p>邮址的自动链接也很类似，只是 Markdown 会先做一个编码转换的过程，把文字字符转成 16 进位码的 HTML 实体，这样的格式可以糊弄一些不好的邮址收集机器人，例如：</p>
-
-<pre><code>&lt;address@example.com&gt;
-</code></pre>
-
-<p>Markdown 会转成：</p>
-
-<pre><code>&lt;a href="&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用尖括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;http://example.com/&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">Markdown 会转为：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;a href="http://example.com/"&gt;http://example.com/&lt;/a&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">邮址的自动链接也很类似，只是 Markdown 会先做一个编码转换的过程，把文字字符转成 16 进位码的 HTML 实体，这样的格式可以糊弄一些不好的邮址收集机器人，例如：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;address@example.com&gt;
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">Markdown 会转成：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">&lt;a href="&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
 &amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;
 &amp;#109;"&gt;&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;
 &amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
-</code></pre>
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">在浏览器里面，这段字串（其实是 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;a href="mailto:address@example.com"&gt;address@example.com&lt;/a&gt;</code>）会变成一个可以点击的「address@example.com」链接。</p>
+<p style="margin: 0px 0px 1.2em ! important;">（这种作法虽然可以糊弄不少的机器人，但并不能全部挡下来，不过总比什么都不做好些。不管怎样，公开你的信箱终究会引来广告信件的。）</p>
+<h3 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.3em;" id="backslash">反斜杠</h3>
 
-<p>在浏览器里面，这段字串（其实是 <code>&lt;a href="mailto:address@example.com"&gt;address@example.com&lt;/a&gt;</code>）会变成一个可以点击的「address@example.com」链接。</p>
-
-<p>（这种作法虽然可以糊弄不少的机器人，但并不能全部挡下来，不过总比什么都不做好些。不管怎样，公开你的信箱终究会引来广告信件的。）</p>
-
-<h3 id="backslash">反斜杠</h3>
-
-<p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
-
-<pre><code>\*literal asterisks\*
-</code></pre>
-
-<p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
-
-<pre><code>\   反斜线
+<p style="margin: 0px 0px 1.2em ! important;">Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;">&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">\*literal asterisks\*
+</code></pre><p style="margin: 0px 0px 1.2em ! important;">Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
+<pre style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;font-size: 1em; line-height: 1.2em;margin: 1.2em 0px;"><code style="font-size: 0.85em; font-family: Consolas,Inconsolata,Courier,monospace;margin: 0px 0.15em; padding: 0px 0.3em; white-space: pre-wrap; border: 1px solid rgb(234, 234, 234); background-color: rgb(248, 248, 248); border-radius: 3px; display: inline;white-space: pre; overflow: auto; border-radius: 3px; border: 1px solid rgb(204, 204, 204); padding: 0.5em 0.7em; display: block ! important;">\   反斜线
 `   反引号
 *   星号
 _   底线
@@ -1569,125 +487,623 @@ _   底线
 -   减号
 .   英文句点
 !   惊叹号
-</code></pre>
+</code></pre><h2 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.4em; border-bottom: 1px solid rgb(238, 238, 238);" id="acknowledgement">感谢</h2>
 
-<h2 id="acknowledgement">感谢</h2>
-
-<p>感谢 <a href="https://twitter.com/#!/leafy7382">leafy7382</a> 协助翻译，<a href="http://iamhlb.com/">hlb</a>、<a href="http://twitter.com/randylien">Randylien</a> 帮忙润稿，<a href="https://twitter.com/#!/ethantw">ethantw</a> 的<a href="http://ethantw.net/projects/han/">汉字标准格式・CSS Reset</a>， <a href="http://kidwm.net/">WM</a> 回报文字错误。</p>
-
-<p>感谢 <a href="https://github.com/fenprace">fenprace</a>，<a href="https://github.com/addv">addv</a>。</p>
-
+<p style="margin: 0px 0px 1.2em ! important;">感谢 <a href="https://twitter.com/#%21/leafy7382">leafy7382</a> 协助翻译，<a href="http://iamhlb.com/">hlb</a>、<a href="http://twitter.com/randylien">Randylien</a> 帮忙润稿，<a href="https://twitter.com/#%21/ethantw">ethantw</a> 的<a href="http://ethantw.net/projects/han/">汉字标准格式&#12539;CSS Reset</a>， <a href="http://kidwm.net/">WM</a> 回报文字错误。</p>
+<p style="margin: 0px 0px 1.2em ! important;">感谢 <a href="https://github.com/fenprace">fenprace</a>，<a href="https://github.com/addv">addv</a>。</p>
 <hr>
+<h2 style="margin: 1.3em 0px 1em; padding: 0px; font-weight: bold;font-size: 1.4em; border-bottom: 1px solid rgb(238, 238, 238);" id="editor">Markdown 免费编辑器</h2>
 
-<h2 id="editor">Markdown 免费编辑器</h2>
-
-<p>Windows 平台</p>
-
-<ul>
-<li><a href="http://markdownpad.com/">MarkdownPad</a></li>
-<li><a href="http://code52.org/DownmarkerWPF/">MarkPad</a></li>
+<p style="margin: 0px 0px 1.2em ! important;">Windows 平台</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;"><a href="http://markdownpad.com/">MarkdownPad</a></li>
+<li style="margin: 0.5em 0px;"><a href="http://code52.org/DownmarkerWPF/">MarkPad</a></li>
 </ul>
-
-<p>Linux 平台</p>
-
-<ul>
-<li><a href="http://sourceforge.net/p/retext/home/ReText/">ReText</a></li>
+<p style="margin: 0px 0px 1.2em ! important;">Linux 平台</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;"><a href="http://sourceforge.net/p/retext/home/ReText/">ReText</a></li>
 </ul>
-
-<p>Mac 平台</p>
-
-<ul>
-<li><a href="http://mouapp.com/">Mou</a></li>
+<p style="margin: 0px 0px 1.2em ! important;">Mac 平台</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;"><a href="http://mouapp.com/">Mou</a></li>
 </ul>
-
-<p>在线编辑器</p>
-
-<ul>
-<li><a href="http://markable.in/">Markable.in</a></li>
-<li><a href="http://dillinger.io/">Dillinger.io</a></li>
+<p style="margin: 0px 0px 1.2em ! important;">在线编辑器</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;"><a href="http://markable.in/">Markable.in</a></li>
+<li style="margin: 0.5em 0px;"><a href="http://dillinger.io/">Dillinger.io</a></li>
 </ul>
-
-<p>浏览器插件</p>
-
-<ul>
-<li><a href="https://chrome.google.com/webstore/detail/oknndfeeopgpibecfjljjfanledpbkog">MaDe</a> (Chrome)</li>
+<p style="margin: 0px 0px 1.2em ! important;">浏览器插件</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;"><a href="https://chrome.google.com/webstore/detail/oknndfeeopgpibecfjljjfanledpbkog">MaDe</a> (Chrome)</li>
 </ul>
-
-<p>高级应用</p>
-
-<ul>
-<li><a href="http://www.sublimetext.com/2">Sublime Text 2</a> + <a href="http://ttscoff.github.com/MarkdownEditing/">MarkdownEditing</a> / <a href="http://lucifr.com/2012/07/12/markdownediting-for-sublime-text-2/">教程</a></li>
+<p style="margin: 0px 0px 1.2em ! important;">高级应用</p>
+<ul style="margin: 1.2em 0px;padding-left: 2em;">
+<li style="margin: 0.5em 0px;"><a href="http://www.sublimetext.com/2">Sublime Text 2</a> + <a href="http://ttscoff.github.com/MarkdownEditing/">MarkdownEditing</a> / <a href="http://lucifr.com/2012/07/12/markdownediting-for-sublime-text-2/">教程</a></li>
 </ul>
-
-<p>*** 如有更好的 Markdown 免费编辑器推荐，请到<a href="https://gitcafe.com/riku/Markdown-Syntax-CN/tickets/1">这里反馈</a>，谢谢！</p>
-<!-- content end -->
-</div>
-<br>
-<br>
-    <div id="disqus_thread"></div>
-	<div class="footer">
-		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
-	</div>
-</div>
-<script src="main.js"></script>
-<script id="content" type="text/mustache">
-    <h1>{{title}}</h1>
-    <div class="tag">
-    {{date}}
-    {{#tags}}
-    <a href="/#/tag/{{name}}">#{{name}}</a>
-    {{/tags}}
-    </div>
-</script>
-<script id="pagesTemplate" type="text/mustache">
-    {{#pages}}
-    <li>
-        <a href="{{path}}">{{title}}</a>
-    </li>
-    {{/pages}}
-</script>
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: "main.json",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $("#title").html(data.name);
-            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
-            var pagesHtml = pagesTemplate.render({"pages": data.pages});
-            $("#pages").append(pagesHtml);
-            //path
-            var path = "markdown.html";
-            //path end
-            var now = 0;
-            for (var i = 0; i < data.posts.length; ++i)
-                if (path == data.posts[i].path)
-                    now = i;
-            var post = data.posts[now];
-            var tmp = post.tags.split(" ");
-            var tags = [];
-            for (var i = 0; i < tmp.length; ++i)
-                if (tmp[i].length > 0)
-                    tags.push({"name": tmp[i]});
-            var contentTemplate = Hogan.compile($("#content").html());
-            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
-            $("#main").prepend(contentHtml);
-            if (data.disqus_shortname.length > 0) {
-                var disqus_shortname = data.disqus_shortname;
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            }
-        }
-    });
-});
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
-</body>
-</html>
+<p style="margin: 0px 0px 1.2em ! important;">*** 如有更好的 Markdown 免费编辑器推荐，请到<a href="https://gitcafe.com/riku/Markdown-Syntax-CN/tickets/1">这里反馈</a>，谢谢！</p>
+<div title="MDH:Jmx0OyZsdDsgW+iuv+mXriBXb3chVWJ1bnR1XShodHRwOi8vd293dWJ1bnR1LmNvbSk8YnI+PGJy
+PioqTk9URToqKiBUaGlzIGlzIFNpbXBsZWxpZmllZMKgIENoaW5lc2UgRWRpdGlvbiBEb2N1bWVu
+dCBvZiBNYXJrZG93biBTeW50YXguIElmIHlvdSBhcmUgc2Vla2luZyBmb3IgRW5nbGlzaCBFZGl0
+aW9uIERvY3VtZW50LiBQbGVhc2UgcmVmZXIgdG8gW01hcmtkb3duOiBTeW50YXhdW2VuZy1kb2Nd
+Ljxicj48YnI+W2VuZy1kb2NdOmh0dHA6Ly9kYXJpbmdmaXJlYmFsbC5uZXQvcHJvamVjdHMvbWFy
+a2Rvd24vc3ludGF4PGJyPjxicj4qKuWjsOaYju+8mioqIOi/meS7veaWh+aho+a0vueUnyhmb3Jr
+KeS6jlvnuYHkvZPkuK3mlofniYhdKGh0dHA6Ly9tYXJrZG93bi50dy8p77yM5Zyo5q2k5Z+656GA
+5LiK6L+b6KGM5LqG57mB5L2T6L2s566A5L2T5bel5L2c77yM5bm26L+b6KGM5LqG6YCC5b2T55qE
+5ram6Imy44CC5q2k5paH5qGj55SoIE1hcmtkb3duIOivreazlee8luWGme+8jOS9oOWPr+S7peWI
+sOi/memHjFvmn6XnnIvlroPnmoTmupDmlofku7ZdW3NyYzFd44CC44CM57mB5L2T5Lit5paH54mI
+55qE5Y6f5aeL5paH5Lu25Y+v5LulW+afpeeci+i/memHjF1bc3JjXSDjgILjgI0tLUJ5IEBbcmlr
+dV1bdF08YnI+PGJyPioq5rOo77yaKiog5pys6aG555uu5omY566h5LqOIFtHaXRDYWZlXVtd5LiK
+77yM6K+36YCa6L+HIua0vueUnyLlkowi5ZCI5bm26K+35rGCIuadpeW4ruW/meaUuei/m+acrOmh
+ueebruOAgjxicj48YnI+wqAgW3NyYzFdOiBodHRwOi8vZ2l0Y2FmZS5jb20vcmlrdS9NYXJrZG93
+bi1TeW50YXgtQ04vYmxvYi9tYXN0ZXIvc3ludGF4Lm1kPGJyPsKgIFtzcmNdOiBodHRwczovL2dp
+dGh1Yi5jb20vb3RocmVlL21hcmtkb3duLXN5bnRheC16aHR3L2Jsb2IvbWFzdGVyL3N5bnRheC5t
+ZDxicj7CoCBbdF06IGh0dHA6Ly90d2l0dGVyLmNvbS9yaWt1PGJyPsKgIFtnXTogaHR0cDovL2dp
+dGNhZmUuY29tL3Jpa3UvTWFya2Rvd24tU3ludGF4LUNOPGJyPsKgIFtHaXRodWJdOiBodHRwczov
+L2dpdGh1Yi5jb20vcmlrdS9NYXJrZG93bi1TeW50YXgtQ048YnI+wqAgW0dpdENhZmVdOiBodHRw
+Oi8vZ2l0Y2FmZS5jb20vcmlrdS9NYXJrZG93bi1TeW50YXgtQ04vPGJyPjxicj5NYXJrZG93biDo
+r63ms5Xor7TmmI4gKOeugOS9k+S4reaWh+eJiCkgLyAoW+eCueWHu+afpeeci+W/q+mAn+WFpemX
+qF0oLi9iYXNpYy5odG1sKSk8YnI+PT09PT09PT09PT09PT09PTxicj48YnI+KsKgwqAgW+amgui/
+sF0oI292ZXJ2aWV3KTxicj7CoMKgwqAgKsKgwqAgW+Wul+aXqF0oI3BoaWxvc29waHkpPGJyPsKg
+wqDCoCAqwqDCoCBb5YW85a65IEhUTUxdKCNodG1sKTxicj7CoMKgwqAgKsKgwqAgW+eJueauiuWt
+l+espuiHquWKqOi9rOaNol0oI2F1dG9lc2NhcGUpPGJyPirCoMKgIFvljLrlnZflhYPntKBdKCNi
+bG9jayk8YnI+wqDCoMKgICrCoMKgIFvmrrXokL3lkozmjaLooYxdKCNwKTxicj7CoMKgwqAgKsKg
+wqAgW+agh+mimF0oI2hlYWRlcik8YnI+wqDCoMKgICrCoMKgIFvljLrlnZflvJXnlKhdKCNibG9j
+a3F1b3RlKTxicj7CoMKgwqAgKsKgwqAgW+WIl+ihqF0oI2xpc3QpPGJyPsKgwqDCoCAqwqDCoCBb
+5Luj56CB5Yy65Z2XXSgjcHJlY29kZSk8YnI+wqDCoMKgICrCoMKgIFvliIbpmpTnur9dKCNocik8
+YnI+KsKgwqAgW+WMuuauteWFg+e0oF0oI3NwYW4pPGJyPsKgwqDCoCAqwqDCoCBb6ZO+5o6lXSgj
+bGluayk8YnI+wqDCoMKgICrCoMKgIFvlvLrosINdKCNlbSk8YnI+wqDCoMKgICrCoMKgIFvku6Pn
+oIFdKCNjb2RlKTxicj7CoMKgwqAgKsKgwqAgW+WbvueJh10oI2ltZyk8YnI+KsKgwqAgW+WFtuWu
+g10oI21pc2MpPGJyPsKgwqDCoCAqwqDCoCBb5Y+N5pac5p2gXSgjYmFja3NsYXNoKTxicj7CoMKg
+wqAgKsKgwqAgW+iHquWKqOmTvuaOpV0oI2F1dG9saW5rKTxicj4qwqDCoCBb5oSf6LCiXSgjYWNr
+bm93bGVkZ2VtZW50KTxicj4qwqDCoCDCoFtNYXJrZG93biDlhY3otLnnvJbovpHlmahdKCNlZGl0
+b3IpPGJyPjxicj4qICogKjxicj48YnI+Jmx0O2gyIGlkPSJvdmVydmlldyImZ3Q75qaC6L+wJmx0
+Oy9oMiZndDs8YnI+PGJyPiZsdDtoMyBpZD0icGhpbG9zb3BoeSImZ3Q75a6X5peoJmx0Oy9oMyZn
+dDs8YnI+PGJyPk1hcmtkb3duIOeahOebruagh+aYr+WunueOsOOAjOaYk+ivu+aYk+WGmeOAjeOA
+gjxicj48YnI+5Y+v6K+75oCn77yM5peg6K665aaC5L2V77yM6YO95piv5pyA6YeN6KaB55qE44CC
+5LiA5Lu95L2/55SoIE1hcmtkb3duIOagvOW8j+aSsOWGmeeahOaWh+S7tuW6lOivpeWPr+S7peeb
+tOaOpeS7pee6r+aWh+acrOWPkeW4g++8jOW5tuS4lOeci+i1t+adpeS4jeS8muWDj+aYr+eUseiu
+uOWkmuagh+etvuaIluaYr+agvOW8j+aMh+S7pOaJgOaehOaIkOOAgk1hcmtkb3duIOivreazleWP
+l+WIsOS4gOS6m+aXouaciSB0ZXh0LXRvLUhUTUwg5qC85byP55qE5b2x5ZON77yM5YyF5ousIFtT
+ZXRleHRdIFsxXeOAgVthdHhdIFsyXeOAgVtUZXh0aWxlXSBbM13jgIFbcmVTdHJ1Y3R1cmVkVGV4
+dF0gWzRd44CBW0dydXRhdGV4dF0gWzVdIOWSjCBbRXRUZXh0XSBbNl3vvIzogIzmnIDlpKfngbXm
+hJ/mnaXmupDlhbblrp7mmK/nuq/mlofmnKznlLXlrZDpgq7ku7bnmoTmoLzlvI/jgII8YnI+PGJy
+PsKgIFsxXTogaHR0cDovL2RvY3V0aWxzLnNvdXJjZWZvcmdlLm5ldC9taXJyb3Ivc2V0ZXh0Lmh0
+bWw8YnI+wqAgWzJdOiBodHRwOi8vd3d3LmFhcm9uc3cuY29tLzIwMDIvYXR4Lzxicj7CoCBbM106
+IGh0dHA6Ly90ZXh0aXNtLmNvbS90b29scy90ZXh0aWxlLzxicj7CoCBbNF06IGh0dHA6Ly9kb2N1
+dGlscy5zb3VyY2Vmb3JnZS5uZXQvcnN0Lmh0bWw8YnI+wqAgWzVdOiBodHRwOi8vd3d3LnRyaXB0
+aWNvLmNvbS9zb2Z0d2FyZS9ncnV0YXR4dC5odG1sPGJyPsKgIFs2XTogaHR0cDovL2V0dGV4dC50
+YWludC5vcmcvZG9jLzxicj48YnI+5oC75LmL77yMIE1hcmtkb3duIOeahOivreazleWFqOeUseS4
+gOS6m+espuWPt+aJgOe7hOaIkO+8jOi/meS6m+espuWPt+e7j+i/h+eyvuaMkee7humAie+8jOWF
+tuS9nOeUqOS4gOebruS6hueEtuOAguavlOWmgu+8muWcqOaWh+Wtl+S4pOaXgeWKoOS4iuaYn+WP
+t++8jOeci+i1t+adpeWwseWDj1wq5by66LCDXCrjgIJNYXJrZG93biDnmoTliJfooajnnIvotbfm
+naXvvIzll6/vvIzlsLHmmK/liJfooajjgIJNYXJrZG93biDnmoTljLrlnZflvJXnlKjnnIvotbfm
+naXlsLHnnJ/nmoTlg4/mmK/lvJXnlKjkuIDmrrXmloflrZfvvIzlsLHlg4/kvaDmm77lnKjnlLXl
+rZDpgq7ku7bkuK3op4Hov4fnmoTpgqPmoLfjgII8YnI+PGJyPiZsdDtoMyBpZD0iaHRtbCImZ3Q7
+5YW85a65IEhUTUwmbHQ7L2gzJmd0Ozxicj48YnI+TWFya2Rvd24g6K+t5rOV55qE55uu5qCH5piv
+77ya5oiQ5Li65LiA56eN6YCC55So5LqO572R57uc55qEKuS5puWGmSror63oqIDjgII8YnI+PGJy
+Pk1hcmtkb3duIOW5tuS4jeaYr+aDs+WPluS7oyBIVE1M55qE5Zyw5L2N77yM55Sa6Iez5o6l6L+R
+5a6D44CC5a6D55qE6K+t5rOV56eN57G75b6I5bCR77yM5Y+q5a+55bqUIEhUTUwg5qCH6K6w55qE
+5LiA5bCP6YOo5YiG44CCTWFya2Rvd24g55qE5p6E5oOzKuS4jeaYryropoHkvb/lvpcgSFRNTCDm
+lofmoaPmm7TlrrnmmJPkuablhpnjgILlnKjmiJHnnIvmnaXvvIwgSFRNTCDlt7Lnu4/lvojlrrnm
+mJPlhpnkuobjgIJNYXJrZG93biDnmoTnkIblv7XmmK/vvIzog73orqnmlofmoaPmm7TlrrnmmJPo
+r7vjgIHlhpnlkozpmo/mhI/mlLnjgIJIVE1MIOaYr+S4gOenjSrlj5HluIMq55qE5qC85byP77yM
+TWFya2Rvd24g5piv5LiA56eNKuS5puWGmSrnmoTmoLzlvI/jgILlsLHov5nmoLfvvIxNYXJrZG93
+biDnmoTmoLzlvI/or63ms5Xlj6rmtrXnm5bnuq/mlofmnKzlj6/ku6XmtrXnm5bnmoTojIPlm7Tj
+gII8YnI+PGJyPuS4jeWcqCBNYXJrZG93biDmtrXnm5bojIPlm7TkuYvlhoXnmoTmoIfnrb7vvIzp
+g73lj6/ku6Xnm7TmjqXlnKjmlofmoaPph4zpnaLnlKggSFRNTCDmkrDlhpnjgILkuI3pnIDopoHp
+op3lpJbmoIfms6jov5nmmK8gSFRNTCDmiJbmmK8gTWFya2Rvd27vvJvlj6ropoHnm7TmjqXliqDm
+oIfnrb7lsLHlj6/ku6XkuobjgII8YnI+PGJyPuimgeWItue6pueahOWPquacieS4gOS6myBIVE1M
+IOWMuuWdl+WFg+e0oOKAleKAleavlOWmgiBgJmx0O2RpdiZndDtg44CBYCZsdDt0YWJsZSZndDtg
+44CBYCZsdDtwcmUmZ3Q7YOOAgWAmbHQ7cCZndDtgIOetieagh+etvu+8jOW/hemhu+WcqOWJjeWQ
+juWKoOS4iuepuuihjOS4juWFtuWug+WGheWuueWMuumalOW8gO+8jOi/mOimgeaxguWug+S7rOea
+hOW8gOWni+agh+etvuS4jue7k+Wwvuagh+etvuS4jeiDveeUqOWItuihqOespuaIluepuuagvOad
+pee8qei/m+OAgk1hcmtkb3duIOeahOeUn+aIkOWZqOaciei2s+Wkn+aZuuiDve+8jOS4jeS8muWc
+qCBIVE1MIOWMuuWdl+agh+etvuWkluWKoOS4iuS4jeW/heimgeeahCBgJmx0O3AmZ3Q7YCDmoIfn
+rb7jgII8YnI+PGJyPuS+i+WtkOWmguS4i++8jOWcqCBNYXJrZG93biDmlofku7bph4zliqDkuIrk
+uIDmrrUgSFRNTCDooajmoLzvvJo8YnI+PGJyPsKgwqDCoCDov5nmmK/kuIDkuKrmma7pgJrmrrXo
+kL3jgII8YnI+PGJyPsKgwqDCoCAmbHQ7dGFibGUmZ3Q7PGJyPsKgwqDCoMKgwqDCoMKgICZsdDt0
+ciZndDs8YnI+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAmbHQ7dGQmZ3Q7Rm9vJmx0Oy90ZCZndDs8
+YnI+wqDCoMKgwqDCoMKgwqAgJmx0Oy90ciZndDs8YnI+wqDCoMKgICZsdDsvdGFibGUmZ3Q7PGJy
+Pjxicj7CoMKgwqAg6L+Z5piv5Y+m5LiA5Liq5pmu6YCa5q616JC944CCPGJyPjxicj7or7fms6jm
+hI/vvIzlnKggSFRNTCDljLrlnZfmoIfnrb7pl7TnmoQgTWFya2Rvd24g5qC85byP6K+t5rOV5bCG
+5LiN5Lya6KKr5aSE55CG44CC5q+U5aaC77yM5L2g5ZyoIEhUTUwg5Yy65Z2X5YaF5L2/55SoIE1h
+cmtkb3duIOagt+W8j+eahGAq5by66LCDKmDkvJrmsqHmnInmlYjmnpzjgII8YnI+PGJyPkhUTUwg
+55qE5Yy65q6177yI6KGM5YaF77yJ5qCH562+5aaCIGAmbHQ7c3BhbiZndDtg44CBYCZsdDtjaXRl
+Jmd0O2DjgIFgJmx0O2RlbCZndDtgIOWPr+S7peWcqCBNYXJrZG93biDnmoTmrrXokL3jgIHliJfo
+oajmiJbmmK/moIfpopjph4zpmo/mhI/kvb/nlKjjgILkvp3nhafkuKrkurrkuaDmg6/vvIznlJro
+h7Plj6/ku6XkuI3nlKggTWFya2Rvd24g5qC85byP77yM6ICM55u05o6l6YeH55SoIEhUTUwg5qCH
+562+5p2l5qC85byP5YyW44CC5Li+5L6L6K+05piO77ya5aaC5p6c5q+U6L6D5Zac5qyiIEhUTUwg
+55qEIGAmbHQ7YSZndDtgIOaIliBgJmx0O2ltZyZndDtgIOagh+etvu+8jOWPr+S7peebtOaOpeS9
+v+eUqOi/meS6m+agh+etvu+8jOiAjOS4jeeUqCBNYXJrZG93biDmj5DkvpvnmoTpk77mjqXmiJbm
+mK/lm77lg4/moIfnrb7or63ms5XjgII8YnI+PGJyPuWSjOWkhOWcqCBIVE1MIOWMuuWdl+agh+et
+vumXtOS4jeWQjO+8jE1hcmtkb3duIOivreazleWcqCBIVE1MIOWMuuauteagh+etvumXtOaYr+ac
+ieaViOeahOOAgjxicj48YnI+Jmx0O2gzIGlkPSJhdXRvZXNjYXBlIiZndDvnibnmrorlrZfnrKbo
+h6rliqjovazmjaImbHQ7L2gzJmd0Ozxicj48YnI+5ZyoIEhUTUwg5paH5Lu25Lit77yM5pyJ5Lik
+5Liq5a2X56ym6ZyA6KaB54m55q6K5aSE55CG77yaIGAmbHQ7YCDlkowgYCZhbXA7YCDjgIIgYCZs
+dDtgIOespuWPt+eUqOS6jui1t+Wni+agh+etvu+8jGAmYW1wO2Ag56ym5Y+35YiZ55So5LqO5qCH
+6K6wIEhUTUwg5a6e5L2T77yM5aaC5p6c5L2g5Y+q5piv5oOz6KaB5pi+56S66L+Z5Lqb5a2X56ym
+55qE5Y6f5Z6L77yM5L2g5b+F6aG76KaB5L2/55So5a6e5L2T55qE5b2i5byP77yM5YOP5pivIGAm
+YW1wO2x0O2Ag5ZKMIGAmYW1wO2FtcDtg44CCPGJyPjxicj5gJmFtcDtgIOWtl+espuWwpOWFtuiu
+qee9kee7nOaWh+aho+e8luWGmeiAheWPl+aKmOejqO+8jOWmguaenOS9oOimgeaJk+OAjGBBVCZh
+bXA7VGDjgI0g77yM5L2g5b+F6aG76KaB5YaZ5oiQ44CMYEFUJmFtcDthbXA7VGDjgI3jgILogIzn
+vZHlnYDkuK3nmoQgYCZhbXA7YCDlrZfnrKbkuZ/opoHovazmjaLjgILmr5TlpoLkvaDopoHpk77m
+jqXliLDvvJo8YnI+PGJyPsKgwqDCoCBodHRwOi8vaW1hZ2VzLmdvb2dsZS5jb20vaW1hZ2VzP251
+bT0zMCZhbXA7cT1sYXJyeStiaXJkPGJyPjxicj7kvaDlv4XpobvopoHmiornvZHlnYDovazmjaLl
+hpnkuLrvvJo8YnI+PGJyPsKgwqDCoCBodHRwOi8vaW1hZ2VzLmdvb2dsZS5jb20vaW1hZ2VzP251
+bT0zMCZhbXA7YW1wO3E9bGFycnkrYmlyZDxicj48YnI+5omN6IO95pS+5Yiw6ZO+5o6l5qCH562+
+55qEIGBocmVmYCDlsZ7mgKfph4zjgILkuI3nlKjor7TkuZ/nn6XpgZPov5nlvojlrrnmmJPlv73n
+laXvvIzov5nkuZ/lj6/og73mmK8gSFRNTCDmoIflh4bmo4DpqozmiYDmo4Dmn6XliLDnmoTplJno
+r6/kuK3vvIzmlbDph4/mnIDlpJrnmoTjgII8YnI+PGJyPk1hcmtkb3duIOiuqeS9oOWPr+S7peiH
+queEtuWcsOS5puWGmeWtl+espu+8jOmcgOimgei9rOaNoueahOeUseWug+adpeWkhOeQhuWlveS6
+huOAguWmguaenOS9oOS9v+eUqOeahCBgJmFtcDtgIOWtl+espuaYryBIVE1MIOWtl+espuWunuS9
+k+eahOS4gOmDqOWIhu+8jOWug+S8muS/neeVmeWOn+eKtu+8jOWQpuWImeWug+S8muiiq+i9rOaN
+ouaIkCBgJmFtcDthbXBgO+OAgjxicj48YnI+5omA5Lul5L2g5aaC5p6c6KaB5Zyo5paH5qGj5Lit
+5o+S5YWl5LiA5Liq54mI5p2D56ym5Y+3IGDCqWDvvIzkvaDlj6/ku6Xov5nmoLflhpnvvJo8YnI+
+PGJyPsKgwqDCoCAmYW1wO2NvcHk7PGJyPjxicj5NYXJrZG93biDkvJrkv53nlZnlroPkuI3liqjj
+gILogIzoi6XkvaDlhpnvvJo8YnI+PGJyPsKgwqDCoCBBVCZhbXA7VDxicj48YnI+TWFya2Rvd24g
+5bCx5Lya5bCG5a6D6L2s5Li677yaPGJyPjxicj7CoMKgwqAgQVQmYW1wO2FtcDtUPGJyPjxicj7n
+sbvkvLznmoTnirblhrXkuZ/kvJrlj5HnlJ/lnKggYCZsdDtgIOespuWPt+S4iu+8jOWboOS4uiBN
+YXJrZG93biDlhYHorrggW+WFvOWuuSBIVE1MXSgjaHRtbCkg77yM5aaC5p6c5L2g5piv5oqKIGAm
+bHQ7YCDnrKblj7fkvZzkuLogSFRNTCDmoIfnrb7nmoTlrprnlYznrKbkvb/nlKjvvIzpgqMgTWFy
+a2Rvd24g5Lmf5LiN5Lya5a+55a6D5YGa5Lu75L2V6L2s5o2i77yM5L2G5piv5aaC5p6c5L2g5YaZ
+77yaPGJyPjxicj7CoMKgwqAgNCAmbHQ7IDU8YnI+PGJyPk1hcmtkb3duIOWwhuS8muaKiuWug+i9
+rOaNouS4uu+8mjxicj48YnI+wqDCoMKgIDQgJmFtcDtsdDsgNTxicj48YnI+5LiN6L+H6ZyA6KaB
+5rOo5oSP55qE5piv77yMY29kZSDojIPlm7TlhoXvvIzkuI3orrrmmK/ooYzlhoXov5jmmK/ljLrl
+nZfvvIwgYCZsdDtgIOWSjCBgJmFtcDtgIOS4pOS4quespuWPt+mDvSrkuIDlrpoq5Lya6KKr6L2s
+5o2i5oiQIEhUTUwg5a6e5L2T77yM6L+Z6aG554m55oCn6K6p5L2g5Y+v5Lul5b6I5a655piT5Zyw
+55SoIE1hcmtkb3duIOWGmSBIVE1MIGNvZGUg77yI5ZKMIEhUTUwg55u45a+56ICM6KiA77yMIEhU
+TUwg6K+t5rOV5Lit77yM5L2g6KaB5oqK5omA5pyJ55qEIGAmbHQ7YCDlkowgYCZhbXA7YCDpg73o
+vazmjaLkuLogSFRNTCDlrp7kvZPvvIzmiY3og73lnKggSFRNTCDmlofku7bph4zpnaLlhpnlh7og
+SFRNTCBjb2Rl44CC77yJPGJyPjxicj4qICogKjxicj48YnI+Jmx0O2gyIGlkPSJibG9jayImZ3Q7
+5Yy65Z2X5YWD57SgJmx0Oy9oMiZndDs8YnI+PGJyPjxicj4mbHQ7aDMgaWQ9InAiJmd0O+auteiQ
+veWSjOaNouihjCZsdDsvaDMmZ3Q7PGJyPjxicj7kuIDkuKogTWFya2Rvd24g5q616JC95piv55Sx
+5LiA5Liq5oiW5aSa5Liq6L+e57ut55qE5paH5pys6KGM57uE5oiQ77yM5a6D55qE5YmN5ZCO6KaB
+5pyJ5LiA5Liq5Lul5LiK55qE56m66KGM77yI56m66KGM55qE5a6a5LmJ5piv5pi+56S65LiK55yL
+6LW35p2l5YOP5piv56m655qE77yM5L6/5Lya6KKr6KeG5Li656m66KGM44CC5q+U5pa56K+077yM
+6Iul5p+Q5LiA6KGM5Y+q5YyF5ZCr56m65qC85ZKM5Yi26KGo56ym77yM5YiZ6K+l6KGM5Lmf5Lya
+6KKr6KeG5Li656m66KGM77yJ44CC5pmu6YCa5q616JC95LiN6K+l55So56m65qC85oiW5Yi26KGo
+56ym5p2l57yp6L+b44CCPGJyPjxicj7jgIznlLHkuIDkuKrmiJblpJrkuKrov57nu63nmoTmlofm
+nKzooYznu4TmiJDjgI3ov5nlj6Xor53lhbblrp7mmpfnpLrkuoYgTWFya2Rvd24g5YWB6K645q61
+6JC95YaF55qE5by66L+r5o2i6KGM77yI5o+S5YWl5o2i6KGM56ym77yJ77yM6L+Z5Liq54m55oCn
+5ZKM5YW25LuW5aSn6YOo5YiG55qEIHRleHQtdG8tSFRNTCDmoLzlvI/kuI3kuIDmoLfvvIjljIXm
+i6wgTW92YWJsZSBUeXBlIOeahOOAjENvbnZlcnQgTGluZSBCcmVha3PjgI3pgInpobnvvInvvIzl
+hbblroPnmoTmoLzlvI/kvJrmiormr4/kuKrmjaLooYznrKbpg73ovazmiJAgYCZsdDticiAvJmd0
+O2Ag5qCH562+44CCPGJyPjxicj7lpoLmnpzkvaAq56Gu5a6eKuaDs+imgeS+nei1liBNYXJrZG93
+biDmnaXmj5LlhaUgYCZsdDticiAvJmd0O2Ag5qCH562+55qE6K+d77yM5Zyo5o+S5YWl5aSE5YWI
+5oyJ5YWl5Lik5Liq5Lul5LiK55qE56m65qC854S25ZCO5Zue6L2m44CCPGJyPjxicj7nmoTnoa7v
+vIzpnIDopoHlpJrotLnngrnkuovvvIjlpJrliqDnqbrmoLzvvInmnaXkuqfnlJ8gYCZsdDticiAv
+Jmd0O2Ag77yM5L2G5piv566A5Y2V5Zyw44CM5q+P5Liq5o2i6KGM6YO96L2s5o2i5Li6IGAmbHQ7
+YnIgLyZndDtg44CN55qE5pa55rOV5ZyoIE1hcmtkb3duIOS4reW5tuS4jemAguWQiO+8jCBNYXJr
+ZG93biDkuK0gZW1haWwg5byP55qEIFvljLrlnZflvJXnlKhdW2JxXSDlkozlpJrmrrXokL3nmoQg
+W+WIl+ihqF1bbF0g5Zyo5L2/55So5o2i6KGM5p2l5o6S54mI55qE5pe25YCZ77yM5LiN5L2G5pu0
+5aW955So77yM6L+Y5pu05pa55L6/6ZiF6K+744CCPGJyPjxicj7CoCBbYnFdOiAjYmxvY2txdW90
+ZTxicj7CoCBbbF06wqAgI2xpc3Q8YnI+PGJyPiZsdDtoMyBpZD0iaGVhZGVyIiZndDvmoIfpopgm
+bHQ7L2gzJmd0Ozxicj48YnI+TWFya2Rvd24g5pSv5oyB5Lik56eN5qCH6aKY55qE6K+t5rOV77yM
+57G7IFtTZXRleHRdIFsxXSDlkoznsbsgW2F0eF0gWzJdIOW9ouW8j+OAgjxicj48YnI+57G7IFNl
+dGV4dCDlvaLlvI/mmK/nlKjlupXnur/nmoTlvaLlvI/vvIzliKnnlKggYD1gIO+8iOacgOmrmOmY
+tuagh+mimO+8ieWSjCBgLWAg77yI56ys5LqM6Zi25qCH6aKY77yJ77yM5L6L5aaC77yaPGJyPjxi
+cj7CoMKgwqAgVGhpcyBpcyBhbiBIMTxicj7CoMKgwqAgPT09PT09PT09PT09PTxicj48YnI+wqDC
+oMKgIFRoaXMgaXMgYW4gSDI8YnI+wqDCoMKgIC0tLS0tLS0tLS0tLS08YnI+PGJyPuS7u+S9leaV
+sOmHj+eahCBgPWAg5ZKMIGAtYCDpg73lj6/ku6XmnInmlYjmnpzjgII8YnI+PGJyPuexuyBBdHgg
+5b2i5byP5YiZ5piv5Zyo6KGM6aaW5o+S5YWlIDEg5YiwIDYg5LiqIGAjYCDvvIzlr7nlupTliLDm
+oIfpopggMSDliLAgNiDpmLbvvIzkvovlpoLvvJo8YnI+PGJyPsKgwqDCoCAjIOi/meaYryBIMTxi
+cj48YnI+wqDCoMKgICMjIOi/meaYryBIMjxicj48YnI+wqDCoMKgICMjIyMjIyDov5nmmK8gSDY8
+YnI+PGJyPuS9oOWPr+S7pemAieaLqeaAp+WcsOOAjOmXreWQiOOAjeexuyBhdHgg5qC35byP55qE
+5qCH6aKY77yM6L+Z57qv57K55Y+q5piv576O6KeC55So55qE77yM6Iul5piv6KeJ5b6X6L+Z5qC3
+55yL6LW35p2l5q+U6L6D6IiS6YCC77yM5L2g5bCx5Y+v5Lul5Zyo6KGM5bC+5Yqg5LiKIGAjYO+8
+jOiAjOihjOWwvueahCBgI2Ag5pWw6YeP5Lmf5LiN55So5ZKM5byA5aS05LiA5qC377yI6KGM6aaW
+55qE5LqV5a2X56ym5pWw6YeP5Yaz5a6a5qCH6aKY55qE6Zi25pWw77yJ77yaPGJyPjxicj7CoMKg
+wqAgIyDov5nmmK8gSDEgIzxicj48YnI+wqDCoMKgICMjIOi/meaYryBIMiAjIzxicj48YnI+wqDC
+oMKgICMjIyDov5nmmK8gSDMgIyMjIyMjPGJyPjxicj48YnI+Jmx0O2gzIGlkPSJibG9ja3F1b3Rl
+IiZndDvljLrlnZflvJXnlKggQmxvY2txdW90ZXMmbHQ7L2gzJmd0Ozxicj48YnI+TWFya2Rvd24g
+5qCH6K6w5Yy65Z2X5byV55So5piv5L2/55So57G75Ly8IGVtYWlsIOS4reeUqCBgJmd0O2Ag55qE
+5byV55So5pa55byP44CC5aaC5p6c5L2g6L+Y54af5oKJ5ZyoIGVtYWlsIOS/oeS7tuS4reeahOW8
+leiogOmDqOWIhu+8jOS9oOWwseefpemBk+aAjuS5iOWcqCBNYXJrZG93biDmlofku7bkuK3lu7rn
+q4vkuIDkuKrljLrlnZflvJXnlKjvvIzpgqPkvJrnnIvotbfmnaXlg4/mmK/kvaDoh6rlt7HlhYjm
+lq3lpb3ooYzvvIznhLblkI7lnKjmr4/ooYznmoTmnIDliY3pnaLliqDkuIogYCZndDtgIO+8mjxi
+cj48YnI+wqDCoMKgICZndDsgVGhpcyBpcyBhIGJsb2NrcXVvdGUgd2l0aCB0d28gcGFyYWdyYXBo
+cy4gTG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsPGJyPsKgwqDCoCAmZ3Q7IGNvbnNlY3RldHVl
+ciBhZGlwaXNjaW5nIGVsaXQuIEFsaXF1YW0gaGVuZHJlcml0IG1pIHBvc3VlcmUgbGVjdHVzLjxi
+cj7CoMKgwqAgJmd0OyBWZXN0aWJ1bHVtIGVuaW0gd2lzaSwgdml2ZXJyYSBuZWMsIGZyaW5naWxs
+YSBpbiwgbGFvcmVldCB2aXRhZSwgcmlzdXMuPGJyPsKgwqDCoCAmZ3Q7IDxicj7CoMKgwqAgJmd0
+OyBEb25lYyBzaXQgYW1ldCBuaXNsLiBBbGlxdWFtIHNlbXBlciBpcHN1bSBzaXQgYW1ldCB2ZWxp
+dC4gU3VzcGVuZGlzc2U8YnI+wqDCoMKgICZndDsgaWQgc2VtIGNvbnNlY3RldHVlciBsaWJlcm8g
+bHVjdHVzIGFkaXBpc2NpbmcuPGJyPjxicj5NYXJrZG93biDkuZ/lhYHorrjkvaDlgbfmh5Llj6rl
+nKjmlbTkuKrmrrXokL3nmoTnrKzkuIDooYzmnIDliY3pnaLliqDkuIogYCZndDtgIO+8mjxicj48
+YnI+wqDCoMKgICZndDsgVGhpcyBpcyBhIGJsb2NrcXVvdGUgd2l0aCB0d28gcGFyYWdyYXBocy4g
+TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsPGJyPsKgwqDCoCBjb25zZWN0ZXR1ZXIgYWRpcGlz
+Y2luZyBlbGl0LiBBbGlxdWFtIGhlbmRyZXJpdCBtaSBwb3N1ZXJlIGxlY3R1cy48YnI+wqDCoMKg
+IFZlc3RpYnVsdW0gZW5pbSB3aXNpLCB2aXZlcnJhIG5lYywgZnJpbmdpbGxhIGluLCBsYW9yZWV0
+IHZpdGFlLCByaXN1cy48YnI+PGJyPsKgwqDCoCAmZ3Q7IERvbmVjIHNpdCBhbWV0IG5pc2wuIEFs
+aXF1YW0gc2VtcGVyIGlwc3VtIHNpdCBhbWV0IHZlbGl0LiBTdXNwZW5kaXNzZTxicj7CoMKgwqAg
+aWQgc2VtIGNvbnNlY3RldHVlciBsaWJlcm8gbHVjdHVzIGFkaXBpc2NpbmcuPGJyPjxicj7ljLrl
+nZflvJXnlKjlj6/ku6XltYzlpZfvvIjkvovlpoLvvJrlvJXnlKjlhoXnmoTlvJXnlKjvvInvvIzl
+j6ropoHmoLnmja7lsYLmrKHliqDkuIrkuI3lkIzmlbDph4/nmoQgYCZndDtgIO+8mjxicj48YnI+
+wqDCoMKgICZndDsgVGhpcyBpcyB0aGUgZmlyc3QgbGV2ZWwgb2YgcXVvdGluZy48YnI+wqDCoMKg
+ICZndDs8YnI+wqDCoMKgICZndDsgJmd0OyBUaGlzIGlzIG5lc3RlZCBibG9ja3F1b3RlLjxicj7C
+oMKgwqAgJmd0Ozxicj7CoMKgwqAgJmd0OyBCYWNrIHRvIHRoZSBmaXJzdCBsZXZlbC48YnI+PGJy
+PuW8leeUqOeahOWMuuWdl+WGheS5n+WPr+S7peS9v+eUqOWFtuS7lueahCBNYXJrZG93biDor63m
+s5XvvIzljIXmi6zmoIfpopjjgIHliJfooajjgIHku6PnoIHljLrlnZfnrYnvvJo8YnI+PGJyPsKg
+wqAgwqAmZ3Q7ICMjIOi/meaYr+S4gOS4quagh+mimOOAgjxicj7CoMKgIMKgJmd0OyA8YnI+wqDC
+oCDCoCZndDsgMS7CoMKgIOi/meaYr+esrOS4gOihjOWIl+ihqOmhueOAgjxicj7CoMKgIMKgJmd0
+OyAyLsKgwqAg6L+Z5piv56ys5LqM6KGM5YiX6KGo6aG544CCPGJyPsKgwqAgwqAmZ3Q7IDxicj7C
+oMKgIMKgJmd0OyDnu5nlh7rkuIDkupvkvovlrZDku6PnoIHvvJo8YnI+wqDCoCDCoCZndDsgPGJy
+PsKgwqAgwqAmZ3Q7wqDCoMKgwqAgcmV0dXJuIHNoZWxsX2V4ZWMoImVjaG8gJGlucHV0IHwgJG1h
+cmtkb3duX3NjcmlwdCIpOzxicj48YnI+5Lu75L2V5YOP5qC355qE5paH5pys57yW6L6R5Zmo6YO9
+6IO96L275p2+5Zyw5bu656uLIGVtYWlsIOWei+eahOW8leeUqOOAguS+i+WmguWcqCBCQkVkaXQg
+5Lit77yM5L2g5Y+v5Lul6YCJ5Y+W5paH5a2X5ZCO54S25ZCO5LuO6YCJ5Y2V5Lit6YCJ5oupKuWi
+nuWKoOW8leeUqOmYtuWxgirjgII8YnI+PGJyPiZsdDtoMyBpZD0ibGlzdCImZ3Q75YiX6KGoJmx0
+Oy9oMyZndDs8YnI+PGJyPk1hcmtkb3duIOaUr+aMgeacieW6j+WIl+ihqOWSjOaXoOW6j+WIl+ih
+qOOAgjxicj48YnI+5peg5bqP5YiX6KGo5L2/55So5pif5Y+344CB5Yqg5Y+35oiW5piv5YeP5Y+3
+5L2c5Li65YiX6KGo5qCH6K6w77yaPGJyPjxicj7CoMKgwqAgKsKgwqAgUmVkPGJyPsKgwqDCoCAq
+wqDCoCBHcmVlbjxicj7CoMKgwqAgKsKgwqAgQmx1ZTxicj48YnI+5pWI5p6c5bCx5pivPGJyPjxi
+cj4qIHJlZDxicj4qIGdyZWVuPGJyPiogYmx1ZTxicj48YnI+562J5ZCM5LqO77yaPGJyPjxicj7C
+oMKgwqAgK8KgwqAgUmVkPGJyPsKgwqDCoCArwqDCoCBHcmVlbjxicj7CoMKgwqAgK8KgwqAgQmx1
+ZTxicj48YnI+5Lmf562J5ZCM5LqO77yaPGJyPjxicj7CoMKgwqAgLcKgwqAgUmVkPGJyPsKgwqDC
+oCAtwqDCoCBHcmVlbjxicj7CoMKgwqAgLcKgwqAgQmx1ZTxicj48YnI+5pyJ5bqP5YiX6KGo5YiZ
+5L2/55So5pWw5a2X5o6l552A5LiA5Liq6Iux5paH5Y+l54K577yaPGJyPjxicj7CoMKgwqAgMS7C
+oCBCaXJkPGJyPsKgwqDCoCAyLsKgIE1jSGFsZTxicj7CoMKgwqAgMy7CoCBQYXJpc2g8YnI+PGJy
+PuW+iOmHjeimgeeahOS4gOeCueaYr++8jOS9oOWcqOWIl+ihqOagh+iusOS4iuS9v+eUqOeahOaV
+sOWtl+W5tuS4jeS8muW9seWTjei+k+WHuueahCBIVE1MIOe7k+aenO+8jOS4iumdoueahOWIl+ih
+qOaJgOS6p+eUn+eahCBIVE1MIOagh+iusOS4uu+8mjxicj48YnI+wqDCoMKgICZsdDtvbCZndDs8
+YnI+wqDCoMKgICZsdDtsaSZndDtCaXJkJmx0Oy9saSZndDs8YnI+wqDCoMKgICZsdDtsaSZndDtN
+Y0hhbGUmbHQ7L2xpJmd0Ozxicj7CoMKgwqAgJmx0O2xpJmd0O1BhcmlzaCZsdDsvbGkmZ3Q7PGJy
+PsKgwqDCoCAmbHQ7L29sJmd0Ozxicj48YnI+5aaC5p6c5L2g55qE5YiX6KGo5qCH6K6w5YaZ5oiQ
+77yaPGJyPjxicj7CoMKgwqAgMS7CoCBCaXJkPGJyPsKgwqDCoCAxLsKgIE1jSGFsZTxicj7CoMKg
+wqAgMS7CoCBQYXJpc2g8YnI+PGJyPuaIlueUmuiHs+aYr++8mjxicj48YnI+wqDCoMKgIDMuIEJp
+cmQ8YnI+wqDCoMKgIDEuIE1jSGFsZTxicj7CoMKgwqAgOC4gUGFyaXNoPGJyPjxicj7kvaDpg73k
+vJrlvpfliLDlrozlhajnm7jlkIznmoQgSFRNTCDovpPlh7rjgILph43ngrnlnKjkuo7vvIzkvaDl
+j6/ku6XorqkgTWFya2Rvd24g5paH5Lu255qE5YiX6KGo5pWw5a2X5ZKM6L6T5Ye655qE57uT5p6c
+55u45ZCM77yM5oiW5piv5L2g5oeS5LiA54K577yM5L2g5Y+v5Lul5a6M5YWo5LiN55So5Zyo5oSP
+5pWw5a2X55qE5q2j56Gu5oCn44CCPGJyPjxicj7lpoLmnpzkvaDkvb/nlKjmh5Lmg7DnmoTlhpnm
+s5XvvIzlu7rorq7nrKzkuIDkuKrpobnnm67mnIDlpb3ov5jmmK/ku44gMS4g5byA5aeL77yM5Zug
+5Li6IE1hcmtkb3duIOacquadpeWPr+iDveS8muaUr+aMgeacieW6j+WIl+ihqOeahCBzdGFydCDl
+sZ7mgKfjgII8YnI+PGJyPuWIl+ihqOmhueebruagh+iusOmAmuW4uOaYr+aUvuWcqOacgOW3pui+
+ue+8jOS9huaYr+WFtuWunuS5n+WPr+S7pee8qei/m++8jOacgOWkmiAzIOS4quepuuagvO+8jOmh
+ueebruagh+iusOWQjumdouWImeS4gOWumuimgeaOpeedgOiHs+WwkeS4gOS4quepuuagvOaIluWI
+tuihqOespuOAgjxicj48YnI+6KaB6K6p5YiX6KGo55yL6LW35p2l5pu05ryC5Lqu77yM5L2g5Y+v
+5Lul5oqK5YaF5a6555So5Zu65a6a55qE57yp6L+b5pW055CG5aW977yaPGJyPjxicj7CoMKgwqAg
+KsKgwqAgTG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVlciBhZGlwaXNjaW5n
+IGVsaXQuPGJyPsKgwqDCoMKgwqDCoMKgIEFsaXF1YW0gaGVuZHJlcml0IG1pIHBvc3VlcmUgbGVj
+dHVzLiBWZXN0aWJ1bHVtIGVuaW0gd2lzaSw8YnI+wqDCoMKgwqDCoMKgwqAgdml2ZXJyYSBuZWMs
+IGZyaW5naWxsYSBpbiwgbGFvcmVldCB2aXRhZSwgcmlzdXMuPGJyPsKgwqDCoCAqwqDCoCBEb25l
+YyBzaXQgYW1ldCBuaXNsLiBBbGlxdWFtIHNlbXBlciBpcHN1bSBzaXQgYW1ldCB2ZWxpdC48YnI+
+wqDCoMKgwqDCoMKgwqAgU3VzcGVuZGlzc2UgaWQgc2VtIGNvbnNlY3RldHVlciBsaWJlcm8gbHVj
+dHVzIGFkaXBpc2NpbmcuPGJyPjxicj7kvYbmmK/lpoLmnpzkvaDmh5LvvIzpgqPkuZ/ooYzvvJo8
+YnI+PGJyPsKgwqDCoCAqwqDCoCBMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCwgY29uc2VjdGV0
+dWVyIGFkaXBpc2NpbmcgZWxpdC48YnI+wqDCoMKgIEFsaXF1YW0gaGVuZHJlcml0IG1pIHBvc3Vl
+cmUgbGVjdHVzLiBWZXN0aWJ1bHVtIGVuaW0gd2lzaSw8YnI+wqDCoMKgIHZpdmVycmEgbmVjLCBm
+cmluZ2lsbGEgaW4sIGxhb3JlZXQgdml0YWUsIHJpc3VzLjxicj7CoMKgwqAgKsKgwqAgRG9uZWMg
+c2l0IGFtZXQgbmlzbC4gQWxpcXVhbSBzZW1wZXIgaXBzdW0gc2l0IGFtZXQgdmVsaXQuPGJyPsKg
+wqDCoCBTdXNwZW5kaXNzZSBpZCBzZW0gY29uc2VjdGV0dWVyIGxpYmVybyBsdWN0dXMgYWRpcGlz
+Y2luZy48YnI+PGJyPuWmguaenOWIl+ihqOmhueebrumXtOeUqOepuuihjOWIhuW8gO+8jOWcqOi+
+k+WHuiBIVE1MIOaXtiBNYXJrZG93biDlsLHkvJrlsIbpobnnm67lhoXlrrnnlKggYCZsdDtwJmd0
+O2AgPGJyPuagh+etvuWMhei1t+adpe+8jOS4vuS+i+adpeivtO+8mjxicj48YnI+wqDCoMKgICrC
+oMKgIEJpcmQ8YnI+wqDCoMKgICrCoMKgIE1hZ2ljPGJyPjxicj7kvJrooqvovazmjaLkuLrvvJo8
+YnI+PGJyPsKgwqDCoCAmbHQ7dWwmZ3Q7PGJyPsKgwqDCoCAmbHQ7bGkmZ3Q7QmlyZCZsdDsvbGkm
+Z3Q7PGJyPsKgwqDCoCAmbHQ7bGkmZ3Q7TWFnaWMmbHQ7L2xpJmd0Ozxicj7CoMKgwqAgJmx0Oy91
+bCZndDs8YnI+PGJyPuS9huaYr+i/meS4qu+8mjxicj48YnI+wqDCoMKgICrCoMKgIEJpcmQ8YnI+
+PGJyPsKgwqDCoCAqwqDCoCBNYWdpYzxicj48YnI+5Lya6KKr6L2s5o2i5Li677yaPGJyPjxicj7C
+oMKgwqAgJmx0O3VsJmd0Ozxicj7CoMKgwqAgJmx0O2xpJmd0OyZsdDtwJmd0O0JpcmQmbHQ7L3Am
+Z3Q7Jmx0Oy9saSZndDs8YnI+wqDCoMKgICZsdDtsaSZndDsmbHQ7cCZndDtNYWdpYyZsdDsvcCZn
+dDsmbHQ7L2xpJmd0Ozxicj7CoMKgwqAgJmx0Oy91bCZndDs8YnI+PGJyPuWIl+ihqOmhueebruWP
+r+S7peWMheWQq+WkmuS4quauteiQve+8jOavj+S4qumhueebruS4i+eahOauteiQvemDveW/hemh
+u+e8qei/myA0IOS4quepuuagvOaIluaYryAxIOS4quWItuihqOespu+8mjxicj48YnI+wqDCoMKg
+IDEuwqAgVGhpcyBpcyBhIGxpc3QgaXRlbSB3aXRoIHR3byBwYXJhZ3JhcGhzLiBMb3JlbSBpcHN1
+bSBkb2xvcjxicj7CoMKgwqDCoMKgwqDCoCBzaXQgYW1ldCwgY29uc2VjdGV0dWVyIGFkaXBpc2Np
+bmcgZWxpdC4gQWxpcXVhbSBoZW5kcmVyaXQ8YnI+wqDCoMKgwqDCoMKgwqAgbWkgcG9zdWVyZSBs
+ZWN0dXMuPGJyPjxicj7CoMKgwqDCoMKgwqDCoCBWZXN0aWJ1bHVtIGVuaW0gd2lzaSwgdml2ZXJy
+YSBuZWMsIGZyaW5naWxsYSBpbiwgbGFvcmVldDxicj7CoMKgwqDCoMKgwqDCoCB2aXRhZSwgcmlz
+dXMuIERvbmVjIHNpdCBhbWV0IG5pc2wuIEFsaXF1YW0gc2VtcGVyIGlwc3VtPGJyPsKgwqDCoMKg
+wqDCoMKgIHNpdCBhbWV0IHZlbGl0Ljxicj48YnI+wqDCoMKgIDIuwqAgU3VzcGVuZGlzc2UgaWQg
+c2VtIGNvbnNlY3RldHVlciBsaWJlcm8gbHVjdHVzIGFkaXBpc2NpbmcuPGJyPjxicj7lpoLmnpzk
+vaDmr4/ooYzpg73mnInnvKnov5vvvIznnIvotbfmnaXkvJrnnIvlpb3lvojlpJrvvIzlvZPnhLbv
+vIzlho3mrKHlnLDvvIzlpoLmnpzkvaDlvojmh5Lmg7DvvIxNYXJrZG93biDkuZ/lhYHorrjvvJo8
+YnI+PGJyPsKgwqDCoCAqwqDCoCBUaGlzIGlzIGEgbGlzdCBpdGVtIHdpdGggdHdvIHBhcmFncmFw
+aHMuPGJyPjxicj7CoMKgwqDCoMKgwqDCoCBUaGlzIGlzIHRoZSBzZWNvbmQgcGFyYWdyYXBoIGlu
+IHRoZSBsaXN0IGl0ZW0uIFlvdSdyZTxicj7CoMKgwqAgb25seSByZXF1aXJlZCB0byBpbmRlbnQg
+dGhlIGZpcnN0IGxpbmUuIExvcmVtIGlwc3VtIGRvbG9yPGJyPsKgwqDCoCBzaXQgYW1ldCwgY29u
+c2VjdGV0dWVyIGFkaXBpc2NpbmcgZWxpdC48YnI+PGJyPsKgwqDCoCAqwqDCoCBBbm90aGVyIGl0
+ZW0gaW4gdGhlIHNhbWUgbGlzdC48YnI+PGJyPuWmguaenOimgeWcqOWIl+ihqOmhueebruWGheaU
+vui/m+W8leeUqO+8jOmCoyBgJmd0O2Ag5bCx6ZyA6KaB57yp6L+b77yaPGJyPjxicj7CoMKgwqAg
+KsKgwqAgQSBsaXN0IGl0ZW0gd2l0aCBhIGJsb2NrcXVvdGU6PGJyPjxicj7CoMKgwqDCoMKgwqDC
+oCAmZ3Q7IFRoaXMgaXMgYSBibG9ja3F1b3RlPGJyPsKgwqDCoMKgwqDCoMKgICZndDsgaW5zaWRl
+IGEgbGlzdCBpdGVtLjxicj48YnI+5aaC5p6c6KaB5pS+5Luj56CB5Yy65Z2X55qE6K+d77yM6K+l
+5Yy65Z2X5bCx6ZyA6KaB57yp6L+bKuS4pOasoSrvvIzkuZ/lsLHmmK8gOCDkuKrnqbrmoLzmiJbm
+mK8gMiDkuKrliLbooajnrKbvvJo8YnI+PGJyPsKgwqDCoCAqwqDCoCDkuIDliJfooajpobnljIXl
+kKvkuIDkuKrliJfooajljLrlnZfvvJo8YnI+PGJyPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgJmx0
+O+S7o+eggeWGmeWcqOi/mSZndDs8YnI+PGJyPjxicj7lvZPnhLbvvIzpobnnm67liJfooajlvojl
+j6/og73kvJrkuI3lsI/lv4PkuqfnlJ/vvIzlg4/mmK/kuIvpnaLov5nmoLfnmoTlhpnms5XvvJo8
+YnI+PGJyPsKgwqDCoCAxOTg2LiBXaGF0IGEgZ3JlYXQgc2Vhc29uLjxicj48YnI+5o2i5Y+l6K+d
+6K+077yM5Lmf5bCx5piv5Zyo6KGM6aaW5Ye6546wKuaVsOWtly3lj6Xngrkt56m655m9Ku+8jOim
+gemBv+WFjei/meagt+eahOeKtuWGte+8jOS9oOWPr+S7peWcqOWPpeeCueWJjemdouWKoOS4iuWP
+jeaWnOadoOOAgjxicj48YnI+wqDCoMKgIDE5ODZcLiBXaGF0IGEgZ3JlYXQgc2Vhc29uLjxicj48
+YnI+Jmx0O2gzIGlkPSJwcmVjb2RlIiZndDvku6PnoIHljLrlnZcmbHQ7L2gzJmd0Ozxicj48YnI+
+5ZKM56iL5bqP55u45YWz55qE5YaZ5L2c5oiW5piv5qCH562+6K+t6KiA5Y6f5aeL56CB6YCa5bi4
+5Lya5pyJ5bey57uP5o6S54mI5aW955qE5Luj56CB5Yy65Z2X77yM6YCa5bi46L+Z5Lqb5Yy65Z2X
+5oiR5Lus5bm25LiN5biM5pyb5a6D5Lul5LiA6Iis5q616JC95paH5Lu255qE5pa55byP5Y675o6S
+54mI77yM6ICM5piv54Wn5Y6f5p2l55qE5qC35a2Q5pi+56S677yMTWFya2Rvd24g5Lya55SoIGAm
+bHQ7cHJlJmd0O2Ag5ZKMIGAmbHQ7Y29kZSZndDtgIOagh+etvuadpeaKiuS7o+eggeWMuuWdl+WM
+hei1t+adpeOAgjxicj48YnI+6KaB5ZyoIE1hcmtkb3duIOS4reW7uueri+S7o+eggeWMuuWdl+W+
+iOeugOWNle+8jOWPquimgeeugOWNleWcsOe8qei/myA0IOS4quepuuagvOaIluaYryAxIOS4quWI
+tuihqOespuWwseWPr+S7pe+8jOS+i+Wmgu+8jOS4i+mdoueahOi+k+WFpe+8mjxicj48YnI+wqDC
+oMKgIOi/meaYr+S4gOS4quaZrumAmuauteiQve+8mjxicj48YnI+wqDCoMKgwqDCoMKgwqAg6L+Z
+5piv5LiA5Liq5Luj56CB5Yy65Z2X44CCPGJyPjxicj5NYXJrZG93biDkvJrovazmjaLmiJDvvJo8
+YnI+PGJyPsKgwqDCoCAmbHQ7cCZndDvov5nmmK/kuIDkuKrmma7pgJrmrrXokL3vvJombHQ7L3Am
+Z3Q7PGJyPjxicj7CoMKgwqAgJmx0O3ByZSZndDsmbHQ7Y29kZSZndDvov5nmmK/kuIDkuKrku6Pn
+oIHljLrlnZfjgII8YnI+wqDCoMKgICZsdDsvY29kZSZndDsmbHQ7L3ByZSZndDs8YnI+PGJyPui/
+meS4quavj+ihjOS4gOmYtueahOe8qei/m++8iDQg5Liq56m65qC85oiW5pivIDEg5Liq5Yi26KGo
+56ym77yJ77yM6YO95Lya6KKr56e76Zmk77yM5L6L5aaC77yaPGJyPjxicj7CoMKgwqAgSGVyZSBp
+cyBhbiBleGFtcGxlIG9mIEFwcGxlU2NyaXB0Ojxicj48YnI+wqDCoMKgwqDCoMKgwqAgdGVsbCBh
+cHBsaWNhdGlvbiAiRm9vIjxicj7CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJlZXA8YnI+wqDCoMKg
+wqDCoMKgwqAgZW5kIHRlbGw8YnI+PGJyPuS8muiiq+i9rOaNouS4uu+8mjxicj48YnI+wqDCoMKg
+ICZsdDtwJmd0O0hlcmUgaXMgYW4gZXhhbXBsZSBvZiBBcHBsZVNjcmlwdDombHQ7L3AmZ3Q7PGJy
+Pjxicj7CoMKgwqAgJmx0O3ByZSZndDsmbHQ7Y29kZSZndDt0ZWxsIGFwcGxpY2F0aW9uICJGb28i
+PGJyPsKgwqDCoMKgwqDCoMKgIGJlZXA8YnI+wqDCoMKgIGVuZCB0ZWxsPGJyPsKgwqDCoCAmbHQ7
+L2NvZGUmZ3Q7Jmx0Oy9wcmUmZ3Q7PGJyPjxicj7kuIDkuKrku6PnoIHljLrlnZfkvJrkuIDnm7Tm
+jIHnu63liLDmsqHmnInnvKnov5vnmoTpgqPkuIDooYzvvIjmiJbmmK/mlofku7bnu5PlsL7vvInj
+gII8YnI+PGJyPuWcqOS7o+eggeWMuuWdl+mHjOmdou+8jCBgJmFtcDtgIOOAgSBgJmx0O2Ag5ZKM
+IGAmZ3Q7YCDkvJroh6rliqjovazmiJAgSFRNTCDlrp7kvZPvvIzov5nmoLfnmoTmlrnlvI/orqnk
+vaDpnZ7luLjlrrnmmJPkvb/nlKggTWFya2Rvd24g5o+S5YWl6IyD5L6L55So55qEIEhUTUwg5Y6f
+5aeL56CB77yM5Y+q6ZyA6KaB5aSN5Yi26LS05LiK77yM5YaN5Yqg5LiK57yp6L+b5bCx5Y+v5Lul
+5LqG77yM5Ymp5LiL55qEIE1hcmtkb3duIOmDveS8muW4ruS9oOWkhOeQhu+8jOS+i+Wmgu+8mjxi
+cj48YnI+wqDCoMKgwqDCoMKgwqAgJmx0O2RpdiBjbGFzcz0iZm9vdGVyIiZndDs8YnI+wqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCAmYW1wO2NvcHk7IDIwMDQgRm9vIENvcnBvcmF0aW9uPGJyPsKgwqDC
+oMKgwqDCoMKgICZsdDsvZGl2Jmd0Ozxicj48YnI+5Lya6KKr6L2s5o2i5Li677yaPGJyPjxicj7C
+oMKgwqAgJmx0O3ByZSZndDsmbHQ7Y29kZSZndDsmYW1wO2x0O2RpdiBjbGFzcz0iZm9vdGVyIiZh
+bXA7Z3Q7PGJyPsKgwqDCoMKgwqDCoMKgICZhbXA7YW1wO2NvcHk7IDIwMDQgRm9vIENvcnBvcmF0
+aW9uPGJyPsKgwqDCoCAmYW1wO2x0Oy9kaXYmYW1wO2d0Ozxicj7CoMKgwqAgJmx0Oy9jb2RlJmd0
+OyZsdDsvcHJlJmd0Ozxicj48YnI+5Luj56CB5Yy65Z2X5Lit77yM5LiA6Iis55qEIE1hcmtkb3du
+IOivreazleS4jeS8muiiq+i9rOaNou+8jOWDj+aYr+aYn+WPt+S+v+WPquaYr+aYn+WPt++8jOi/
+meihqOekuuS9oOWPr+S7peW+iOWuueaYk+WcsOS7pSBNYXJrZG93biDor63ms5XmkrDlhpkgTWFy
+a2Rvd24g6K+t5rOV55u45YWz55qE5paH5Lu244CCPGJyPjxicj4mbHQ7aDMgaWQ9ImhyIiZndDvl
+iIbpmpTnur8mbHQ7L2gzJmd0Ozxicj48YnI+5L2g5Y+v5Lul5Zyo5LiA6KGM5Lit55So5LiJ5Liq
+5Lul5LiK55qE5pif5Y+344CB5YeP5Y+344CB5bqV57q/5p2l5bu656uL5LiA5Liq5YiG6ZqU57q/
+77yM6KGM5YaF5LiN6IO95pyJ5YW25LuW5Lic6KW/44CC5L2g5Lmf5Y+v5Lul5Zyo5pif5Y+35oiW
+5piv5YeP5Y+35Lit6Ze05o+S5YWl56m65qC844CC5LiL6Z2i5q+P56eN5YaZ5rOV6YO95Y+v5Lul
+5bu656uL5YiG6ZqU57q/77yaPGJyPjxicj7CoMKgwqAgKiAqICo8YnI+PGJyPsKgwqDCoCAqKio8
+YnI+PGJyPsKgwqDCoCAqKioqKjxicj48YnI+wqDCoMKgIC0gLSAtPGJyPjxicj7CoMKgwqAgLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tPGJyPjxicj48YnI+KiAqICo8YnI+
+PGJyPiZsdDtoMiBpZD0ic3BhbiImZ3Q75Yy65q615YWD57SgJmx0Oy9oMiZndDs8YnI+PGJyPiZs
+dDtoMyBpZD0ibGluayImZ3Q76ZO+5o6lJmx0Oy9oMyZndDs8YnI+PGJyPk1hcmtkb3duIOaUr+aM
+geS4pOenjeW9ouW8j+eahOmTvuaOpeivreazle+8miAq6KGM5YaF5byPKuWSjCrlj4LogIPlvI8q
+5Lik56eN5b2i5byP44CCPGJyPjxicj7kuI3nrqHmmK/lk6rkuIDnp43vvIzpk77mjqXmloflrZfp
+g73mmK/nlKggW+aWueaLrOWPt10g5p2l5qCH6K6w44CCPGJyPjxicj7opoHlu7rnq4vkuIDkuKoq
+6KGM5YaF5byPKueahOmTvuaOpe+8jOWPquimgeWcqOaWueWdl+aLrOWPt+WQjumdoue0p+aOpeed
+gOWchuaLrOWPt+W5tuaPkuWFpee9keWdgOmTvuaOpeWNs+WPr++8jOWmguaenOS9oOi/mOaDs+im
+geWKoOS4iumTvuaOpeeahCB0aXRsZSDmloflrZfvvIzlj6ropoHlnKjnvZHlnYDlkI7pnaLvvIzn
+lKjlj4zlvJXlj7fmioogdGl0bGUg5paH5a2X5YyF6LW35p2l5Y2z5Y+v77yM5L6L5aaC77yaPGJy
+Pjxicj7CoMKgwqAgVGhpcyBpcyBbYW4gZXhhbXBsZV0oaHR0cDovL2V4YW1wbGUuY29tLyAiVGl0
+bGUiKSBpbmxpbmUgbGluay48YnI+PGJyPsKgwqDCoCBbVGhpcyBsaW5rXShodHRwOi8vZXhhbXBs
+ZS5uZXQvKSBoYXMgbm8gdGl0bGUgYXR0cmlidXRlLjxicj48YnI+5Lya5Lqn55Sf77yaPGJyPjxi
+cj7CoMKgwqAgJmx0O3AmZ3Q7VGhpcyBpcyAmbHQ7YSBocmVmPSJodHRwOi8vZXhhbXBsZS5jb20v
+IiB0aXRsZT0iVGl0bGUiJmd0Ozxicj7CoMKgwqAgYW4gZXhhbXBsZSZsdDsvYSZndDsgaW5saW5l
+IGxpbmsuJmx0Oy9wJmd0Ozxicj48YnI+wqDCoMKgICZsdDtwJmd0OyZsdDthIGhyZWY9Imh0dHA6
+Ly9leGFtcGxlLm5ldC8iJmd0O1RoaXMgbGluayZsdDsvYSZndDsgaGFzIG5vPGJyPsKgwqDCoCB0
+aXRsZSBhdHRyaWJ1dGUuJmx0Oy9wJmd0Ozxicj48YnI+5aaC5p6c5L2g5piv6KaB6ZO+5o6l5Yiw
+5ZCM5qC35Li75py655qE6LWE5rqQ77yM5L2g5Y+v5Lul5L2/55So55u45a+56Lev5b6E77yaPGJy
+Pjxicj7CoMKgwqAgU2VlIG15IFtBYm91dF0oL2Fib3V0LykgcGFnZSBmb3IgZGV0YWlscy7CoCDC
+oDxicj48YnI+KuWPguiAg+W8jyrnmoTpk77mjqXmmK/lnKjpk77mjqXmloflrZfnmoTmi6zlj7fl
+kI7pnaLlho3mjqXkuIrlj6bkuIDkuKrmlrnmi6zlj7fvvIzogIzlnKjnrKzkuozkuKrmlrnmi6zl
+j7fph4zpnaLopoHloavlhaXnlKjku6Xovqjor4bpk77mjqXnmoTmoIforrDvvJo8YnI+PGJyPsKg
+wqDCoCBUaGlzIGlzIFthbiBleGFtcGxlXVtpZF0gcmVmZXJlbmNlLXN0eWxlIGxpbmsuPGJyPjxi
+cj7kvaDkuZ/lj6/ku6XpgInmi6nmgKflnLDlnKjkuKTkuKrmlrnmi6zlj7fkuK3pl7TliqDkuIrk
+uIDkuKrnqbrmoLzvvJo8YnI+PGJyPsKgwqDCoCBUaGlzIGlzIFthbiBleGFtcGxlXSBbaWRdIHJl
+ZmVyZW5jZS1zdHlsZSBsaW5rLjxicj48YnI+5o6l552A77yM5Zyo5paH5Lu255qE5Lu75oSP5aSE
+77yM5L2g5Y+v5Lul5oqK6L+Z5Liq5qCH6K6w55qE6ZO+5o6l5YaF5a655a6a5LmJ5Ye65p2l77ya
+PGJyPjxicj7CoMKgwqAgW2lkXTogaHR0cDovL2V4YW1wbGUuY29tL8KgICJPcHRpb25hbCBUaXRs
+ZSBIZXJlIjxicj48YnI+6ZO+5o6l5YaF5a655a6a5LmJ55qE5b2i5byP5Li677yaPGJyPjxicj4q
+wqDCoCDmlrnmi6zlj7fvvIjliY3pnaLlj6/ku6XpgInmi6nmgKflnLDliqDkuIroh7PlpJrkuInk
+uKrnqbrmoLzmnaXnvKnov5vvvInvvIzph4zpnaLovpPlhaXpk77mjqXmloflrZc8YnI+KsKgwqAg
+5o6l552A5LiA5Liq5YaS5Y+3PGJyPirCoMKgIOaOpeedgOS4gOS4quS7peS4iueahOepuuagvOaI
+luWItuihqOespjxicj4qwqDCoCDmjqXnnYDpk77mjqXnmoTnvZHlnYA8YnI+KsKgwqAg6YCJ5oup
+5oCn5Zyw5o6l552AIHRpdGxlIOWGheWuue+8jOWPr+S7peeUqOWNleW8leWPt+OAgeWPjOW8leWP
+t+aIluaYr+aLrOW8p+WMheedgDxicj48YnI+5LiL6Z2i6L+Z5LiJ56eN6ZO+5o6l55qE5a6a5LmJ
+6YO95piv55u45ZCM77yaPGJyPjxicj7CoMKgIMKgW2Zvb106IGh0dHA6Ly9leGFtcGxlLmNvbS/C
+oCAiT3B0aW9uYWwgVGl0bGUgSGVyZSI8YnI+wqDCoCDCoFtmb29dOiBodHRwOi8vZXhhbXBsZS5j
+b20vwqAgJ09wdGlvbmFsIFRpdGxlIEhlcmUnPGJyPsKgwqAgwqBbZm9vXTogaHR0cDovL2V4YW1w
+bGUuY29tL8KgIChPcHRpb25hbCBUaXRsZSBIZXJlKTxicj48YnI+Kiror7fms6jmhI/vvJoqKuac
+ieS4gOS4quW3suefpeeahOmXrumimOaYryBNYXJrZG93bi5wbCAxLjAuMSDkvJrlv73nlaXljZXl
+vJXlj7fljIXotbfmnaXnmoTpk77mjqUgdGl0bGXjgII8YnI+PGJyPumTvuaOpee9keWdgOS5n+WP
+r+S7peeUqOWwluaLrOWPt+WMhei1t+adpe+8mjxicj48YnI+wqDCoMKgIFtpZF06ICZsdDtodHRw
+Oi8vZXhhbXBsZS5jb20vJmd0O8KgICJPcHRpb25hbCBUaXRsZSBIZXJlIjxicj48YnI+5L2g5Lmf
+5Y+v5Lul5oqKIHRpdGxlIOWxnuaAp+aUvuWIsOS4i+S4gOihjO+8jOS5n+WPr+S7peWKoOS4gOS6
+m+e8qei/m++8jOiLpee9keWdgOWkqumVv+eahOivne+8jOi/meagt+S8muavlOi+g+Wlveeci++8
+mjxicj48YnI+wqDCoMKgIFtpZF06IGh0dHA6Ly9leGFtcGxlLmNvbS9sb25naXNoL3BhdGgvdG8v
+cmVzb3VyY2UvaGVyZTxicj7CoMKgwqDCoMKgwqDCoCAiT3B0aW9uYWwgVGl0bGUgSGVyZSI8YnI+
+PGJyPue9keWdgOWumuS5ieWPquacieWcqOS6p+eUn+mTvuaOpeeahOaXtuWAmeeUqOWIsO+8jOW5
+tuS4jeS8muebtOaOpeWHuueOsOWcqOaWh+S7tuS5i+S4reOAgjxicj48YnI+6ZO+5o6l6L6o5Yir
+5qCH562+5Y+v5Lul5pyJ5a2X5q+N44CB5pWw5a2X44CB56m655m95ZKM5qCH54K556ym5Y+377yM
+5L2G5piv5bm2KuS4jSrljLrliIblpKflsI/lhpnvvIzlm6DmraTkuIvpnaLkuKTkuKrpk77mjqXm
+mK/kuIDmoLfnmoTvvJo8YnI+PGJyPsKgwqAgwqBbbGluayB0ZXh0XVthXTxicj7CoMKgIMKgW2xp
+bmsgdGV4dF1bQV08YnI+PGJyPirpmpDlvI/pk77mjqXmoIforrAq5Yqf6IO96K6p5L2g5Y+v5Lul
+55yB55Wl5oyH5a6a6ZO+5o6l5qCH6K6w77yM6L+Z56eN5oOF5b2i5LiL77yM6ZO+5o6l5qCH6K6w
+5Lya6KeG5Li6562J5ZCM5LqO6ZO+5o6l5paH5a2X77yM6KaB55So6ZqQ5byP6ZO+5o6l5qCH6K6w
+5Y+q6KaB5Zyo6ZO+5o6l5paH5a2X5ZCO6Z2i5Yqg5LiK5LiA5Liq56m655qE5pa55ous5Y+377yM
+5aaC5p6c5L2g6KaB6K6pICJHb29nbGUiIOmTvuaOpeWIsCBnb29nbGUuY29t77yM5L2g5Y+v5Lul
+566A5YyW5oiQ77yaPGJyPjxicj7CoMKgIMKgW0dvb2dsZV1bXTxicj48YnI+54S25ZCO5a6a5LmJ
+6ZO+5o6l5YaF5a6577yaPGJyPjxicj7CoMKgIMKgW0dvb2dsZV06IGh0dHA6Ly9nb29nbGUuY29t
+Lzxicj48YnI+55Sx5LqO6ZO+5o6l5paH5a2X5Y+v6IO95YyF5ZCr56m655m977yM5omA5Lul6L+Z
+56eN566A5YyW5Z6L55qE5qCH6K6w5YaF5Lmf6K645YyF5ZCr5aSa5Liq5Y2V6K+N77yaPGJyPjxi
+cj7CoMKgIMKgVmlzaXQgW0RhcmluZyBGaXJlYmFsbF1bXSBmb3IgbW9yZSBpbmZvcm1hdGlvbi48
+YnI+PGJyPueEtuWQjuaOpeedgOWumuS5iemTvuaOpe+8mjxicj48YnI+wqDCoCDCoFtEYXJpbmcg
+RmlyZWJhbGxdOiBodHRwOi8vZGFyaW5nZmlyZWJhbGwubmV0Lzxicj48YnI+6ZO+5o6l55qE5a6a
+5LmJ5Y+v5Lul5pS+5Zyo5paH5Lu25Lit55qE5Lu75L2V5LiA5Liq5Zyw5pa577yM5oiR5q+U6L6D
+5YGP5aW955u05o6l5pS+5Zyo6ZO+5o6l5Ye6546w5q616JC955qE5ZCO6Z2i77yM5L2g5Lmf5Y+v
+5Lul5oqK5a6D5pS+5Zyo5paH5Lu25pyA5ZCO6Z2i77yM5bCx5YOP5piv5rOo6Kej5LiA5qC344CC
+PGJyPjxicj7kuIvpnaLmmK/kuIDkuKrlj4LogIPlvI/pk77mjqXnmoTojIPkvovvvJo8YnI+PGJy
+PsKgwqDCoCBJIGdldCAxMCB0aW1lcyBtb3JlIHRyYWZmaWMgZnJvbSBbR29vZ2xlXSBbMV0gdGhh
+biBmcm9tPGJyPsKgwqDCoCBbWWFob29dIFsyXSBvciBbTVNOXSBbM10uPGJyPjxicj7CoMKgwqDC
+oMKgIFsxXTogaHR0cDovL2dvb2dsZS5jb20vwqDCoMKgwqDCoMKgwqAgIkdvb2dsZSI8YnI+wqDC
+oMKgwqDCoCBbMl06IGh0dHA6Ly9zZWFyY2gueWFob28uY29tL8KgICJZYWhvbyBTZWFyY2giPGJy
+PsKgwqDCoMKgwqAgWzNdOiBodHRwOi8vc2VhcmNoLm1zbi5jb20vwqDCoMKgICJNU04gU2VhcmNo
+Ijxicj48YnI+5aaC5p6c5pS55oiQ55So6ZO+5o6l5ZCN56ew55qE5pa55byP5YaZ77yaPGJyPjxi
+cj7CoMKgwqAgSSBnZXQgMTAgdGltZXMgbW9yZSB0cmFmZmljIGZyb20gW0dvb2dsZV1bXSB0aGFu
+IGZyb208YnI+wqDCoMKgIFtZYWhvb11bXSBvciBbTVNOXVtdLjxicj48YnI+wqDCoMKgwqDCoCBb
+Z29vZ2xlXTogaHR0cDovL2dvb2dsZS5jb20vwqDCoMKgwqDCoMKgwqAgIkdvb2dsZSI8YnI+wqDC
+oMKgwqDCoCBbeWFob29dOsKgIGh0dHA6Ly9zZWFyY2gueWFob28uY29tL8KgICJZYWhvbyBTZWFy
+Y2giPGJyPsKgwqDCoMKgwqAgW21zbl06wqDCoMKgIGh0dHA6Ly9zZWFyY2gubXNuLmNvbS/CoMKg
+wqAgIk1TTiBTZWFyY2giPGJyPjxicj7kuIrpnaLkuKTnp43lhpnms5Xpg73kvJrkuqfnlJ/kuIvp
+naLnmoQgSFRNTOOAgjxicj48YnI+wqDCoMKgICZsdDtwJmd0O0kgZ2V0IDEwIHRpbWVzIG1vcmUg
+dHJhZmZpYyBmcm9tICZsdDthIGhyZWY9Imh0dHA6Ly9nb29nbGUuY29tLyI8YnI+wqDCoMKgIHRp
+dGxlPSJHb29nbGUiJmd0O0dvb2dsZSZsdDsvYSZndDsgdGhhbiBmcm9tPGJyPsKgwqDCoCAmbHQ7
+YSBocmVmPSJodHRwOi8vc2VhcmNoLnlhaG9vLmNvbS8iIHRpdGxlPSJZYWhvbyBTZWFyY2giJmd0
+O1lhaG9vJmx0Oy9hJmd0Ozxicj7CoMKgwqAgb3IgJmx0O2EgaHJlZj0iaHR0cDovL3NlYXJjaC5t
+c24uY29tLyIgdGl0bGU9Ik1TTiBTZWFyY2giJmd0O01TTiZsdDsvYSZndDsuJmx0Oy9wJmd0Ozxi
+cj48YnI+5LiL6Z2i5piv55So6KGM5YaF5byP5YaZ55qE5ZCM5qC35LiA5q615YaF5a6555qEIE1h
+cmtkb3duIOaWh+S7tu+8jOaPkOS+m+S9nOS4uuavlOi+g+S5i+eUqO+8mjxicj48YnI+wqDCoMKg
+IEkgZ2V0IDEwIHRpbWVzIG1vcmUgdHJhZmZpYyBmcm9tIFtHb29nbGVdKGh0dHA6Ly9nb29nbGUu
+Y29tLyAiR29vZ2xlIik8YnI+wqDCoMKgIHRoYW4gZnJvbSBbWWFob29dKGh0dHA6Ly9zZWFyY2gu
+eWFob28uY29tLyAiWWFob28gU2VhcmNoIikgb3I8YnI+wqDCoMKgIFtNU05dKGh0dHA6Ly9zZWFy
+Y2gubXNuLmNvbS8gIk1TTiBTZWFyY2giKS48YnI+PGJyPuWPguiAg+W8j+eahOmTvuaOpeWFtuWu
+numHjeeCueS4jeWcqOS6juWug+avlOi+g+WlveWGme+8jOiAjOaYr+Wug+avlOi+g+Wlveivu++8
+jOavlOi+g+S4gOS4i+S4iumdoueahOiMg+S+i++8jOS9v+eUqOWPguiAg+W8j+eahOaWh+eroOac
+rOi6q+WPquaciSA4MSDkuKrlrZfnrKbvvIzkvYbmmK/nlKjooYzlhoXlvaLlvI/nmoTljbTkvJrl
+op7liqDliLAgMTc2IOS4quWtl+WFg++8jOWmguaenOaYr+eUqOe6ryBIVE1MIOagvOW8j+adpeWG
+me+8jOS8muaciSAyMzQg5Liq5a2X5YWD77yM5ZyoIEhUTUwg5qC85byP5Lit77yM5qCH562+5q+U
+5paH5pys6L+Y6KaB5aSa44CCPGJyPjxicj7kvb/nlKggTWFya2Rvd24g55qE5Y+C6ICD5byP6ZO+
+5o6l77yM5Y+v5Lul6K6p5paH5Lu25pu05YOP5piv5rWP6KeI5Zmo5pyA5ZCO5Lqn55Sf55qE57uT
+5p6c77yM6K6p5L2g5Y+v5Lul5oqK5LiA5Lqb5qCH6K6w55u45YWz55qE5YWD5pWw5o2u56e75Yiw
+5q616JC95paH5a2X5LmL5aSW77yM5L2g5bCx5Y+v5Lul5aKe5Yqg6ZO+5o6l6ICM5LiN6K6p5paH
+56ug55qE6ZiF6K+75oSf6KeJ6KKr5omT5pat44CCPGJyPjxicj4mbHQ7aDMgaWQ9ImVtIiZndDvl
+vLrosIMmbHQ7L2gzJmd0Ozxicj48YnI+TWFya2Rvd24g5L2/55So5pif5Y+377yIYCpg77yJ5ZKM
+5bqV57q/77yIYF9g77yJ5L2c5Li65qCH6K6w5by66LCD5a2X6K+N55qE56ym5Y+377yM6KKrIGAq
+YCDmiJYgYF9gIOWMheWbtOeahOWtl+ivjeS8muiiq+i9rOaIkOeUqCBgJmx0O2VtJmd0O2Ag5qCH
+562+5YyF5Zu077yM55So5Lik5LiqIGAqYCDmiJYgYF9gIOWMhei1t+adpeeahOivne+8jOWImeS8
+muiiq+i9rOaIkCBgJmx0O3N0cm9uZyZndDtg77yM5L6L5aaC77yaPGJyPjxicj7CoMKgwqAgKnNp
+bmdsZSBhc3Rlcmlza3MqPGJyPjxicj7CoMKgwqAgX3NpbmdsZSB1bmRlcnNjb3Jlc188YnI+PGJy
+PsKgwqDCoCAqKmRvdWJsZSBhc3Rlcmlza3MqKjxicj48YnI+wqDCoMKgIF9fZG91YmxlIHVuZGVy
+c2NvcmVzX188YnI+PGJyPuS8mui9rOaIkO+8mjxicj48YnI+wqDCoMKgICZsdDtlbSZndDtzaW5n
+bGUgYXN0ZXJpc2tzJmx0Oy9lbSZndDs8YnI+PGJyPsKgwqDCoCAmbHQ7ZW0mZ3Q7c2luZ2xlIHVu
+ZGVyc2NvcmVzJmx0Oy9lbSZndDs8YnI+PGJyPsKgwqDCoCAmbHQ7c3Ryb25nJmd0O2RvdWJsZSBh
+c3Rlcmlza3MmbHQ7L3N0cm9uZyZndDs8YnI+PGJyPsKgwqDCoCAmbHQ7c3Ryb25nJmd0O2RvdWJs
+ZSB1bmRlcnNjb3JlcyZsdDsvc3Ryb25nJmd0Ozxicj48YnI+5L2g5Y+v5Lul6ZqP5L6/55So5L2g
+5Zac5qyi55qE5qC35byP77yM5ZSv5LiA55qE6ZmQ5Yi25piv77yM5L2g55So5LuA5LmI56ym5Y+3
+5byA5ZCv5qCH562+77yM5bCx6KaB55So5LuA5LmI56ym5Y+357uT5p2f44CCPGJyPjxicj7lvLro
+sIPkuZ/lj6/ku6Xnm7TmjqXmj5LlnKjmloflrZfkuK3pl7TvvJo8YnI+PGJyPsKgwqDCoCB1bipm
+cmlnZ2luZypiZWxpZXZhYmxlPGJyPjxicj7kvYbmmK8qKuWmguaenOS9oOeahCBgKmAg5ZKMIGBf
+YCDkuKTovrnpg73mnInnqbrnmb3nmoTor53vvIzlroPku6zlsLHlj6rkvJrooqvlvZPmiJDmma7p
+gJrnmoTnrKblj7cqKuOAgjxicj48YnI+5aaC5p6c6KaB5Zyo5paH5a2X5YmN5ZCO55u05o6l5o+S
+5YWl5pmu6YCa55qE5pif5Y+35oiW5bqV57q/77yM5L2g5Y+v5Lul55So5Y+N5pac57q/77yaPGJy
+Pjxicj7CoMKgwqAgXCp0aGlzIHRleHQgaXMgc3Vycm91bmRlZCBieSBsaXRlcmFsIGFzdGVyaXNr
+c1wqPGJyPjxicj4mbHQ7aDMgaWQ9ImNvZGUiJmd0O+S7o+eggSZsdDsvaDMmZ3Q7PGJyPjxicj7l
+poLmnpzopoHmoIforrDkuIDlsI/mrrXooYzlhoXku6PnoIHvvIzkvaDlj6/ku6XnlKjlj43lvJXl
+j7fmiorlroPljIXotbfmnaXvvIhgYCBgIGBg77yJ77yM5L6L5aaC77yaPGJyPjxicj7CoMKgwqAg
+VXNlIHRoZSBgcHJpbnRmKClgIGZ1bmN0aW9uLjxicj48YnI+5Lya5Lqn55Sf77yaPGJyPjxicj7C
+oMKgwqAgJmx0O3AmZ3Q7VXNlIHRoZSAmbHQ7Y29kZSZndDtwcmludGYoKSZsdDsvY29kZSZndDsg
+ZnVuY3Rpb24uJmx0Oy9wJmd0Ozxicj48YnI+5aaC5p6c6KaB5Zyo5Luj56CB5Yy65q615YaF5o+S
+5YWl5Y+N5byV5Y+377yM5L2g5Y+v5Lul55So5aSa5Liq5Y+N5byV5Y+35p2l5byA5ZCv5ZKM57uT
+5p2f5Luj56CB5Yy65q6177yaPGJyPjxicj7CoMKgwqAgYGBUaGVyZSBpcyBhIGxpdGVyYWwgYmFj
+a3RpY2sgKGApIGhlcmUuYGA8YnI+PGJyPui/meauteivreazleS8muS6p+eUn++8mjxicj48YnI+
+wqDCoMKgICZsdDtwJmd0OyZsdDtjb2RlJmd0O1RoZXJlIGlzIGEgbGl0ZXJhbCBiYWNrdGljayAo
+YCkgaGVyZS4mbHQ7L2NvZGUmZ3Q7Jmx0Oy9wJmd0Ozxicj48YnI+5Luj56CB5Yy65q6155qE6LW3
+5aeL5ZKM57uT5p2f56uv6YO95Y+v5Lul5pS+5YWl5LiA5Liq56m655m977yM6LW35aeL56uv5ZCO
+6Z2i5LiA5Liq77yM57uT5p2f56uv5YmN6Z2i5LiA5Liq77yM6L+Z5qC35L2g5bCx5Y+v5Lul5Zyo
+5Yy65q6155qE5LiA5byA5aeL5bCx5o+S5YWl5Y+N5byV5Y+377yaPGJyPjxicj7CoMKgIMKgQSBz
+aW5nbGUgYmFja3RpY2sgaW4gYSBjb2RlIHNwYW46IGBgIGAgYGA8YnI+wqDCoCDCoDxicj7CoMKg
+IMKgQSBiYWNrdGljay1kZWxpbWl0ZWQgc3RyaW5nIGluIGEgY29kZSBzcGFuOiBgYCBgZm9vYCBg
+YDxicj48YnI+5Lya5Lqn55Sf77yaPGJyPjxicj7CoMKgIMKgJmx0O3AmZ3Q7QSBzaW5nbGUgYmFj
+a3RpY2sgaW4gYSBjb2RlIHNwYW46ICZsdDtjb2RlJmd0O2AmbHQ7L2NvZGUmZ3Q7Jmx0Oy9wJmd0
+Ozxicj7CoMKgIMKgPGJyPsKgwqAgwqAmbHQ7cCZndDtBIGJhY2t0aWNrLWRlbGltaXRlZCBzdHJp
+bmcgaW4gYSBjb2RlIHNwYW46ICZsdDtjb2RlJmd0O2Bmb29gJmx0Oy9jb2RlJmd0OyZsdDsvcCZn
+dDs8YnI+PGJyPuWcqOS7o+eggeWMuuauteWGhe+8jGAmYW1wO2Ag5ZKM5bCW5ous5Y+3Kirpg70q
+KuS8muiiq+iHquWKqOWcsOi9rOaIkCBIVE1MIOWunuS9k++8jOi/meS9v+W+l+aPkuWFpSBIVE1M
+IOWOn+Wni+eggeWPmOW+l+W+iOWuueaYk++8jE1hcmtkb3duIOS8muaKiuS4i+mdoui/meaute+8
+mjxicj48YnI+wqDCoMKgIFBsZWFzZSBkb24ndCB1c2UgYW55IGAmbHQ7YmxpbmsmZ3Q7YCB0YWdz
+Ljxicj48YnI+6L2s5Li677yaPGJyPjxicj7CoMKgwqAgJmx0O3AmZ3Q7UGxlYXNlIGRvbid0IHVz
+ZSBhbnkgJmx0O2NvZGUmZ3Q7JmFtcDtsdDtibGluayZhbXA7Z3Q7Jmx0Oy9jb2RlJmd0OyB0YWdz
+LiZsdDsvcCZndDs8YnI+PGJyPuS9oOS5n+WPr+S7pei/meagt+WGme+8mjxicj48YnI+wqDCoMKg
+IGAmYW1wOyM4MjEyO2AgaXMgdGhlIGRlY2ltYWwtZW5jb2RlZCBlcXVpdmFsZW50IG9mIGAmYW1w
+O21kYXNoO2AuPGJyPjxicj7ku6XkuqfnlJ/vvJo8YnI+PGJyPsKgwqDCoCAmbHQ7cCZndDsmbHQ7
+Y29kZSZndDsmYW1wO2FtcDsjODIxMjsmbHQ7L2NvZGUmZ3Q7IGlzIHRoZSBkZWNpbWFsLWVuY29k
+ZWQ8YnI+wqDCoMKgIGVxdWl2YWxlbnQgb2YgJmx0O2NvZGUmZ3Q7JmFtcDthbXA7bWRhc2g7Jmx0
+Oy9jb2RlJmd0Oy4mbHQ7L3AmZ3Q7PGJyPjxicj48YnI+PGJyPiZsdDtoMyBpZD0iaW1nIiZndDvl
+m77niYcmbHQ7L2gzJmd0Ozxicj48YnI+5b6I5piO5pi+5Zyw77yM6KaB5Zyo57qv5paH5a2X5bqU
+55So5Lit6K6+6K6h5LiA5Liq44CM6Ieq54S244CN55qE6K+t5rOV5p2l5o+S5YWl5Zu+54mH5piv
+5pyJ5LiA5a6a6Zq+5bqm55qE44CCPGJyPjxicj5NYXJrZG93biDkvb/nlKjkuIDnp43lkozpk77m
+jqXlvojnm7jkvLznmoTor63ms5XmnaXmoIforrDlm77niYfvvIzlkIzmoLfkuZ/lhYHorrjkuKTn
+p43moLflvI/vvJogKuihjOWGheW8jyrlkowq5Y+C6ICD5byPKuOAgjxicj48YnI+6KGM5YaF5byP
+55qE5Zu+54mH6K+t5rOV55yL6LW35p2l5YOP5piv77yaPGJyPjxicj7CoMKgwqAgIVtBbHQgdGV4
+dF0oL3BhdGgvdG8vaW1nLmpwZyk8YnI+PGJyPsKgwqDCoCAhW0FsdCB0ZXh0XSgvcGF0aC90by9p
+bWcuanBnICJPcHRpb25hbCB0aXRsZSIpPGJyPjxicj7or6bnu4blj5nov7DlpoLkuIvvvJo8YnI+
+PGJyPirCoMKgIOS4gOS4quaDiuWPueWPtyBgIWA8YnI+KsKgwqAg5o6l552A5LiA5Liq5pa55ous
+5Y+377yM6YeM6Z2i5pS+5LiK5Zu+54mH55qE5pu/5Luj5paH5a2XPGJyPirCoMKgIOaOpeedgOS4
+gOS4quaZrumAmuaLrOWPt++8jOmHjOmdouaUvuS4iuWbvueJh+eahOe9keWdgO+8jOacgOWQjui/
+mOWPr+S7peeUqOW8leWPt+WMheS9j+W5tuWKoOS4ijxicj7CoMKgwqAg6YCJ5oup5oCn55qEICd0
+aXRsZScg5paH5a2X44CCPGJyPjxicj7lj4LogIPlvI/nmoTlm77niYfor63ms5XliJnplb/lvpfl
+g4/ov5nmoLfvvJo8YnI+PGJyPsKgwqDCoCAhW0FsdCB0ZXh0XVtpZF08YnI+PGJyPuOAjGlk44CN
+5piv5Zu+54mH5Y+C6ICD55qE5ZCN56ew77yM5Zu+54mH5Y+C6ICD55qE5a6a5LmJ5pa55byP5YiZ
+5ZKM6ZO+5o6l5Y+C6ICD5LiA5qC377yaPGJyPjxicj7CoMKgwqAgW2lkXTogdXJsL3RvL2ltYWdl
+wqAgIk9wdGlvbmFsIHRpdGxlIGF0dHJpYnV0ZSI8YnI+PGJyPuWIsOebruWJjeS4uuatou+8jCBN
+YXJrZG93biDov5jmsqHmnInlip7ms5XmjIflrprlm77niYfnmoTlrr3pq5jvvIzlpoLmnpzkvaDp
+nIDopoHnmoTor53vvIzkvaDlj6/ku6Xkvb/nlKjmma7pgJrnmoQgYCZsdDtpbWcmZ3Q7YCDmoIfn
+rb7jgII8YnI+PGJyPiogKiAqPGJyPjxicj4mbHQ7aDIgaWQ9Im1pc2MiJmd0O+WFtuWugyZsdDsv
+aDImZ3Q7PGJyPjxicj4mbHQ7aDMgaWQ9ImF1dG9saW5rIiZndDvoh6rliqjpk77mjqUmbHQ7L2gz
+Jmd0Ozxicj48YnI+TWFya2Rvd24g5pSv5oyB5Lul5q+U6L6D566A55+t55qE6Ieq5Yqo6ZO+5o6l
+5b2i5byP5p2l5aSE55CG572R5Z2A5ZKM55S15a2Q6YKu5Lu25L+h566x77yM5Y+q6KaB5piv55So
+5bCW5ous5Y+35YyF6LW35p2l77yMIE1hcmtkb3duIOWwseS8muiHquWKqOaKiuWug+i9rOaIkOmT
+vuaOpeOAguS4gOiIrOe9keWdgOeahOmTvuaOpeaWh+Wtl+WwseWSjOmTvuaOpeWcsOWdgOS4gOag
+t++8jOS+i+Wmgu+8mjxicj48YnI+wqDCoMKgICZsdDtodHRwOi8vZXhhbXBsZS5jb20vJmd0Ozxi
+cj48YnI+TWFya2Rvd24g5Lya6L2s5Li677yaPGJyPjxicj7CoMKgwqAgJmx0O2EgaHJlZj0iaHR0
+cDovL2V4YW1wbGUuY29tLyImZ3Q7aHR0cDovL2V4YW1wbGUuY29tLyZsdDsvYSZndDs8YnI+PGJy
+PumCruWdgOeahOiHquWKqOmTvuaOpeS5n+W+iOexu+S8vO+8jOWPquaYryBNYXJrZG93biDkvJrl
+hYjlgZrkuIDkuKrnvJbnoIHovazmjaLnmoTov4fnqIvvvIzmiormloflrZflrZfnrKbovazmiJAg
+MTYg6L+b5L2N56CB55qEIEhUTUwg5a6e5L2T77yM6L+Z5qC355qE5qC85byP5Y+v5Lul57OK5byE
+5LiA5Lqb5LiN5aW955qE6YKu5Z2A5pS26ZuG5py65Zmo5Lq677yM5L6L5aaC77yaPGJyPjxicj7C
+oMKgwqAgJmx0O2FkZHJlc3NAZXhhbXBsZS5jb20mZ3Q7PGJyPjxicj5NYXJrZG93biDkvJrovazm
+iJDvvJo8YnI+PGJyPsKgwqDCoCAmbHQ7YSBocmVmPSImYW1wOyN4NkQ7JmFtcDsjeDYxO2kmYW1w
+OyN4NkM7JmFtcDsjeDc0OyZhbXA7I3g2Rjs6JmFtcDsjeDYxOyZhbXA7I3g2NDsmYW1wOyN4NjQ7
+JmFtcDsjeDcyOyZhbXA7I3g2NTs8YnI+wqDCoMKgICZhbXA7IzExNTsmYW1wOyMxMTU7JmFtcDsj
+NjQ7JmFtcDsjMTAxOyZhbXA7IzEyMDsmYW1wOyN4NjE7JmFtcDsjMTA5OyZhbXA7I3g3MDsmYW1w
+OyN4NkM7ZSZhbXA7I3gyRTsmYW1wOyM5OTsmYW1wOyMxMTE7PGJyPsKgwqDCoCAmYW1wOyMxMDk7
+IiZndDsmYW1wOyN4NjE7JmFtcDsjeDY0OyZhbXA7I3g2NDsmYW1wOyN4NzI7JmFtcDsjeDY1OyZh
+bXA7IzExNTsmYW1wOyMxMTU7JmFtcDsjNjQ7JmFtcDsjMTAxOyZhbXA7IzEyMDsmYW1wOyN4NjE7
+PGJyPsKgwqDCoCAmYW1wOyMxMDk7JmFtcDsjeDcwOyZhbXA7I3g2QztlJmFtcDsjeDJFOyZhbXA7
+Izk5OyZhbXA7IzExMTsmYW1wOyMxMDk7Jmx0Oy9hJmd0Ozxicj48YnI+5Zyo5rWP6KeI5Zmo6YeM
+6Z2i77yM6L+Z5q615a2X5Liy77yI5YW25a6e5pivIGAmbHQ7YSBocmVmPSJtYWlsdG86YWRkcmVz
+c0BleGFtcGxlLmNvbSImZ3Q7YWRkcmVzc0BleGFtcGxlLmNvbSZsdDsvYSZndDtg77yJ5Lya5Y+Y
+5oiQ5LiA5Liq5Y+v5Lul54K55Ye755qE44CMYWRkcmVzc0BleGFtcGxlLmNvbeOAjemTvuaOpeOA
+gjxicj48YnI+77yI6L+Z56eN5L2c5rOV6Jm954S25Y+v5Lul57OK5byE5LiN5bCR55qE5py65Zmo
+5Lq677yM5L2G5bm25LiN6IO95YWo6YOo5oyh5LiL5p2l77yM5LiN6L+H5oC75q+U5LuA5LmI6YO9
+5LiN5YGa5aW95Lqb44CC5LiN566h5oCO5qC377yM5YWs5byA5L2g55qE5L+h566x57uI56m25Lya
+5byV5p2l5bm/5ZGK5L+h5Lu255qE44CC77yJPGJyPjxicj4mbHQ7aDMgaWQ9ImJhY2tzbGFzaCIm
+Z3Q75Y+N5pac5p2gJmx0Oy9oMyZndDs8YnI+PGJyPk1hcmtkb3duIOWPr+S7peWIqeeUqOWPjeaW
+nOadoOadpeaPkuWFpeS4gOS6m+WcqOivreazleS4reacieWFtuWug+aEj+S5ieeahOespuWPt++8
+jOS+i+Wmgu+8muWmguaenOS9oOaDs+imgeeUqOaYn+WPt+WKoOWcqOaWh+Wtl+aXgei+ueeahOaW
+ueW8j+adpeWBmuWHuuW8uuiwg+aViOaenO+8iOS9huS4jeeUqCBgJmx0O2VtJmd0O2Ag5qCH562+
+77yJ77yM5L2g5Y+v5Lul5Zyo5pif5Y+355qE5YmN6Z2i5Yqg5LiK5Y+N5pac5p2g77yaPGJyPjxi
+cj7CoMKgwqAgXCpsaXRlcmFsIGFzdGVyaXNrc1wqPGJyPjxicj5NYXJrZG93biDmlK/mjIHku6Xk
+uIvov5nkupvnrKblj7fliY3pnaLliqDkuIrlj43mlpzmnaDmnaXluK7liqnmj5LlhaXmma7pgJrn
+moTnrKblj7fvvJo8YnI+PGJyPsKgwqDCoCBcwqDCoCDlj43mlpznur88YnI+wqDCoMKgIGDCoMKg
+IOWPjeW8leWPtzxicj7CoMKgwqAgKsKgwqAg5pif5Y+3PGJyPsKgwqDCoCBfwqDCoCDlupXnur88
+YnI+wqDCoMKgIHt9wqAg6Iqx5ous5Y+3PGJyPsKgwqDCoCBbXcKgIOaWueaLrOWPtzxicj7CoMKg
+wqAgKCnCoCDmi6zlvKc8YnI+wqDCoMKgICPCoMKgIOS6leWtl+WPtzxicj7CoMKgwqAgK8KgwqAg
+5Yqg5Y+3PGJyPsKgwqDCoCAtwqDCoCDlh4/lj7c8YnI+wqDCoMKgIC7CoMKgIOiLseaWh+WPpeeC
+uTxicj7CoMKgwqAgIcKgwqAg5oOK5Y+55Y+3PGJyPjxicj4mbHQ7aDIgaWQ9ImFja25vd2xlZGdl
+bWVudCImZ3Q75oSf6LCiJmx0Oy9oMiZndDs8YnI+PGJyPuaEn+iwoiBbbGVhZnk3MzgyXVtdIOWN
+j+WKqee/u+ivke+8jFtobGJdW13jgIFbUmFuZHlsaWVuXVtdIOW4ruW/mea2pueov++8jFtldGhh
+bnR3XVtdIOeahFvmsYnlrZfmoIflh4bmoLzlvI/jg7tDU1MgUmVzZXRdW13vvIwgW1dNXVtdIOWb
+nuaKpeaWh+Wtl+mUmeivr+OAgjxicj48YnI+W2xlYWZ5NzM4Ml06aHR0cHM6Ly90d2l0dGVyLmNv
+bS8jIS9sZWFmeTczODI8YnI+W2hsYl06aHR0cDovL2lhbWhsYi5jb20vPGJyPltSYW5keWxpZW5d
+Omh0dHA6Ly90d2l0dGVyLmNvbS9yYW5keWxpZW48YnI+W2V0aGFudHddOmh0dHBzOi8vdHdpdHRl
+ci5jb20vIyEvZXRoYW50dzxicj5b5rGJ5a2X5qCH5YeG5qC85byP44O7Q1NTIFJlc2V0XTpodHRw
+Oi8vZXRoYW50dy5uZXQvcHJvamVjdHMvaGFuLzxicj5bV01dOmh0dHA6Ly9raWR3bS5uZXQvPGJy
+Pjxicj7mhJ/osKIgW2ZlbnByYWNlXVtd77yMW2FkZHZdW13jgII8YnI+PGJyPltmZW5wcmFjZV06
+aHR0cHM6Ly9naXRodWIuY29tL2ZlbnByYWNlPGJyPlthZGR2XTpodHRwczovL2dpdGh1Yi5jb20v
+YWRkdjxicj48YnI+LS0tLS0tLS0tLTxicj4mbHQ7aDIgaWQ9ImVkaXRvciImZ3Q7TWFya2Rvd24g
+5YWN6LS557yW6L6R5ZmoJmx0Oy9oMiZndDs8YnI+PGJyPldpbmRvd3Mg5bmz5Y+wPGJyPjxicj4q
+IFtNYXJrZG93blBhZF0oaHR0cDovL21hcmtkb3ducGFkLmNvbS8pPGJyPiogW01hcmtQYWRdKGh0
+dHA6Ly9jb2RlNTIub3JnL0Rvd25tYXJrZXJXUEYvKTxicj48YnI+TGludXgg5bmz5Y+wPGJyPjxi
+cj4qIFtSZVRleHRdKGh0dHA6Ly9zb3VyY2Vmb3JnZS5uZXQvcC9yZXRleHQvaG9tZS9SZVRleHQv
+KTxicj48YnI+TWFjIOW5s+WPsDxicj48YnI+KiBbTW91XShodHRwOi8vbW91YXBwLmNvbS8pPGJy
+Pjxicj7lnKjnur/nvJbovpHlmag8YnI+PGJyPiogW01hcmthYmxlLmluXShodHRwOi8vbWFya2Fi
+bGUuaW4vKTxicj4qIFtEaWxsaW5nZXIuaW9dKGh0dHA6Ly9kaWxsaW5nZXIuaW8vKTxicj48YnI+
+5rWP6KeI5Zmo5o+S5Lu2PGJyPjxicj4qIFtNYURlXShodHRwczovL2Nocm9tZS5nb29nbGUuY29t
+L3dlYnN0b3JlL2RldGFpbC9va25uZGZlZW9wZ3BpYmVjZmpsampmYW5sZWRwYmtvZykgKENocm9t
+ZSk8YnI+PGJyPumrmOe6p+W6lOeUqDxicj48YnI+KiBbU3VibGltZSBUZXh0IDJdKGh0dHA6Ly93
+d3cuc3VibGltZXRleHQuY29tLzIpICsgW01hcmtkb3duRWRpdGluZ10oaHR0cDovL3R0c2NvZmYu
+Z2l0aHViLmNvbS9NYXJrZG93bkVkaXRpbmcvKSAvIFvmlZnnqItdKGh0dHA6Ly9sdWNpZnIuY29t
+LzIwMTIvMDcvMTIvbWFya2Rvd25lZGl0aW5nLWZvci1zdWJsaW1lLXRleHQtMi8pPGJyPjxicj5c
+KioqIOWmguacieabtOWlveeahCBNYXJrZG93biDlhY3otLnnvJbovpHlmajmjqjojZDvvIzor7fl
+iLBb6L+Z6YeM5Y+N6aaIXShodHRwczovL2dpdGNhZmUuY29tL3Jpa3UvTWFya2Rvd24tU3ludGF4
+LUNOL3RpY2tldHMvMSnvvIzosKLosKLvvIE=" style="height:0;width:0;max-height:0;max-width:0;overflow:hidden;font-size:0em;padding:0;margin:0;">&#8203;</div></div></body></html>
